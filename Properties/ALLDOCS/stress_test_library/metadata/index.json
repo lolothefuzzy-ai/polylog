@@ -1,0 +1,18 @@
+{
+  "demo_small_20251030_005050": {
+    "path": "stress_test_library\\by_scale\\demo_small_20251030_005050.pkl.gz",
+    "context": "by_scale",
+    "category": "demo_small",
+    "count": 100,
+    "size_mb": 0.004542350769042969,
+    "timestamp": "20251030_005050"
+  },
+  "demo_small_20251030_005103": {
+    "path": "stress_test_library\\by_scale\\demo_small_20251030_005103.pkl.gz",
+    "context": "by_scale",
+    "category": "demo_small",
+    "count": 100,
+    "size_mb": 0.004540443420410156,
+    "timestamp": "20251030_005103"
+  }
+}

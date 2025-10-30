@@ -1,7 +1,0 @@
-﻿76,034,660 C:\Users\Nauti\Downloads\Pycharm\Polylog6\.mypy_cache
-8,148,042 C:\Users\Nauti\Downloads\Pycharm\Polylog6\archive
-1,197,017 C:\Users\Nauti\Downloads\Pycharm\Polylog6\Code
-774,256 C:\Users\Nauti\Downloads\Pycharm\Polylog6\ALLDOCS
-541,773 C:\Users\Nauti\Downloads\Pycharm\Polylog6\docs
-290,790 C:\Users\Nauti\Downloads\Pycharm\Polylog6\gui
-26,291 C:\Users\Nauti\Downloads\Pycharm\Polylog6\.git

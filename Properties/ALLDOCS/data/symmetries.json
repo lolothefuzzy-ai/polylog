@@ -1,0 +1,23 @@
+{
+  "layouts": [
+    {
+      "pattern": {
+        "type": "circular",
+        "coherence": 1.0,
+        "center": [
+          -4.440892098500626e-16,
+          2.220446049250313e-16
+        ],
+        "spacing": 5.0
+      },
+      "discovered": 1761802169.2351217,
+      "usage_count": 1
+    }
+  ],
+  "folds": {},
+  "templates": {
+    "cube_net": 1,
+    "tetrahedron_net": 1
+  },
+  "patterns": {}
+}

@@ -1,0 +1,52 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../__pycache__"
+		},
+		{
+			"path": "../_archive_legacy_code"
+		},
+		{
+			"path": "../tests"
+		},
+		{
+			"path": "../render"
+		},
+		{
+			"path": "../scripts"
+		},
+		{
+			"path": "../installer"
+		},
+		{
+			"path": "../stress_test_library"
+		},
+		{
+			"path": "../data"
+		},
+		{
+			"path": "../tools"
+		},
+		{
+			"path": "../physics"
+		},
+		{
+			"path": "../metrics"
+		},
+		{
+			"path": "../.github"
+		},
+		{
+			"path": "../ci"
+		},
+		{
+			"path": "../docs"
+		},
+		{
+			"path": "../{docs"
+		}
+	]
+}

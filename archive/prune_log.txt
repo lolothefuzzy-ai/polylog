@@ -1,8 +1,0 @@
-﻿PRUNE-START 2025-10-30T06:12:58.3855974-05:00
-TOTAL_BEFORE:	86992748
-Removed .mypy_cache
-Removed C:\Users\Nauti\Downloads\Pycharm\Polylog6\ALLDOCS\__pycache__
-Removed C:\Users\Nauti\Downloads\Pycharm\Polylog6\gui\__pycache__
-TOTAL_AFTER:	10559799
-FREED_BYTES:	76432949
-PRUNE-END 2025-10-30T06:12:58.7471943-05:00

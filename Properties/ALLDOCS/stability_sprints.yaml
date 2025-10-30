@@ -1,0 +1,55 @@
+version: 1
+name: Stability Sprints Plan
+sprint_duration: 2w
+notes: >-
+  Six prioritized sprints optimized for fastest path to acceptance checks.
+  Estimates are ideal days; adjust per team capacity. All dependencies respected.
+
+sprints:
+  - key: Sprint-1
+    goal: Foundations — targets, budgets, fixed-step loop, determinism toggle, rendering decision.
+    tickets: [STAB-001, STAB-002, STAB-003, STAB-004, STAB-005, STAB-006, STAB-010]
+    total_estimate: 13d
+    risks:
+      - Team alignment on SLOs and budgets may require extra iteration
+      - Rendering stack decision may impact later task scopes
+
+  - key: Sprint-2
+    goal: Core infra — frame graph MVP, shader toolchain, tech selections, logging.
+    tickets: [STAB-008, STAB-011, STAB-012, STAB-013, STAB-039]
+    total_estimate: 14d
+    risks:
+      - Shader toolchain validation across platforms could spill over
+      - Frame graph MVP may reveal hidden dependencies
+
+  - key: Sprint-3
+    goal: Render robustness start — golden images, device-loss handler, time utils, allocators.
+    tickets: [STAB-033, STAB-019, STAB-015, STAB-021]
+    total_estimate: 12d
+    risks:
+      - Device-loss recovery can be vendor/driver sensitive
+      - Golden image baselines across the matrix may be time-consuming
+
+  - key: Sprint-4
+    goal: Assets and camera — deterministic packs, runtime loaders, camera model, repro capture.
+    tickets: [STAB-025, STAB-027, STAB-017, STAB-041]
+    total_estimate: 12d
+    risks:
+      - KTX2/meshopt toolchain compatibility
+      - Reversed-Z integration may require material/Depth fixes
+
+  - key: Sprint-5
+    goal: Determinism & perf gates — physics determinism, record/replay, perf dashboards.
+    tickets: [STAB-030, STAB-032, STAB-034, STAB-051]
+    total_estimate: 12d
+    risks:
+      - Physics determinism flakes under broadphase/joint configs
+      - Perf gates tuning may initially be noisy
+
+  - key: Sprint-6
+    goal: Acceptance path — soak tests, importer fuzzing, enable determinism in CI, acceptance stage.
+    tickets: [STAB-037, STAB-028, STAB-047, STAB-057]
+    total_estimate: 15d
+    risks:
+      - Soak tests surface long-tail leaks; schedule buffer for fixes
+      - Fuzzing may uncover high-severity issues impacting scope

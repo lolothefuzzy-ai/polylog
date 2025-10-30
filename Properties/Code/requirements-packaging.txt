@@ -1,0 +1,11 @@
+# Packaging and distribution requirements
+# Install with: pip install -r requirements-packaging.txt
+
+pyinstaller>=6.0.0
+setuptools>=61.0
+wheel>=0.40.0
+build>=1.0.0
+
+# Optional: for creating installers
+# pynsist>=2.8  # For Windows NSIS-based installers
+# cx_Freeze>=6.15  # Alternative to PyInstaller

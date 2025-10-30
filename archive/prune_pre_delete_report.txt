@@ -1,5 +1,0 @@
-﻿.mypy_cache	76034660
-C:\Users\Nauti\Downloads\Pycharm\Polylog6\ALLDOCS\__pycache__	294882
-C:\Users\Nauti\Downloads\Pycharm\Polylog6\gui\__pycache__	103590
-PYCFCount	23
-PYCFSize	398472
