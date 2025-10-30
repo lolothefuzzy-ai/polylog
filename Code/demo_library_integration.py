@@ -32,12 +32,26 @@ class MockAssembly:
     
     def add_polyform(self, polyform: Dict[str, Any]) -> bool:
         """Add polyform to assembly."""
-        # Generate ID if needed
-        if 'id' not in polyform:
-            import uuid
-            polyform['id'] = str(uuid.uuid4())
-        
-        self.polyforms.append(polyform)
+        # Normalize incoming polyform to canonical shape when possible
+        try:
+            from gui.polyform_adapter import normalize_polyform
+            norm = normalize_polyform(polyform)
+        except Exception:
+            norm = dict(polyform)
+            if 'id' not in norm:
+                import uuid
+                norm['id'] = str(uuid.uuid4())
+            verts = []
+            for v in norm.get('vertices', []):
+                if isinstance(v, (list, tuple)):
+                    if len(v) == 2:
+                        verts.append((float(v[0]), float(v[1]), 0.0))
+                    else:
+                        verts.append((float(v[0]), float(v[1]), float(v[2]) if len(v) > 2 else 0.0))
+            if verts:
+                norm['vertices'] = verts
+
+        self.polyforms.append(norm)
         return True
     
     def get_all_polyforms(self):

@@ -83,10 +83,27 @@ class MainWindow(QMainWindow):
                 self.hinge_manager = None  # Will be set if needed
             
             def add_polyform(self, poly):
-                if 'id' not in poly:
-                    poly['id'] = f'poly_{len(self.polyforms)}'
-                self.polyforms[poly['id']] = poly
-                return poly['id']
+                # Normalize incoming polyform when possible to ensure canonical schema
+                try:
+                    from gui.polyform_adapter import normalize_polyform
+                    norm = normalize_polyform(poly)
+                except Exception:
+                    # Minimal fallback normalization
+                    norm = dict(poly)
+                    if 'id' not in norm:
+                        norm['id'] = f'poly_{len(self.polyforms)}'
+                    verts = []
+                    for v in norm.get('vertices', []):
+                        if isinstance(v, (list, tuple)):
+                            if len(v) == 2:
+                                verts.append((float(v[0]), float(v[1]), 0.0))
+                            else:
+                                verts.append((float(v[0]), float(v[1]), float(v[2]) if len(v) > 2 else 0.0))
+                    if verts:
+                        norm['vertices'] = verts
+
+                self.polyforms[norm['id']] = norm
+                return norm['id']
             
             def get_polyform(self, poly_id):
                 return self.polyforms.get(poly_id)

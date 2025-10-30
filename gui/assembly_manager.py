@@ -88,14 +88,29 @@ class AssemblyManager:
         if 'polygons' not in self.current_assembly:
             self.current_assembly['polygons'] = []
         
-        # Store simplified polygon data
-        poly_data = {
-            'sides': polygon.get('sides'),
-            'vertices': polygon.get('vertices', []),
-            'position': polygon.get('position', [0, 0, 0]),
-            'rotation': polygon.get('rotation', 0),
-        }
-        
+        # Normalize the polygon into canonical form when possible
+        try:
+            from gui.polyform_adapter import normalize_polyform
+            norm = normalize_polyform(polygon)
+            poly_data = norm
+        except Exception:
+            # Minimal fallback: keep essential fields and ensure 3D vertices
+            poly_data = {
+                'sides': polygon.get('sides'),
+                'vertices': [],
+                'position': polygon.get('position', [0, 0, 0]),
+                'rotation': polygon.get('rotation', 0),
+            }
+            verts = []
+            for v in polygon.get('vertices', []):
+                if isinstance(v, (list, tuple)):
+                    if len(v) == 2:
+                        verts.append((float(v[0]), float(v[1]), 0.0))
+                    else:
+                        verts.append((float(v[0]), float(v[1]), float(v[2]) if len(v) > 2 else 0.0))
+            if verts:
+                poly_data['vertices'] = verts
+
         self.current_assembly['polygons'].append(poly_data)
         return True
     
