@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package polylog;
+
+// ============================================================================
+// MESSAGES
+// ============================================================================
+
+message Vertex {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message Bond {
+  string poly1_id = 1;
+  int32 edge1_idx = 2;
+  string poly2_id = 3;
+  int32 edge2_idx = 4;
+}
+
+message Polyform {
+  string id = 1;
+  int32 sides = 2;
+  repeated Vertex vertices = 3;
+  repeated Bond bonds = 4;
+  repeated float position = 5;  // [x, y, z]
+}
+
+message EdgeCandidate {
+  string poly1_id = 1;
+  int32 edge1_idx = 2;
+  string poly2_id = 3;
+  int32 edge2_idx = 4;
+  float stability_score = 5;
+  float confidence = 6;
+  string quality = 7;  // "perfect", "excellent", "good", "fair", "poor", "failed"
+}
+
+message EvaluateRequest {
+  string target_id = 1;
+  string candidate_id = 2;
+}
+
+message EvaluateResponse {
+  repeated EdgeCandidate candidates = 1;
+}
+
+message PlacementRequest {
+  string target_id = 1;
+  string candidate_id = 2;
+}
+
+message PlacementResult {
+  bool success = 1;
+  string final_polyform_id = 2;
+  float total_time = 3;
+  float confidence_score = 4;
+  int32 fold_count = 5;
+  string failure_reason = 6;
+}
+
+message ExplorationStartRequest {
+  string strategy = 1;         // "greedy", "random", "balanced", "systematic", "learned"
+  int32 max_order = 2;
+  int32 max_iterations = 3;
+  float exploration_rate = 4;
+  float animation_speed = 5;
+  int32 seed_sides = 6;
+}
+
+message ExplorationEvent {
+  string type = 1;              // "progress", "placement", "error", "done"
+  int32 current_iteration = 2;
+  float success_rate = 3;
+  int32 successful_placements = 4;
+  int32 failed_attempts = 5;
+  string message = 6;
+}
+
+message ExplorationStats {
+  int32 current_iteration = 1;
+  int32 successful_placements = 2;
+  int32 failed_attempts = 3;
+  int32 decay_events = 4;
+  float elapsed_time = 5;
+  bool is_running = 6;
+}
+
+message HealthCheckRequest {
+}
+
+message HealthCheckResponse {
+  bool ok = 1;
+  int64 timestamp = 2;
+  string version = 3;
+}
+
+// ============================================================================
+// SERVICE
+// ============================================================================
+
+service PolylogPlacement {
+  // Health check
+  rpc Health(HealthCheckRequest) returns (HealthCheckResponse);
+  
+  // Request-response RPCs
+  rpc EvaluateConnections(EvaluateRequest) returns (EvaluateResponse);
+  rpc PlacePolyform(PlacementRequest) returns (PlacementResult);
+  
+  // Query RPCs
+  rpc GetExplorationStats(ExplorationStartRequest) returns (ExplorationStats);
+  
+  // Server streaming (real-time exploration updates)
+  rpc StreamExplorationUpdates(ExplorationStartRequest) returns (stream ExplorationEvent);
+  
+  // Bidirectional streaming (interactive placement)
+  rpc InteractivePlacement(stream PlacementRequest) returns (stream PlacementResult);
+}
