@@ -33,10 +33,24 @@ class MockAssembly:
         self._id_counter = 1
     
     def add_polyform(self, polyform):
-        if 'id' not in polyform:
-            polyform['id'] = f"poly_{self._id_counter}"
-            self._id_counter += 1
-        self.polyforms[polyform['id']] = polyform
+        try:
+            from gui.polyform_adapter import normalize_polyform
+            norm = normalize_polyform(polyform)
+        except Exception:
+            norm = dict(polyform)
+            if 'id' not in norm:
+                norm['id'] = f"poly_{self._id_counter}"
+                self._id_counter += 1
+            verts = []
+            for v in norm.get('vertices', []):
+                if isinstance(v, (list, tuple)):
+                    if len(v) == 2:
+                        verts.append((float(v[0]), float(v[1]), 0.0))
+                    else:
+                        verts.append((float(v[0]), float(v[1]), float(v[2]) if len(v) > 2 else 0.0))
+            if verts:
+                norm['vertices'] = verts
+        self.polyforms[norm['id']] = norm
     
     def get_polyform(self, poly_id):
         return self.polyforms.get(poly_id)

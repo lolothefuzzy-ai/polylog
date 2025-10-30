@@ -28,11 +28,25 @@ class TestAssembly:
         self.next_id = 1
     
     def add_polyform(self, poly):
-        if 'id' not in poly:
-            poly['id'] = f'poly_{self.next_id}'
-            self.next_id += 1
-        self.polyforms.append(poly)
-        return poly['id']
+        try:
+            from gui.polyform_adapter import normalize_polyform
+            norm = normalize_polyform(poly)
+        except Exception:
+            norm = dict(poly)
+            if 'id' not in norm:
+                norm['id'] = f'poly_{self.next_id}'
+                self.next_id += 1
+            verts = []
+            for v in norm.get('vertices', []):
+                if isinstance(v, (list, tuple)):
+                    if len(v) == 2:
+                        verts.append((float(v[0]), float(v[1]), 0.0))
+                    else:
+                        verts.append((float(v[0]), float(v[1]), float(v[2]) if len(v) > 2 else 0.0))
+            if verts:
+                norm['vertices'] = verts
+        self.polyforms.append(norm)
+        return norm['id']
     
     def get_all_polyforms(self):
         return self.polyforms

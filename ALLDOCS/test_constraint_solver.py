@@ -55,7 +55,23 @@ class MockAssembly:
     def add_polyform(self, poly_id: str, sides: int = 4):
         """Add polyform to assembly"""
         poly = MockPolyform(poly_id, sides)
-        self.polyforms[poly_id] = poly.data
+        try:
+            from gui.polyform_adapter import normalize_polyform
+            norm = normalize_polyform(poly.data)
+        except Exception:
+            norm = dict(poly.data)
+            if 'id' not in norm:
+                norm['id'] = poly_id
+            verts = []
+            for v in norm.get('vertices', []):
+                if isinstance(v, (list, tuple)):
+                    if len(v) == 2:
+                        verts.append((float(v[0]), float(v[1]), 0.0))
+                    else:
+                        verts.append((float(v[0]), float(v[1]), float(v[2]) if len(v) > 2 else 0.0))
+            if verts:
+                norm['vertices'] = verts
+        self.polyforms[poly_id] = norm
     
     def add_bond(self, poly1_id: str, poly2_id: str, edge1: int = 0, edge2: int = 0):
         """Add bond between polyforms"""
