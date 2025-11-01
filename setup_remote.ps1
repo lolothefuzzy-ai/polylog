@@ -1,5 +1,6 @@
 # Run this script after creating the remote repository on GitHub
-# Replace <your-repository-url> with your actual repository URL
+# Replace YOUR-REPOSITORY-URL with your actual repository URL
 
-git remote set-url origin <your-repository-url>
+Set-ExecutionPolicy Bypass -Scope Process -Force
+git remote set-url origin https://github.com/lolothefuzzy-ai/polylog.git
 git push -u origin main
