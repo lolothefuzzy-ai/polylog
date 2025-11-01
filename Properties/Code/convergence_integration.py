@@ -12,6 +12,8 @@ from evolutionary_generator import EvolutionaryGenerator
 
 from convergence_visualizer import ConvergenceVisualizerWindow
 import matplotlib.pyplot as plt
+import json
+import os
 
 class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
     """Extended EvolutionaryGenerator with convergence tracking."""
@@ -134,6 +136,7 @@ def setup_convergence_tracking(generator: EvolutionaryGenerator,
         population = generator._initialize_population(target_count, allowed_types)
         best_genome = None
         best_fitness = float('-inf')
+        history = {"generation": [], "fitness": []}
         
         for gen in range(generations):
             fitness_scores = [generator._evaluate_fitness(genome) for genome in population]
@@ -145,6 +148,8 @@ def setup_convergence_tracking(generator: EvolutionaryGenerator,
                 fitness_scores,
                 len(population)
             )
+            history["generation"].append(gen)
+            history["fitness"].append(max(fitness_scores))
             
             gen_best_idx = fitness_scores.index(max(fitness_scores))
             if fitness_scores[gen_best_idx] > best_fitness:
@@ -170,6 +175,7 @@ def setup_convergence_tracking(generator: EvolutionaryGenerator,
             generator.generation += 1
         
         print(f"Evolution complete! Best fitness: {best_fitness:.3f}")
+        save_convergence_history(history)
         generator.evolve = original_evolve
         return best_genome
     
@@ -177,6 +183,18 @@ def setup_convergence_tracking(generator: EvolutionaryGenerator,
     
     return window
 
+
+def save_convergence_history(history, filename="convergence_history.json"):
+    """Save convergence history to JSON file"""
+    with open(filename, 'w') as f:
+        json.dump(history, f)
+
+def load_convergence_history(filename="convergence_history.json"):
+    """Load convergence history from JSON file"""
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            return json.load(f)
+    return {"generation": [], "fitness": []}
 
 def plot_convergence(history):
     """Visualize convergence history"""
