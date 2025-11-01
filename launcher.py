@@ -12,8 +12,6 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.resolve()
 
-# Update the path to migration_workflow
-MIGRATION_SCRIPT = "PolylogCore/scripts/migration_workflow.py"
 
 def ensure_venv():
     """Ensure virtual environment exists and is activated"""
@@ -39,7 +37,7 @@ def install_dependencies():
     requirements = PROJECT_ROOT / "PolylogCore" / "requirements.txt"
     if requirements.exists():
         print("Installing dependencies...")
-        subprocess.run(["pip", "install", "-r", "PolylogCore/requirements.txt"], cwd=PROJECT_ROOT)
+        subprocess.run(["pip", "install", "-r", str(requirements)], cwd=PROJECT_ROOT)
     else:
         print("Warning: requirements.txt not found")
 
@@ -52,7 +50,7 @@ def run_main(mode):
         return
     
     print(f"Starting Polylog in {mode} mode...")
-    subprocess.run(["python", "PolylogCore/Properties/Code/main.py", mode], cwd=PROJECT_ROOT)
+    subprocess.run(["python", str(main_script), mode], cwd=PROJECT_ROOT)
 
 
 def main():
