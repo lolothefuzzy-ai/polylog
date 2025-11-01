@@ -1,7 +1,8 @@
 import math
-import numpy as np
-from typing import List, Dict, Any, Optional, Tuple
 from collections import deque
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 class ConvergenceTracker:

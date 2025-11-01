@@ -12,19 +12,20 @@ Two examples:
 Run: python example_tracking_integration.py
 """
 
-import sys
 import os
+import sys
 
 # Add project to path
 sys.path.insert(0, os.path.dirname(__file__))
+
+import time
 
 from continuous_exploration_engine import (
     ContinuousExplorationEngine,
     ExplorationConfig,
     ExplorationStrategy,
-    SuggestionEngine
+    SuggestionEngine,
 )
-import time
 
 
 # Mock classes for testing (same as in engine)

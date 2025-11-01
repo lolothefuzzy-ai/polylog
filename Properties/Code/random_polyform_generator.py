@@ -11,14 +11,16 @@ Generates random polyforms across n ranges with:
 Supports n=[50, 100, 500, 1000, 2000, 5000, 10000]
 """
 
-import numpy as np
+import logging
 import time
-from typing import List, Dict, Any, Optional, Callable, Tuple
+from collections import deque
 from dataclasses import dataclass
 from enum import Enum
-import logging
-from collections import deque
-from generator_protocol import BaseGenerator, register_generator, GeneratorCapability
+from typing import Any, Callable, Dict, List, Optional, Tuple
+
+import numpy as np
+
+from generator_protocol import BaseGenerator, GeneratorCapability, register_generator
 
 logger = logging.getLogger(__name__)
 

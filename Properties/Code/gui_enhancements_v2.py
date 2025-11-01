@@ -3,10 +3,10 @@ GUI Enhancement Module v2 - Polylog Desktop App
 Implements: Menu Bar, Toolbar, Status Bar, Undo/Redo, Polygon Slider, Fold Animations
 Focus: Library-centric layout with visual folding animations
 """
-from typing import Callable, List, Dict, Any, Optional
-from PySide6 import QtWidgets, QtCore, QtGui
-from PySide6.QtCore import Qt, Signal, QTimer
-import numpy as np
+from typing import Any, Callable, Dict, List, Optional
+
+from PySide6 import QtCore, QtWidgets
+from PySide6.QtCore import Qt, QTimer, Signal
 
 
 # ======================== STATUS BAR MANAGER ========================

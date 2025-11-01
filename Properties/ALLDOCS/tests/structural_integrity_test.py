@@ -11,12 +11,12 @@ Validates:
 5. Exception handling and error recovery
 """
 
-import sys
-import pathlib
-import json
 import importlib
+import json
+import pathlib
+import sys
 import traceback
-from typing import Dict, Any, List, Tuple
+from typing import Any, Dict, List
 
 # Ensure project root on path
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -43,7 +43,6 @@ class IntegrityTester:
             assert hasattr(main, '_launch_demo'), "_launch_demo() not found"
             
             # Test argument parsing (don't try to parse sys.argv; just check main has argparse)
-            import argparse
             assert hasattr(main, 'argparse'), "main doesn't have argparse module"
             # Parser exists and is properly configured in main.main()
             # Skip direct parse test to avoid side effects
@@ -103,13 +102,6 @@ class IntegrityTester:
         """Verify manager API contracts (methods, signatures, return types)."""
         print("\n[TEST] Manager API Contracts")
         try:
-            from managers import (
-                RealMemoryManager,
-                RealChainManager,
-                RealFoldValidator,
-                RealWorkspaceManager,
-                RealProvenanceTracker
-            )
             
             contracts = {
                 'RealMemoryManager': ['get_scaler_confidence', 'get_all_scalers', 'record_success', 'query_successful_patterns'],
@@ -149,16 +141,6 @@ class IntegrityTester:
         """Verify engine API contracts."""
         print("\n[TEST] Engine API Contracts")
         try:
-            from automated_placement_engine import (
-                ConnectionEvaluator,
-                FoldSequencer,
-                DecayManager,
-                AutomatedPlacementEngine
-            )
-            from continuous_exploration_engine import (
-                SuggestionEngine,
-                ContinuousExplorationEngine
-            )
             
             contracts = {
                 'ConnectionEvaluator': ['evaluate_all_connections', 'clear_cache'],
@@ -199,10 +181,21 @@ class IntegrityTester:
         """Test assembly data model consistency through cycles."""
         print("\n[TEST] Assembly Data Consistency")
         try:
-            from polygon_utils import create_polygon
-            from managers import RealMemoryManager, RealChainManager, RealFoldValidator, RealWorkspaceManager, RealProvenanceTracker
-            from automated_placement_engine import ConnectionEvaluator, FoldSequencer, DecayManager, AutomatedPlacementEngine
             import validators as V
+            from automated_placement_engine import (
+                AutomatedPlacementEngine,
+                ConnectionEvaluator,
+                DecayManager,
+                FoldSequencer,
+            )
+            from managers import (
+                RealChainManager,
+                RealFoldValidator,
+                RealMemoryManager,
+                RealProvenanceTracker,
+                RealWorkspaceManager,
+            )
+            from polygon_utils import create_polygon
             
             # Mock assembly
             class TestAssembly:
@@ -290,8 +283,8 @@ class IntegrityTester:
         """Test validator functions with edge cases."""
         print("\n[TEST] Validators Coverage")
         try:
-            from polygon_utils import create_polygon
             import validators as V
+            from polygon_utils import create_polygon
             
             # Test 1: valid polygon
             p = create_polygon(4)
@@ -347,10 +340,11 @@ class IntegrityTester:
         """Test stable library save/load cycle."""
         print("\n[TEST] Library Persistence")
         try:
-            from stable_library import StableLibrary
-            from polygon_utils import create_polygon
-            import tempfile
             import os
+            import tempfile
+
+            from polygon_utils import create_polygon
+            from stable_library import StableLibrary
             
             # Use temp file
             with tempfile.NamedTemporaryFile(mode='w', suffix='.jsonl', delete=False) as f:

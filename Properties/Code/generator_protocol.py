@@ -4,8 +4,8 @@ Base Protocol for Polyform Generation Engines
 Defines standardized interface that all generators must implement
 for consistent behavior across the unified system.
 """
-from typing import Protocol, Dict, List, Any, Optional
 from abc import ABC, abstractmethod
+from typing import Any, Dict, List, Optional, Protocol
 
 
 class GeneratorProtocol(Protocol):

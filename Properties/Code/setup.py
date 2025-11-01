@@ -3,7 +3,8 @@ Polylog Installation Script
 """
 
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 # Read version from code/__init__.py
 with open(os.path.join('code', '__init__.py'), 'r') as f:

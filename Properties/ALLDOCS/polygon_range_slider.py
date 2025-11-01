@@ -12,22 +12,24 @@ Features:
 - Integration with HingeManager for fold animations
 """
 
-from typing import Dict, List, Optional, Callable, Any
-import math
 import time
+from typing import Any, Callable, Dict, List, Optional
+
 import numpy as np
-
-from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtCore import Qt, Signal, Slot
-from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QSlider,
-    QLabel, QPushButton, QSpinBox, QProgressBar
-)
-
 import pyqtgraph.opengl as gl
-
-from polygon_utils import create_polygon_3d
 from geometry3d import rotation_matrix_axis_angle
+from polygon_utils import create_polygon_3d
+from PySide6 import QtCore, QtWidgets
+from PySide6.QtCore import Signal, Slot
+from PySide6.QtWidgets import (
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QProgressBar,
+    QPushButton,
+    QSpinBox,
+    QVBoxLayout,
+)
 
 
 class PolygonRangeSliderWidget(QGroupBox):
@@ -335,7 +337,7 @@ class PolygonGenerationAnimator:
         
         Uses hinge-based rotation to demonstrate fold mechanics.
         """
-        from polygon_utils import get_polyform_mesh, update_polyform_mesh
+        from polygon_utils import get_polyform_mesh
         
         initial_mesh = get_polyform_mesh(poly)
         if initial_mesh is None:

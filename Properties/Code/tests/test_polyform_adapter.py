@@ -5,13 +5,15 @@ Verifies the normalize_polyform() function correctly handles various input cases
 and produces consistently formatted output.
 """
 
-import unittest
-import sys
 import os
+import sys
+import unittest
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import just the normalize_polyform function to avoid GUI dependencies
 import importlib.util
+
 adapter_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
                            "gui", "polyform_adapter.py")
 spec = importlib.util.spec_from_file_location("polyform_adapter", adapter_path)

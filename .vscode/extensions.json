@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "eamodio.gitlens",
+        "ms-toolsai.jupyter",
+        "toba.vsfire",
+        "ms-vscode.live-server"
+    ]
+}

@@ -7,25 +7,12 @@ Run this to test the GUI without launching it visually.
 
 import sys
 import traceback
-from typing import List
 
 
 def test_imports():
     """Test that all required modules can be imported."""
     print("Testing imports...")
     try:
-        from PySide6.QtWidgets import QApplication
-        from gui.main_window import MainWindow
-        from gui.viewport import Viewport3D
-        from gui.panels.controls_panel import ControlsPanel
-        from gui.panels.library_panel import LibraryPanel
-        from gui.utils import (
-            gui_params_to_generator_params,
-            extract_vertices_3d,
-            get_polygon_color,
-            format_polygon_for_display,
-        )
-        from random_assembly_generator import RandomAssemblyGenerator
         print("✓ All imports successful")
         return True
     except Exception as e:
@@ -143,8 +130,8 @@ def test_multiple_polygons():
     """Test generating multiple polygons."""
     print("\nTesting multiple polygon generation...")
     try:
-        from random_assembly_generator import RandomAssemblyGenerator
         from gui.utils import format_polygon_for_display
+        from random_assembly_generator import RandomAssemblyGenerator
         
         generator = RandomAssemblyGenerator()
         polygons = []

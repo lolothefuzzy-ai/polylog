@@ -1,5 +1,5 @@
-import pytest
 from unittest.mock import MagicMock
+
 from src.engines.optimization_engine import OptimizationEngine
 
 

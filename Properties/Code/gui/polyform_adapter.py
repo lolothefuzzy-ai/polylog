@@ -5,10 +5,12 @@ Provides a single normalize_polyform() function that converts arbitrary polygon 
 to a canonical format expected by the viewport and other systems.
 """
 
-from typing import Dict, Any
 import uuid
 import warnings
+from typing import Any, Dict
+
 import numpy as np
+
 
 def normalize_polyform(polyform: Dict[str, Any]) -> Dict[str, Any]:
     """

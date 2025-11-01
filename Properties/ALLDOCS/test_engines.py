@@ -6,9 +6,6 @@ Run: py test_engines.py
 """
 
 import sys
-import json
-import time
-from typing import List, Dict, Any, Optional
 
 # Test coloring
 COLORS = {
@@ -78,7 +75,6 @@ def test_polygon_creation():
     print_header("TEST 2: Polygon Creation")
     
     from polygon_utils import create_polygon
-    import numpy as np
     
     tests_passed = 0
     tests_total = 0
@@ -111,7 +107,7 @@ def test_managers():
     """Test manager implementations"""
     print_header("TEST 3: Managers")
     
-    from managers import RealMemoryManager, RealChainManager, RealFoldValidator
+    from managers import RealChainManager, RealFoldValidator, RealMemoryManager
     
     tests_passed = 0
     tests_total = 0
@@ -164,7 +160,7 @@ def test_connection_evaluator():
     print_header("TEST 4: Connection Evaluator")
     
     from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
+    from managers import RealChainManager, RealMemoryManager
     from polygon_utils import create_polygon
     
     tests_passed = 0
@@ -224,8 +220,12 @@ def test_fold_sequencer():
     print_header("TEST 5: Fold Sequencer")
     
     from automated_placement_engine import ConnectionEvaluator, FoldSequencer
-    from managers import (RealMemoryManager, RealChainManager, RealFoldValidator,
-                         RealWorkspaceManager)
+    from managers import (
+        RealChainManager,
+        RealFoldValidator,
+        RealMemoryManager,
+        RealWorkspaceManager,
+    )
     from polygon_utils import create_polygon
     
     tests_passed = 0
@@ -281,8 +281,7 @@ def test_decay_manager():
     print_header("TEST 6: Decay Manager")
     
     from automated_placement_engine import DecayManager
-    from managers import (RealMemoryManager, RealChainManager,
-                         RealWorkspaceManager)
+    from managers import RealChainManager, RealMemoryManager, RealWorkspaceManager
     
     tests_passed = 0
     tests_total = 0
@@ -311,9 +310,11 @@ def test_exploration_engine():
     print_header("TEST 7: Exploration Engine")
     
     from continuous_exploration_engine import (
-        SuggestionEngine, ExplorationConfig, ExplorationStrategy
+        ExplorationConfig,
+        ExplorationStrategy,
+        SuggestionEngine,
     )
-    from managers import RealMemoryManager, RealChainManager
+    from managers import RealChainManager, RealMemoryManager
     
     tests_passed = 0
     tests_total = 0
@@ -349,8 +350,8 @@ def test_assembly_consistency():
     """Test assembly validation"""
     print_header("TEST 8: Assembly Consistency")
     
-    from validators import check_assembly_consistency
     from polygon_utils import create_polygon
+    from validators import check_assembly_consistency
     
     tests_passed = 0
     tests_total = 0

@@ -1,5 +1,10 @@
-import sys, time, argparse, json, random, tracemalloc, pathlib
-import numpy as np
+import argparse
+import json
+import pathlib
+import random
+import sys
+import time
+import tracemalloc
 
 # Ensure project root in path
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -10,9 +15,9 @@ from polygon_utils import create_polygon_3d
 
 # Optional GUI imports
 try:
-    from PySide6 import QtWidgets
     import pyqtgraph.opengl as gl
     from desktop_app import GLRenderer
+    from PySide6 import QtWidgets
     GUI_AVAILABLE = True
 except Exception:
     GUI_AVAILABLE = False

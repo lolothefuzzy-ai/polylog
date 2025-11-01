@@ -5,12 +5,10 @@ Tests ray-triangle intersection, ray-casting, and selection management.
 """
 
 import sys
+
 import numpy as np
-from interaction_manager import (
-    RaycastingEngine,
-    SelectionManager,
-    InteractionManager
-)
+from interaction_manager import InteractionManager, RaycastingEngine, SelectionManager
+
 
 class MockRenderer:
     """Mock renderer for testing"""

@@ -3,7 +3,8 @@ Demo: N Population Sizing Calculator
 Shows how N is determined based on different strategies.
 """
 
-from convergence_interactive_menu import PopulationSizingCalculator, PopulationConfig
+from convergence_interactive_menu import PopulationSizingCalculator
+
 
 def demo():
     """Run demonstration of N calculation."""

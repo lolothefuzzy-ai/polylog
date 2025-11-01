@@ -11,13 +11,14 @@ Determine:
 5. Safe operation limits and recommendations
 """
 
-import sys
-import pathlib
-import numpy as np
-import time
 import gc
+import pathlib
+import sys
+import time
 import tracemalloc
-from typing import Dict, List, Any, Tuple, Optional
+from typing import Any, Dict, Tuple
+
+import numpy as np
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -318,7 +319,6 @@ def test_memory_vertex_compression():
     print("\n[TEST] Memory Optimization: Vertex Data Compression")
     print("=" * 70)
     
-    import struct
     
     # Create sample polygon vertices
     n = 12

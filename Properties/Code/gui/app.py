@@ -5,7 +5,9 @@ Creates and runs the PySide6 Qt application with the main window.
 """
 
 import sys
+
 from PySide6.QtWidgets import QApplication
+
 from gui.main_window import MainWindow
 
 

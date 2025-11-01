@@ -11,10 +11,11 @@ Provides:
 - Comparison across ranges
 """
 
-from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
-import time
+from typing import Any, Dict, List
+
 import numpy as np
+
 from canonical_integration import CanonicalIntegrator
 from convergence_range_analyzer import RangeConvergenceAnalyzer
 

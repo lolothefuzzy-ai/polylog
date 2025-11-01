@@ -2,7 +2,8 @@
 Shared utility for creating polygon polyforms.
 Used by multiple modules to avoid circular imports.
 """
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, Optional
+
 import numpy as np
 
 try:

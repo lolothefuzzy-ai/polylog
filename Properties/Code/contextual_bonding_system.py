@@ -8,12 +8,12 @@ Automatically bonds edges based on:
 - User preferences
 - Machine learning from past assemblies
 """
-import numpy as np
 import json
-from typing import Dict, Any, List, Tuple, Optional
-from dataclasses import dataclass, asdict
 from collections import defaultdict
-import math
+from dataclasses import asdict, dataclass
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 @dataclass

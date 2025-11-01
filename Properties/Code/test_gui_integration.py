@@ -14,15 +14,24 @@ print("=" * 60)
 print("\n[1/4] Testing gui_enhancements_v2 module...")
 try:
     from gui_enhancements_v2 import (
-        StatusBarManager,
-        UndoRedoManager,
         FoldAnimationEngine,
         PolygonInfluenceSlider,
+        StatusBarManager,
+        UndoRedoManager,
+        create_help_dropdown_menu,
         create_menu_bar,
         create_toolbar,
-        create_help_dropdown_menu
     )
     print("✓ Successfully imported all GUI enhancement components")
+    _ = (
+        FoldAnimationEngine,
+        PolygonInfluenceSlider,
+        StatusBarManager,
+        UndoRedoManager,
+        create_help_dropdown_menu,
+        create_menu_bar,
+        create_toolbar,
+    )
 except ImportError as e:
     print(f"✗ Failed to import: {e}")
     sys.exit(1)
@@ -32,6 +41,7 @@ print("\n[2/4] Testing theme_manager module...")
 try:
     from theme_manager import load_theme, set_button_color, set_label_color
     print("✓ Successfully imported theme manager")
+    _ = (load_theme, set_button_color, set_label_color)
 except ImportError as e:
     print(f"✗ Failed to import: {e}")
     sys.exit(1)

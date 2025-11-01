@@ -8,18 +8,20 @@ Tests cover:
 - Numerical stability
 """
 
-import unittest
-import numpy as np
 import math
-from typing import List
+import unittest
 
-from geometry3d import (
-    MeshData, extrude_polygon, extrude_polygon_with_centroid,
-    compute_vertex_normals, rotation_matrix_axis_angle, transform_mesh
-)
-from hinge_manager import Hinge, HingeManager, HingeGraph
-from polygon_utils import create_polygon_3d, get_polyform_mesh, add_3d_mesh_to_polyform
+import numpy as np
 from collision_validator import CollisionValidator
+from geometry3d import (
+    MeshData,
+    extrude_polygon,
+    extrude_polygon_with_centroid,
+    rotation_matrix_axis_angle,
+    transform_mesh,
+)
+from hinge_manager import Hinge
+from polygon_utils import create_polygon_3d, get_polyform_mesh
 
 
 class TestMeshExtrusion(unittest.TestCase):

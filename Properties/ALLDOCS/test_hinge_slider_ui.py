@@ -5,9 +5,9 @@ Tests UI creation, angle control, constraint updates, and signal emissions.
 """
 
 import sys
-import math
+
 import numpy as np
-from constraint_solver import ForwardKinematics, HingeConstraint, ConstraintMode
+from constraint_solver import ConstraintMode, ForwardKinematics, HingeConstraint
 
 
 class MockAssembly:

@@ -1,6 +1,6 @@
 """Quick smoke test for polyform generation."""
-import sys
 import logging
+import sys
 from pathlib import Path
 
 # Configure logging
@@ -10,12 +10,8 @@ logging.basicConfig(level=logging.INFO)
 project_root = Path(__file__).parent.parent
 sys.path.append(str(project_root / 'Code'))
 
-from random_polyform_generator import (
-    RandomPolyformGenerator, 
-    GenerationParams, 
-    DistributionMode, 
-    ShapeVariety
-)
+from random_polyform_generator import DistributionMode, GenerationParams, RandomPolyformGenerator, ShapeVariety
+
 
 def main():
     """Run basic polyform generation test."""

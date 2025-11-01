@@ -18,11 +18,11 @@ Tests verify:
 5. Assembly state preservation
 """
 
-import sys
 import pathlib
+import sys
+from typing import Any, Dict, List, Optional
+
 import numpy as np
-from typing import Dict, List, Any, Optional, Tuple
-import math
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -119,8 +119,8 @@ def test_drag_pick_single_polygon():
     print("\n[TEST] Drag Pick: Single Polygon")
     print("=" * 70)
     
-    from polygon_utils import create_polygon
     from interaction_manager import RaycastingEngine
+    from polygon_utils import create_polygon
     
     asm = Assembly()
     poly = create_polygon(4, position=(0, 0, 0))
@@ -174,7 +174,6 @@ def test_drag_pick_multiple_polygons():
     print("=" * 70)
     
     from polygon_utils import create_polygon
-    from interaction_manager import InteractionManager
     
     asm = Assembly()
     
@@ -472,8 +471,9 @@ def test_drag_performance():
     print("\n[TEST] Drag Stability: Performance (Large Assembly)")
     print("=" * 70)
     
-    from polygon_utils import create_polygon
     import time
+
+    from polygon_utils import create_polygon
     
     asm = Assembly()
     

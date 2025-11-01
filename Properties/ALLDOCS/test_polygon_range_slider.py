@@ -5,16 +5,22 @@ Quick test of PolygonRangeSlider module for syntax and import validation.
 
 import sys
 
+
 def test_imports():
     """Test that all imports work."""
     try:
         print("Testing imports...")
         from polygon_range_slider import (
-            PolygonRangeSliderWidget,
             PolygonGenerationAnimator,
-            integrate_polygon_range_slider_into_gui
+            PolygonRangeSliderWidget,
+            integrate_polygon_range_slider_into_gui,
         )
         print("✓ All imports successful")
+        _ = (
+            PolygonGenerationAnimator,
+            PolygonRangeSliderWidget,
+            integrate_polygon_range_slider_into_gui,
+        )
         return True
     except ImportError as e:
         print(f"✗ Import error: {e}")

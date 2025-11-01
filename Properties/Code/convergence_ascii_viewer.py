@@ -5,11 +5,11 @@ Displays T/N convergence patterns as text graphs that update in the terminal.
 Perfect for monitoring without loading PyQtGraph/PySide6.
 """
 
-import numpy as np
-from typing import Dict, List, Tuple
 from collections import defaultdict
-import time
 from dataclasses import dataclass
+from typing import Dict, List
+
+import numpy as np
 
 
 @dataclass

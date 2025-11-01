@@ -1,8 +1,6 @@
 import json
-import math
-import os
 import time
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -161,8 +159,9 @@ class RealFoldValidator:
         
         # Try to import 3D collision detection
         try:
-            from bvh3d import TriangleCollisionDetector
             from polygon_utils import get_polyform_mesh
+
+            from bvh3d import TriangleCollisionDetector
             self._collision_detector_cls = TriangleCollisionDetector
             self._get_mesh_fn = get_polyform_mesh
             self._3d_available = True

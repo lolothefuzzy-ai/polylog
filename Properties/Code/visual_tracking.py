@@ -2,12 +2,12 @@
 Visual Tracking System - Motion trails, glow effects, and camera following for polyforms.
 Enhances visual feedback during animations and interactions.
 """
-from typing import Dict, Optional, List, Tuple
-from collections import deque
-import numpy as np
-from PySide6 import QtCore
-import pyqtgraph.opengl as gl
 import time
+from collections import deque
+from typing import Dict, Optional, Tuple
+
+import numpy as np
+import pyqtgraph.opengl as gl
 
 
 class MotionTrail:

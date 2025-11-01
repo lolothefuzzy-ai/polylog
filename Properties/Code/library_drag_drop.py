@@ -10,10 +10,11 @@ Features:
 - Multiple selection support
 - Undo/redo integration
 """
-import numpy as np
-from typing import Dict, Any, List, Tuple, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
+from typing import Any, Callable, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 class DragState(Enum):

@@ -7,7 +7,8 @@ Learning engine that observes user activity and progressively learns:
 - Efficient workflows
 """
 import time
-from typing import Dict, List, Tuple, Optional, Any
+from typing import Any, Dict, List, Optional, Tuple
+
 import numpy as np
 
 from scaler_database import ScalerDatabase

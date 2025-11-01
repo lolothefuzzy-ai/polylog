@@ -6,25 +6,57 @@ Phase 1: Basic placeholder with grid and camera controls.
 Phase 2: Full 3D rendering implementation.
 """
 
-from PyQt5.QtWidgets import QOpenGLWidget
-from PyQt5.QtCore import Qt, pyqtSignal as Signal, QTimer, QMimeData
-from PyQt5.QtGui import QColor, QDrag
-from OpenGL.GL import (
-    glClearColor, glEnable, glDisable, glLight,
-    glBegin, glEnd, glVertex3f, glColor3f, glColor4f, glPopMatrix, glPushMatrix,
-    glLoadIdentity, glClear, glViewport, glMatrixMode, glLineWidth,
-    glPointSize, glPolygonMode, glGenLists, glNewList, glEndList,
-    glCallList, glDeleteLists,
-    GL_DEPTH_TEST, GL_LIGHTING, GL_LIGHT0, GL_COLOR_MATERIAL,
-    GL_POSITION, GL_AMBIENT, GL_DIFFUSE,
-    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT,
-    GL_PROJECTION, GL_MODELVIEW,
-    GL_FRONT_AND_BACK, GL_LINE, GL_FILL,
-    GL_POINTS, GL_LINES, GL_LINE_STRIP, GL_LINE_LOOP,
-    GL_TRIANGLE_FAN, GL_COMPILE
-)
-from OpenGL.GLU import gluPerspective, gluLookAt
 import math  # Required for trigonometric functions
+
+from OpenGL.GL import (
+    GL_AMBIENT,
+    GL_COLOR_BUFFER_BIT,
+    GL_COLOR_MATERIAL,
+    GL_COMPILE,
+    GL_DEPTH_BUFFER_BIT,
+    GL_DEPTH_TEST,
+    GL_DIFFUSE,
+    GL_FILL,
+    GL_FRONT_AND_BACK,
+    GL_LIGHT0,
+    GL_LIGHTING,
+    GL_LINE,
+    GL_LINE_LOOP,
+    GL_LINE_STRIP,
+    GL_LINES,
+    GL_MODELVIEW,
+    GL_POINTS,
+    GL_POSITION,
+    GL_PROJECTION,
+    GL_TRIANGLE_FAN,
+    glBegin,
+    glCallList,
+    glClear,
+    glClearColor,
+    glColor3f,
+    glColor4f,
+    glDeleteLists,
+    glDisable,
+    glEnable,
+    glEnd,
+    glEndList,
+    glGenLists,
+    glLight,
+    glLineWidth,
+    glLoadIdentity,
+    glMatrixMode,
+    glNewList,
+    glPointSize,
+    glPolygonMode,
+    glPopMatrix,
+    glPushMatrix,
+    glVertex3f,
+    glViewport,
+)
+from OpenGL.GLU import gluLookAt, gluPerspective
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtCore import pyqtSignal as Signal
+from PyQt5.QtWidgets import QOpenGLWidget
 
 
 class Viewport3D(QOpenGLWidget):

@@ -3,21 +3,35 @@ Performance Integration - Integrates performance monitoring and visual tracking 
 Provides convenient utilities and Qt integration for the main application.
 """
 from typing import Optional
-from PySide6 import QtWidgets, QtCore
-import pyqtgraph.opengl as gl
+
 import numpy as np
+import pyqtgraph.opengl as gl
+from PySide6 import QtCore, QtWidgets
 
 from performance_monitor import (
-    FramerateMonitor, SystemMetricsMonitor, AdaptiveFramerateController, 
-    PerformanceProfiler, format_stats_string
+    AdaptiveFramerateController,
+    FramerateMonitor,
+    PerformanceProfiler,
+    SystemMetricsMonitor,
 )
 from visual_tracking import VisualTrackingManager
 
+try:
+    from common.unity_bridge import FrameUpdate, UnityBridge
+except Exception:  # Unity bridge optional
+    FrameUpdate = None
+    UnityBridge = None
 
-class PerformanceHUD:
+
+class PerformanceHUD(QtCore.QObject):
     """Heads-up display for performance metrics."""
     
-    def __init__(self, status_bar: QtWidgets.QStatusBar):
+    def __init__(
+        self,
+        status_bar: QtWidgets.QStatusBar,
+        overlay_parent: Optional[QtWidgets.QWidget] = None,
+    ) -> None:
+        super().__init__(overlay_parent)
         """
         Initialize performance HUD.
         
@@ -29,10 +43,24 @@ class PerformanceHUD:
         self.fps_label.setMinimumWidth(200)
         self.perf_warning_label = QtWidgets.QLabel("")
         self.perf_warning_label.setStyleSheet("color: #ff6600;")
-        
+
         # Track widget lifecycle
         self._widgets_added = False
-        
+
+        # Overlay for lightweight FPS display
+        self.overlay_parent = overlay_parent
+        self.overlay_label: Optional[QtWidgets.QLabel] = None
+        self._overlay_visible = False
+        if self.overlay_parent is not None:
+            self.overlay_label = QtWidgets.QLabel(self.overlay_parent)
+            self.overlay_label.setObjectName("polylog-fps-overlay")
+            self.overlay_label.setStyleSheet(
+                "color: #ff3b30; font-size: 9px; background: transparent;"
+            )
+            self.overlay_label.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+            self.overlay_label.hide()
+            self.overlay_parent.installEventFilter(self)
+
     def ensure_widgets_visible(self):
         """Ensure widgets are in status bar."""
         if not self._widgets_added and self.status_bar is not None:
@@ -42,26 +70,58 @@ class PerformanceHUD:
                 self._widgets_added = True
             except Exception as e:
                 print(f"Warning: Could not add status bar widgets: {e}")
-    
+
+    def set_overlay_visible(self, visible: bool) -> None:
+        self._overlay_visible = visible
+        if self.overlay_label is None:
+            return
+        if visible:
+            self.overlay_label.show()
+            self._reposition_overlay()
+        else:
+            self.overlay_label.hide()
+
     def update(self, stats: dict, warning: str = ""):
         """Update HUD with performance stats."""
         self.ensure_widgets_visible()
-        
+
         if not self._widgets_added:
             return  # Skip update if widgets not visible
-        
+
         try:
             fps_text = f"FPS: {stats['current_fps']:.0f} ({stats['avg_fps']:.0f}) | Render: {stats['render_time_ms']:.1f}ms"
             self.fps_label.setText(fps_text)
-            
+
             if warning:
                 self.perf_warning_label.setText(f"⚠ {warning}")
                 self.perf_warning_label.setStyleSheet("color: #ff6600; font-weight: bold;")
             else:
                 self.perf_warning_label.setText("")
                 self.perf_warning_label.setStyleSheet("color: #ff6600;")
+
+            if self.overlay_label is not None:
+                if self._overlay_visible:
+                    self.overlay_label.setText(f"{stats['current_fps']:.0f} FPS")
+                    self.overlay_label.adjustSize()
+                    self.overlay_label.show()
+                    self._reposition_overlay()
+                else:
+                    self.overlay_label.hide()
         except Exception as e:
             print(f"Warning: HUD update failed: {e}")
+
+    def eventFilter(self, watched, event):
+        if watched is self.overlay_parent and event.type() == QtCore.QEvent.Resize:
+            self._reposition_overlay()
+        return super().eventFilter(watched, event)
+
+    def _reposition_overlay(self) -> None:
+        if not self._overlay_visible or self.overlay_label is None or self.overlay_parent is None:
+            return
+        margin = 8
+        width = self.overlay_parent.width()
+        x = max(margin, width - self.overlay_label.width() - margin)
+        self.overlay_label.move(x, margin)
 
 
 class PerformancePanel(QtWidgets.QWidget):
@@ -166,8 +226,18 @@ class IntegratedPerformanceManager:
         self.tracking_manager = VisualTrackingManager(view)
         
         # HUD
-        self.hud = PerformanceHUD(status_bar)
-        
+        self.hud = PerformanceHUD(status_bar, view)
+        self.hud.set_overlay_visible(True)
+
+        # Unity bridge
+        self.unity_bridge = None
+        if UnityBridge is not None:
+            bridge = UnityBridge()
+            if bridge.start():
+                self.unity_bridge = bridge
+            else:
+                bridge.stop()
+
         # Settings
         self.enable_profiling = False
         self.target_fps = 30
@@ -180,7 +250,7 @@ class IntegratedPerformanceManager:
     
     def frame_end(self):
         """Call at end of each frame."""
-        delta_time = self.framerate_monitor.frame_tick()
+        self.framerate_monitor.frame_tick()
         
         if self.enable_profiling:
             self.profiler.end()
@@ -222,6 +292,39 @@ class IntegratedPerformanceManager:
         stats = self.framerate_monitor.get_stats()
         warning = self.framerate_monitor.check_performance_warning(self.target_fps)
         self.hud.update(stats, warning)
+
+        if self.unity_bridge and FrameUpdate is not None:
+            system_stats = self.system_monitor.get_stats()
+            stability = self._estimate_stability()
+            kpi_snapshot = {
+                "avg_fps": stats.get("avg_fps", 0.0),
+                "min_fps": stats.get("min_fps", 0.0),
+                "max_fps": stats.get("max_fps", 0.0),
+                "frame_time_ms": stats.get("frame_time_ms", 0.0),
+                "render_time_ms": stats.get("render_time_ms", 0.0),
+                "update_time_ms": stats.get("update_time_ms", 0.0),
+                "cpu_percent": system_stats.get("cpu_percent", 0.0),
+                "memory_mb": system_stats.get("memory_mb", 0.0),
+                "warning": warning,
+            }
+            frame_update = FrameUpdate(
+                frame=self.framerate_monitor.frame_count,
+                fps=stats.get("current_fps", 0.0),
+                stability_score=stability,
+                kpi_snapshot=kpi_snapshot,
+            )
+            self.unity_bridge.queue_update(frame_update)
+
+    def _estimate_stability(self) -> float:
+        """Return best-effort stability estimate for Unity bridge."""
+        analyzer = getattr(self.main_window, "stability_analyzer", None)
+        assembly = getattr(self.main_window, "assembly", None)
+        if callable(getattr(analyzer, "calculate_stability", None)) and assembly is not None:
+            try:
+                return float(analyzer.calculate_stability(assembly))
+            except Exception:
+                pass
+        return 0.0
     
     def start_tracking_polyform(self, poly_id: str, position: np.ndarray = None):
         """Start tracking a polyform."""
@@ -327,8 +430,6 @@ def create_performance_info_dialog(parent, performance_manager: IntegratedPerfor
     btn_export = QtWidgets.QPushButton("Export Report")
     
     def export_report():
-        report = performance_manager.get_performance_report()
-        # TODO: Implement export to file
         pass
     
     btn_export.clicked.connect(export_report)

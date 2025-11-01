@@ -11,19 +11,19 @@ Provides:
 - Audit logging
 """
 
-import time
 import hashlib
 import hmac
+import json
 import secrets
-from typing import Optional, Dict, Callable, Any, Set
+import threading
+import time
 from collections import defaultdict
 from dataclasses import dataclass
-from functools import wraps
 from datetime import datetime, timedelta
-import threading
-import json
+from functools import wraps
+from typing import Any, Callable, Dict, Optional, Set
 
-from fastapi import HTTPException, Header, Request
+from fastapi import HTTPException, Request
 from fastapi.responses import JSONResponse
 
 

@@ -1,6 +1,7 @@
-import sys
-from PySide6 import QtWidgets
 import pathlib
+import sys
+
+from PySide6 import QtWidgets
 
 # Ensure project root in path
 ROOT = pathlib.Path(__file__).resolve().parents[1]

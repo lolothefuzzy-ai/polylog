@@ -1,5 +1,8 @@
-import sys, pathlib
+import pathlib
+import sys
+
 import numpy as np
+
 # Ensure project root in path
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:

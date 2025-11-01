@@ -10,13 +10,12 @@ Promotes frequently accessed items up the hierarchy.
 Expected improvement: 40-50% better cache efficiency at high-n.
 """
 
-import numpy as np
-from typing import Dict, Any, Optional, Tuple
-from collections import OrderedDict
 import logging
+import os
 import pickle
 import tempfile
-import os
+from collections import OrderedDict
+from typing import Any, Dict, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 

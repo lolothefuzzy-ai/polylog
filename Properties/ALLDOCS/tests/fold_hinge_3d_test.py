@@ -1,10 +1,13 @@
-import sys, pathlib
+import pathlib
+import sys
+
 import numpy as np
+
 # Ensure project root in path
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from geometry3d import MeshData, extrude_polygon
+from geometry3d import extrude_polygon
 from hinge_manager import Hinge, HingeManager
 
 

@@ -2,16 +2,17 @@
 Unified engine for creating polyforms from any source.
 Ensures all polyforms have correct vertex/edge tracking and 3D mesh data.
 """
-from typing import Dict, List, Tuple, Optional, Any
-import numpy as np
 import time
+from typing import Any, Dict, List, Optional, Tuple
 
-from polygon_utils import create_polygon, create_polygon_3d, add_3d_mesh_to_polyform
+import numpy as np
+from polygon_utils import add_3d_mesh_to_polyform, create_polygon, create_polygon_3d
+
+from generator_protocol import BaseGenerator, GeneratorCapability, register_generator
+from learning_engine import LearningEngine
 from scaler_database import ScalerDatabase
 from symmetry_database import SymmetryDatabase
-from learning_engine import LearningEngine
 from template_library import TemplateLibrary
-from generator_protocol import BaseGenerator, register_generator, GeneratorCapability
 
 
 @register_generator('basic', [GeneratorCapability.BASIC, GeneratorCapability.TEMPLATE_BASED, GeneratorCapability.LEARNING])

@@ -1,6 +1,6 @@
 import math
 import time
-from typing import Dict, List, Tuple, Any, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 # Canonical, agent-implementable combinatorial estimator for N
 # Follows the spec provided by user exactly, computing in log-space and returning

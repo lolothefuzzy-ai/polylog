@@ -10,11 +10,11 @@ Tests:
 - Raycast functionality
 - Performance benchmarks
 """
-import pytest
-import numpy as np
 import time
-from geometry3d import extrude_polygon, MeshData
+
+import numpy as np
 from bvh3d import AABB, BVHNode, TriangleCollisionDetector
+from geometry3d import extrude_polygon
 
 
 class TestAABB:

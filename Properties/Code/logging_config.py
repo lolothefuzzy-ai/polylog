@@ -10,17 +10,16 @@ Provides:
 - Thread-safe logging across all modules
 """
 
+import functools
+import json
 import logging
 import logging.handlers
-import json
 import time
 import traceback
-import functools
-from typing import Any, Callable, Optional, Dict
 from contextlib import contextmanager
 from datetime import datetime
-import os
 from pathlib import Path
+from typing import Callable, Dict, Optional
 
 # Default log directory
 LOG_DIR = Path("./logs")
@@ -267,7 +266,6 @@ validation_logger = get_logger("polylog.validation")
 def clear_old_logs(days: int = 7):
     """Clean up log files older than specified days"""
     import os
-    from pathlib import Path
     from datetime import datetime, timedelta
     
     cutoff = datetime.now() - timedelta(days=days)

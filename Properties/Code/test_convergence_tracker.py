@@ -9,6 +9,7 @@ Demonstrates:
 """
 import numpy as np
 from canonical_estimator import canonical_estimate
+
 from convergence_tracker import ConvergenceTracker
 
 

@@ -12,17 +12,14 @@ This shows:
 5. Data export
 """
 
-import numpy as np
-from typing import List, Dict, Any
 import random
 import time
+from typing import Dict, List
+
+import numpy as np
 
 # Import integration modules
-from integration_hooks import (
-    GAIntegration, 
-    MultiPopulationIntegration
-)
-
+from integration_hooks import GAIntegration, MultiPopulationIntegration
 
 # ============================================================================
 # MOCK GA CLASSES (Simulating your actual GA)
@@ -310,8 +307,9 @@ def demo_4_real_time_monitoring():
     print("DEMO 4: Real-Time Monitoring with Metrics Export")
     print("="*80)
     
-    from canonical_system_integration import CanonicalSystemIntegrator
     import json
+
+    from canonical_system_integration import CanonicalSystemIntegrator
     
     # Create system tracker
     system = CanonicalSystemIntegrator(enable_visual_tracking=True)

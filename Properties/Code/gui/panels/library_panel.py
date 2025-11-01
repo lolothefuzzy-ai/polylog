@@ -8,12 +8,9 @@ Features:
 - Search/filter capability
 """
 
-from PySide6.QtWidgets import (
-    QGroupBox, QVBoxLayout, QListWidget, QListWidgetItem,
-    QLineEdit, QContextMenuEvent
-)
-from PySide6.QtCore import Qt, Signal, QMimeData
-from PySide6.QtGui import QColor, QDrag
+from PySide6.QtCore import QMimeData, Qt, Signal
+from PySide6.QtGui import QDrag
+from PySide6.QtWidgets import QGroupBox, QLineEdit, QListWidget, QListWidgetItem, QVBoxLayout
 
 
 class DragEnabledListWidget(QListWidget):

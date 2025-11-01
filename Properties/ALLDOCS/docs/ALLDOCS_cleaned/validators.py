@@ -1,5 +1,5 @@
-from typing import Dict, Any, List, Tuple
-import math
+from typing import Any, Dict, List, Tuple
+
 import numpy as np
 
 # Geometry and assembly validators for visualization stability

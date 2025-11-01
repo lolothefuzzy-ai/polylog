@@ -1,13 +1,8 @@
 """Quick smoke test for polyform generation."""
 import sys
-from pathlib import Path
 
-from minimal_generator import (
-    RandomPolyformGenerator, 
-    GenerationParams, 
-    DistributionMode, 
-    ShapeVariety
-)
+from minimal_generator import DistributionMode, GenerationParams, RandomPolyformGenerator, ShapeVariety
+
 
 def main():
     """Run basic polyform generation test."""

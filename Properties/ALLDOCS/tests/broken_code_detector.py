@@ -12,11 +12,10 @@ Finds:
 - Missing return statements
 """
 
-import sys
-import pathlib
-import ast
 import importlib
-from typing import Dict, List, Any
+import pathlib
+import sys
+from typing import Any, Dict, List
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -82,15 +81,24 @@ class BrokenCodeDetector:
             print(f"  [OK] create_polygon(4)")
             
             # Test managers
-            from managers import RealMemoryManager, RealChainManager
+            from managers import RealChainManager, RealMemoryManager
             m = RealMemoryManager()
             m.record_success('test', {}, 0.5)
             c = RealChainManager()
             print(f"  [OK] Manager instantiation")
             
             # Test engine instantiation
-            from managers import RealFoldValidator, RealWorkspaceManager, RealProvenanceTracker
-            from automated_placement_engine import ConnectionEvaluator, FoldSequencer, DecayManager, AutomatedPlacementEngine
+            from automated_placement_engine import (
+                AutomatedPlacementEngine,
+                ConnectionEvaluator,
+                DecayManager,
+                FoldSequencer,
+            )
+            from managers import (
+                RealFoldValidator,
+                RealProvenanceTracker,
+                RealWorkspaceManager,
+            )
             v = RealFoldValidator()
             w = RealWorkspaceManager()
             p = RealProvenanceTracker()
@@ -169,8 +177,8 @@ class BrokenCodeDetector:
         print("\n[TEST] Validators")
         
         try:
-            from polygon_utils import create_polygon
             import validators as V
+            from polygon_utils import create_polygon
             
             p = create_polygon(4)
             ok, meta = V.check_polyform_integrity(p)
@@ -220,10 +228,11 @@ class BrokenCodeDetector:
         print("\n[TEST] Library Operations")
         
         try:
-            from stable_library import StableLibrary
-            from polygon_utils import create_polygon
-            import tempfile
             import os
+            import tempfile
+
+            from polygon_utils import create_polygon
+            from stable_library import StableLibrary
             
             with tempfile.NamedTemporaryFile(mode='w', suffix='.jsonl', delete=False) as f:
                 temp_path = f.name
@@ -267,14 +276,20 @@ class BrokenCodeDetector:
         print("\n[TEST] Placement Cycle")
         
         try:
-            from polygon_utils import create_polygon
-            from managers import (
-                RealMemoryManager, RealChainManager, RealFoldValidator,
-                RealWorkspaceManager, RealProvenanceTracker
-            )
             from automated_placement_engine import (
-                ConnectionEvaluator, FoldSequencer, DecayManager, AutomatedPlacementEngine
+                AutomatedPlacementEngine,
+                ConnectionEvaluator,
+                DecayManager,
+                FoldSequencer,
             )
+            from managers import (
+                RealChainManager,
+                RealFoldValidator,
+                RealMemoryManager,
+                RealProvenanceTracker,
+                RealWorkspaceManager,
+            )
+            from polygon_utils import create_polygon
             
             class Asm:
                 def __init__(self):

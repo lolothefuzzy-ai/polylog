@@ -8,10 +8,11 @@ This database learns:
 - Fold angle preferences
 - Template usage statistics
 """
-import os
 import json
+import os
 import time
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Optional, Tuple
+
 import numpy as np
 
 

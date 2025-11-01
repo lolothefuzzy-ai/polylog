@@ -2,10 +2,10 @@
 """
 Comprehensive dependency and loose ends audit for Polylog
 """
-import sys
 import importlib.util
-from pathlib import Path
 import re
+import sys
+from pathlib import Path
 
 print("=" * 70)
 print("POLYLOG BACKEND DEPENDENCY AUDIT")

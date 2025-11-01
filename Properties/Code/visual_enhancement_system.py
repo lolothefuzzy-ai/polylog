@@ -9,10 +9,11 @@ Upgrades rendering with:
 - Texture support
 - Color gradients and patterns
 """
-import numpy as np
-from typing import Dict, Any, List, Tuple, Optional
 from dataclasses import dataclass
 from enum import Enum
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 class MaterialType(Enum):

@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Ruff: Fix All Imports",
+      "type": "shell",
+      "command": "ruff",
+      "args": ["check", ".", "--select", "F401", "--fix"],
+      "group": "build"
+    },
+    {
+      "label": "Find Legacy Imports",
+      "type": "shell",
+      "command": "ruff",
+      "args": ["check", ".", "--select", "I"],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false
+      }
+    },
+    {
+      "label": "Test Metrics Endpoint",
+      "type": "shell",
+      "command": "pytest",
+      "args": ["tests/test_unity_bridge_metrics.py", "-v"]
+    },
+    {
+      "label": "Verify Package Structure",
+      "type": "shell",
+      "command": "python",
+      "args": ["-c", "from polylog6.metrics.service import MetricsService; print('✓ Import successful')"]
+    }
+  ]
+}

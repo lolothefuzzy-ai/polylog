@@ -8,9 +8,10 @@ Ready-to-use integration points for:
 - Real-time visualization
 """
 
-from canonical_system_integration import CanonicalSystemIntegrator
-from typing import Optional, Callable, List, Dict, Any
 import time
+from typing import Any, Callable, Dict, List
+
+from canonical_system_integration import CanonicalSystemIntegrator
 
 
 class GeneratorIntegration:
@@ -91,6 +92,11 @@ class GAIntegration:
         
         self.generation_count += 1
     
+    def get_metrics(self) -> Dict[str, Any]:
+        """Return structured metrics for this GA tracker."""
+        metrics = self.system_tracker.get_range_metrics(self.n_value)
+        return metrics or {}
+    
     def print_progress(self, total_generations: int = None):
         """Print current progress."""
         elapsed = time.time() - self.start_time
@@ -130,6 +136,16 @@ class MultiPopulationIntegration:
         ga = GAIntegration(pop_size, name or f"Population {len(self.ga_integrations)}")
         self.ga_integrations[pop_size] = ga
         return ga
+    
+    def get_metrics(self) -> Dict[str, Dict[str, Any]]:
+        """Collect metrics for all registered populations."""
+        data: Dict[str, Dict[str, Any]] = {}
+        for pop_size, ga in self.ga_integrations.items():
+            data[ga.name] = ga.get_metrics()
+            if "n_value" not in data[ga.name]:
+                # annotate with key metadata for convenience
+                data[ga.name]["n_value"] = pop_size
+        return data
     
     def track_all_populations(self, populations: Dict[int, Any]):
         """Track all populations at once."""

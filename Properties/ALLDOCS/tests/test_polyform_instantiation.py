@@ -20,11 +20,11 @@ Tests verify:
 6. Rendering pipeline (draw operations, updates)
 """
 
-import sys
 import pathlib
+import sys
+from typing import Any, Dict, List, Optional
+
 import numpy as np
-from typing import Dict, List, Any, Optional
-import json
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -245,7 +245,12 @@ def test_polyform_3d_mesh_generation():
     print("\n[TEST] Polyform 3D Mesh Generation")
     print("=" * 70)
     
-    from polygon_utils import create_polygon, create_polygon_3d, add_3d_mesh_to_polyform, get_polyform_mesh
+    from polygon_utils import (
+        add_3d_mesh_to_polyform,
+        create_polygon,
+        create_polygon_3d,
+        get_polyform_mesh,
+    )
     
     try:
         # Test mesh addition to existing polyform
@@ -375,8 +380,9 @@ def test_polyform_instantiation_batch():
     print("\n[TEST] Polyform Batch Instantiation")
     print("=" * 70)
     
-    from polygon_utils import create_polygon
     import time
+
+    from polygon_utils import create_polygon
     
     asm = Assembly()
     

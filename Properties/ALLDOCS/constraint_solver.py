@@ -6,11 +6,12 @@ positions through forward kinematics. Supports large assembly chains with
 efficient constraint propagation.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple, Set
-import numpy as np
-from enum import Enum
 import logging
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Dict, List, Optional, Set, Tuple
+
+import numpy as np
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -408,6 +409,7 @@ class ConstraintValidator:
 
 # Type hints for assembly interface
 from typing import Any
+
 
 def apply_constraints(assembly: Any, solver: ForwardKinematics) -> bool:
     """

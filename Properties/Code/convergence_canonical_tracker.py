@@ -13,11 +13,10 @@ Where:
   symmetry_factor = geometric indistinguishability reduction
 """
 
-import numpy as np
-from typing import Dict, List, Optional
-from collections import defaultdict
 from dataclasses import dataclass
-import math
+from typing import List, Optional
+
+import numpy as np
 from canonical_estimator import canonical_estimate
 
 

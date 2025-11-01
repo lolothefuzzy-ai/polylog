@@ -1,8 +1,10 @@
-from typing import Dict, Any, List, Optional
 import json
 import os
 import uuid
+from typing import Any, Dict, List, Optional
+
 from polygon_utils import create_polygon
+
 
 # Lazy normalization helper to avoid importing GUI modules at module import time
 def _normalize_polyform_local(polyform: Dict[str, Any]) -> Dict[str, Any]:

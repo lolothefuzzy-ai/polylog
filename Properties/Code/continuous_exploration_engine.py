@@ -12,13 +12,14 @@ Enables autonomous, background exploration of polyform space by:
 This transforms the visualizer into a self-directed research tool.
 """
 
-import numpy as np
-from typing import List, Dict, Optional, Tuple, Callable
+import threading
+import time
 from dataclasses import dataclass
 from enum import Enum
-import time
-import threading
-from queue import Queue, Empty
+from queue import Empty, Queue
+from typing import Callable, Dict, List, Optional
+
+import numpy as np
 
 # Canonical N Tracking Integration
 try:
@@ -731,13 +732,7 @@ class ContinuousExplorationEngine:
 # ═══════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
-    from managers import (
-        RealMemoryManager,
-        RealChainManager,
-        RealWorkspaceManager,
-        RealProvenanceTracker
-    )
-    from automated_placement_engine import AutomatedPlacementEngine
+    from managers import RealChainManager, RealMemoryManager, RealProvenanceTracker, RealWorkspaceManager
     
     print("╔════════════════════════════════════════════════════════╗")
     print("║  CONTINUOUS EXPLORATION ENGINE - TEST MODE            ║")

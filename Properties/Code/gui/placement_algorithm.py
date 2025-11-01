@@ -4,9 +4,9 @@ Placement and exploration algorithms for autonomous polygon arrangement.
 Implements intelligent placement strategies for polyforms.
 """
 
-import random
 import math
-from typing import List, Dict, Any, Tuple, Optional
+import random
+from typing import Any, Dict, List, Tuple
 
 
 class PlacementAlgorithm:

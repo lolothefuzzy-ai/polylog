@@ -1,7 +1,8 @@
 import json
 import time
 import uuid
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List, Optional
+
 
 class StableLibrary:
     def __init__(self, path: str = 'stable_polyforms.jsonl'):
@@ -219,8 +220,8 @@ class StableLibrary:
     
     def _restore_3d_meshes(self, entry: Dict[str, Any]) -> Dict[str, Any]:
         """Restore 3D mesh data in polyforms, reconstructing if necessary."""
-        from polygon_utils import add_3d_mesh_to_polyform
         from geometry3d import MeshData
+        from polygon_utils import add_3d_mesh_to_polyform
         
         if 'polyforms' not in entry:
             return entry

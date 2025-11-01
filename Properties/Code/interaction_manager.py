@@ -5,9 +5,10 @@ Handles mouse-based picking, ray-casting through 3D geometry,
 and selection state management with visual highlighting.
 """
 
-from typing import Optional, List, Tuple, Dict, Any
-import numpy as np
 from enum import Enum
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 class SelectionMode(Enum):

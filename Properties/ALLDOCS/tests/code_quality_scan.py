@@ -13,12 +13,11 @@ Scans all Python files for:
 - Type mismatches
 """
 
-import sys
-import pathlib
 import ast
 import importlib
-import traceback
-from typing import Dict, List, Tuple, Any
+import pathlib
+import sys
+from typing import Any, Dict, List
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:

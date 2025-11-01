@@ -11,14 +11,15 @@ Integrates:
 """
 
 import random
-import numpy as np
 import time
-from typing import Dict, Any, List, Tuple, Optional
+from typing import Any, Dict, List, Tuple
+
+import numpy as np
 from polygon_utils import create_polygon, create_polygon_3d
-from generator_protocol import BaseGenerator, register_generator, GeneratorCapability
 
 # Import canonical tracking
-from canonical_integration import CanonicalIntegrator, AssemblyObserver
+from canonical_integration import AssemblyObserver, CanonicalIntegrator
+from generator_protocol import BaseGenerator, GeneratorCapability, register_generator
 
 
 @register_generator('random_assembly_tracked', [GeneratorCapability.BASIC])

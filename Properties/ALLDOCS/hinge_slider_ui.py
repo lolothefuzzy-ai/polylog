@@ -8,20 +8,26 @@ Provides:
 - Group organization by polyform
 """
 
-from typing import Dict, List, Optional, Callable, TYPE_CHECKING
 import math
-import numpy as np
+from typing import TYPE_CHECKING, Callable, Dict, List, Optional
 
-from PySide6 import QtCore, QtWidgets, QtGui
+import numpy as np
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QSlider,
-    QLabel, QDoubleSpinBox, QPushButton, QScrollArea, QFrame
+    QFrame,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QScrollArea,
+    QSlider,
+    QVBoxLayout,
+    QWidget,
 )
 
 if TYPE_CHECKING:
     # Type hints only - avoid circular imports
-    from constraint_solver import HingeConstraint, ForwardKinematics
+    from constraint_solver import ForwardKinematics, HingeConstraint
 
 # Lazy imports for runtime
 HingeConstraint = None
@@ -333,7 +339,8 @@ def _init_imports():
     """Load constraint_solver imports after module initialization."""
     global HingeConstraint, ForwardKinematics
     try:
-        from constraint_solver import HingeConstraint as HC, ForwardKinematics as FK
+        from constraint_solver import ForwardKinematics as FK
+        from constraint_solver import HingeConstraint as HC
         HingeConstraint = HC
         ForwardKinematics = FK
     except ImportError as e:

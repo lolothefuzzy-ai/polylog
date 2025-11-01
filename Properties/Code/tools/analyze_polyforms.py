@@ -1,12 +1,11 @@
 """
 Analyze polyform data structures by generating a small sample and printing a schema-like summary.
 """
-import json
-from typing import Any, Dict
-
 # Import the minimal generator used in tests (load by path to avoid package import issues)
 import importlib.util
+import json
 from pathlib import Path
+from typing import Any, Dict
 
 tests_path = Path(__file__).resolve().parents[1] / "tests" / "minimal_generator.py"
 spec = importlib.util.spec_from_file_location("minimal_generator", str(tests_path))

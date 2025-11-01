@@ -6,14 +6,14 @@ performance with 100+ polyforms, and solver convergence.
 """
 
 import sys
-import numpy as np
 import time
+
+import numpy as np
 from constraint_solver import (
+    ConstraintMode,
+    ConstraintValidator,
     ForwardKinematics,
     HingeConstraint,
-    ConstraintValidator,
-    ConstraintMode,
-    apply_constraints
 )
 
 

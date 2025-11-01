@@ -3,7 +3,8 @@ Test script for PolyformGenerationEngine.
 Tests single polygon generation, range generation, and 3D tracking.
 """
 import sys
-from typing import Dict, Any
+from typing import Any, Dict
+
 
 # Mock Assembly class for testing
 class TestAssembly:

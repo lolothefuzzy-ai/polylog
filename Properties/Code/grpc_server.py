@@ -15,11 +15,12 @@ Or use from main.py:
   python main.py grpc --port 50051
 """
 
-import grpc
-from concurrent import futures
 import logging
 import time
-from typing import Iterator, Optional
+from concurrent import futures
+from typing import Iterator
+
+import grpc
 
 # Import generated protobuf code (after running protoc)
 try:
@@ -31,9 +32,14 @@ except ImportError:
     exit(1)
 
 # Import Polylog modules
-from automated_placement_engine import ConnectionEvaluator, FoldSequencer, DecayManager, AutomatedPlacementEngine
-from managers import RealMemoryManager, RealChainManager, RealFoldValidator, RealWorkspaceManager, RealProvenanceTracker
-from continuous_exploration_engine import ContinuousExplorationEngine, SuggestionEngine, ExplorationConfig, ExplorationStrategy
+from automated_placement_engine import AutomatedPlacementEngine, ConnectionEvaluator, DecayManager, FoldSequencer
+from continuous_exploration_engine import (
+    ContinuousExplorationEngine,
+    ExplorationConfig,
+    ExplorationStrategy,
+    SuggestionEngine,
+)
+from managers import RealChainManager, RealFoldValidator, RealMemoryManager, RealProvenanceTracker, RealWorkspaceManager
 from stable_library import StableLibrary
 
 logging.basicConfig(level=logging.INFO)

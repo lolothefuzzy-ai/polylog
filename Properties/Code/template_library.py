@@ -8,6 +8,7 @@ Each template defines:
 - Symmetry properties
 """
 from typing import Dict, List, Optional
+
 import numpy as np
 
 

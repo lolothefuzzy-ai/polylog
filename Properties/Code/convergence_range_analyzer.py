@@ -8,14 +8,15 @@ Shows:
 - Generation-wise comparison across multiple N values
 """
 
-from PySide6 import QtWidgets, QtCore, QtGui
-from PySide6.QtCore import Qt, QTimer
-import pyqtgraph as pg
-import numpy as np
-from typing import Dict, List, Tuple, Optional
-from dataclasses import dataclass
-from collections import defaultdict
 import time
+from collections import defaultdict
+from dataclasses import dataclass
+from typing import Dict, List
+
+import numpy as np
+import pyqtgraph as pg
+from PySide6 import QtGui, QtWidgets
+from PySide6.QtCore import QTimer
 
 
 @dataclass

@@ -11,10 +11,10 @@ Creates visual outputs to verify:
 5. 3D coordinates are preserved
 """
 
-import sys
 import pathlib
+import sys
+
 import numpy as np
-from typing import Dict, List, Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -73,7 +73,6 @@ def test_assembly_composition():
     print("\n[VISUAL TEST] Assembly Composition")
     print("=" * 70)
     
-    from polygon_utils import create_polygon
     from polyform_library import add_cube_net, add_triangular_prism_net
     
     class TestAsm:
@@ -210,8 +209,8 @@ def test_3d_persistence():
     print("\n[VISUAL TEST] 3D Coordinate Persistence")
     print("=" * 70)
     
-    from polygon_utils import create_polygon
     import validators as V
+    from polygon_utils import create_polygon
     
     class TestAsm:
         def __init__(self):

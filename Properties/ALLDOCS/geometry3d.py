@@ -4,7 +4,8 @@
 This module provides helpers for converting 2D polygons to 3D meshes with proper
 face topology, normals, and extrusion operations.
 """
-from typing import List, Tuple, Dict, Any, Optional
+from typing import Any, Dict, Optional, Tuple
+
 import numpy as np
 
 

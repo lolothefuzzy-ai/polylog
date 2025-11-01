@@ -4,8 +4,11 @@ Launches the PyQt5-based GUI.
 """
 
 import sys
+
 from PyQt5.QtWidgets import QApplication
+
 from gui.main_window_qt5 import MainWindow
+
 
 def main():
     """Launch the application GUI."""

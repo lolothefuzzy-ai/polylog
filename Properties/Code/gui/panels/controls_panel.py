@@ -7,10 +7,8 @@ Provides real-time polygon generation parameters:
 - Symmetry: 0-1 (0=none, 1=full)
 """
 
-from PySide6.QtWidgets import (
-    QGroupBox, QVBoxLayout, QHBoxLayout, QLabel, QSlider, QSpinBox, QPushButton
-)
 from PySide6.QtCore import Qt, Signal
+from PySide6.QtWidgets import QGroupBox, QHBoxLayout, QLabel, QPushButton, QSlider, QSpinBox, QVBoxLayout
 
 
 class ControlsPanel(QGroupBox):
@@ -144,8 +142,8 @@ class ControlsPanel(QGroupBox):
         
         # Generate polygon
         try:
-            from random_assembly_generator import RandomAssemblyGenerator
             from gui.utils import format_polygon_for_display
+            from random_assembly_generator import RandomAssemblyGenerator
             
             generator = RandomAssemblyGenerator()
             polygon = generator.generate_random_assembly(
@@ -192,8 +190,8 @@ class ControlsPanel(QGroupBox):
     def _generate_preview(self, params: dict):
         """Generate preview polygon silently (no emission, used by viewport)."""
         try:
-            from random_assembly_generator import RandomAssemblyGenerator
             from gui.utils import format_polygon_for_display
+            from random_assembly_generator import RandomAssemblyGenerator
             
             generator = RandomAssemblyGenerator()
             polygon = generator.generate_random_assembly(

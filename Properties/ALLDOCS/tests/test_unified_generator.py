@@ -4,9 +4,10 @@ Integration test for unified generator system.
 Tests the new BaseGenerator protocol, registry system, and UnifiedGenerator.
 """
 import sys
+
 sys.path.insert(0, '..')
 
-from generator_protocol import get_generator_registry, GeneratorCapability
+from generator_protocol import GeneratorCapability, get_generator_registry
 
 
 def test_registry():

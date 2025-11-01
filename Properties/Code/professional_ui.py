@@ -3,7 +3,7 @@ Professional UI Styling Module for Polylog
 Provides modern, polished components with clean aesthetics
 """
 
-from PySide6 import QtWidgets, QtCore, QtGui
+from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import Qt
 
 # ==================== PROFESSIONAL STYLESHEET ====================

@@ -1,32 +1,33 @@
-from typing import List, Optional, Dict, Any
+import threading
+import time
+from typing import Any, Dict, List, Optional
+
+from canonical_estimator import canonical_estimate, get_cached
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import threading
-import time
 
 from automated_placement_engine import (
-    ConnectionEvaluator,
-    FoldSequencer,
-    DecayManager,
     AutomatedPlacementEngine,
-)
-from managers import (
-    RealMemoryManager,
-    RealChainManager,
-    RealFoldValidator,
-    RealWorkspaceManager,
-    RealProvenanceTracker,
+    ConnectionEvaluator,
+    DecayManager,
+    FoldSequencer,
 )
 from continuous_exploration_engine import (
-    SuggestionEngine,
     ContinuousExplorationEngine,
     ExplorationConfig,
     ExplorationStrategy,
+    SuggestionEngine,
 )
-from canonical_estimator import canonical_estimate, get_cached
-from scipy_constraint_optimizer import ScipyConstraintOptimizer
+from managers import (
+    RealChainManager,
+    RealFoldValidator,
+    RealMemoryManager,
+    RealProvenanceTracker,
+    RealWorkspaceManager,
+)
 from optuna_placement_tuner import OptunaPlacementTuner
+from scipy_constraint_optimizer import ScipyConstraintOptimizer
 
 
 # ---- Simple in-memory Assembly (thread-safe) ----
@@ -162,6 +163,7 @@ assembly = Assembly()
 
 # Engines
 from stable_library import StableLibrary
+
 stable_lib = StableLibrary()
 _evaluator = ConnectionEvaluator(memory, chains)
 _sequencer = FoldSequencer(validator, workspace)

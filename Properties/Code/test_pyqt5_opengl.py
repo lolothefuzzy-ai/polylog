@@ -1,10 +1,8 @@
 import sys
+
+from OpenGL.GL import GL_COLOR_BUFFER_BIT, glClear, glClearColor, glViewport
 from PyQt5.QtWidgets import QApplication, QMainWindow, QOpenGLWidget
-from PyQt5.QtCore import Qt
-from OpenGL.GL import (
-    glClearColor, glClear, glViewport,
-    GL_COLOR_BUFFER_BIT
-)
+
 
 class MinimalGLWidget(QOpenGLWidget):
     def __init__(self, parent=None):

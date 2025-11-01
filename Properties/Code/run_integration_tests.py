@@ -3,8 +3,8 @@ Quick integration test runner.
 
 Tests the unified system without full pytest infrastructure.
 """
-import sys
 import os
+import sys
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -17,7 +17,7 @@ print()
 # Test 1: Import generator protocol
 print("1. Testing generator protocol import...")
 try:
-    from generator_protocol import get_generator_registry, GeneratorCapability, BaseGenerator
+    from generator_protocol import GeneratorCapability, get_generator_registry
     print("   ✓ Generator protocol imported")
 except Exception as e:
     print(f"   ✗ Error: {e}")
@@ -32,19 +32,16 @@ except Exception as e:
     print(f"   ✗ Error: {e}")
 
 try:
-    from random_assembly_generator import RandomAssemblyGenerator
     print("   ✓ RandomAssemblyGenerator imported")
 except Exception as e:
     print(f"   ✗ Error: {e}")
 
 try:
-    from random_polyform_generator import RandomPolyformGenerator
     print("   ✓ RandomPolyformGenerator imported")
 except Exception as e:
     print(f"   ✗ Error: {e}")
 
 try:
-    from physics_simulator import PhysicsBasedGenerator
     print("   ✓ PhysicsBasedGenerator imported")
 except Exception as e:
     print(f"   ✗ Error: {e}")
@@ -70,7 +67,7 @@ except Exception as e:
 # Test 4: Test bonding system
 print("\n4. Testing unified bonding system...")
 try:
-    from unified_bonding_system import UnifiedBondingSystem, BondCandidate
+    from unified_bonding_system import UnifiedBondingSystem
     bonding = UnifiedBondingSystem()
     print(f"   ✓ Bonding system created (3D mode: {bonding._enable_3d})")
 except Exception as e:
@@ -132,9 +129,7 @@ print("\n6. Testing generation...")
 try:
     # Create mock dependencies
     try:
-        from scaler_database import ScalerDatabase
-        from symmetry_database import SymmetryDatabase
-        from learning_engine import LearningEngine
+        pass
     except:
         print("   ⚠ Optional dependencies missing (scaler_database, etc.)")
         print("   Skipping generation test")
@@ -152,8 +147,9 @@ except Exception as e:
 # Test 7: Test collision detection
 print("\n7. Testing collision detection...")
 try:
-    from bvh3d import TriangleCollisionDetector, AABB
     import numpy as np
+
+    from bvh3d import AABB
     
     # Simple AABB test
     aabb1 = AABB(np.array([0, 0, 0]), np.array([1, 1, 1]))

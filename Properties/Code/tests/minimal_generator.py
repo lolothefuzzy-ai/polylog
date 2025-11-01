@@ -3,13 +3,12 @@ Quick fix for RandomPolyformGenerator
 Fixes the generation_stats attribute issue
 """
 
-import numpy as np
 import time
-from typing import List, Dict, Any, Optional, Callable, Tuple
 from dataclasses import dataclass
 from enum import Enum
-import logging
-from collections import deque
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 class DistributionMode(Enum):

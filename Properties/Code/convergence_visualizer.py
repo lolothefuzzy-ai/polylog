@@ -8,13 +8,14 @@ Displays log graphs showing:
 - Live statistics panel
 """
 
-from PySide6 import QtWidgets, QtCore, QtGui
-from PySide6.QtCore import Qt, QTimer, Signal
-import pyqtgraph as pg
-import numpy as np
-from typing import Dict, List, Optional
-from dataclasses import dataclass
 from collections import deque
+from dataclasses import dataclass
+from typing import Dict, List
+
+import numpy as np
+import pyqtgraph as pg
+from PySide6 import QtWidgets
+from PySide6.QtCore import QTimer
 
 
 @dataclass

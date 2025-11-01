@@ -7,12 +7,13 @@ Simulates physical properties to:
 - Detect collisions
 - Ensure real-world foldability
 """
-from typing import Dict, List, Tuple, Optional, Any
-import numpy as np
 import time
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
 
-from generator_protocol import BaseGenerator, register_generator, GeneratorCapability
+import numpy as np
+
+from generator_protocol import BaseGenerator, GeneratorCapability, register_generator
 
 
 @dataclass

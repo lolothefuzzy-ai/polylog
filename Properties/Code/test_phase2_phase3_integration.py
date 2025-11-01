@@ -9,11 +9,12 @@ Tests all optimizations together:
 Run with: pytest test_phase2_phase3_integration.py -v --tb=short -s
 """
 
-import pytest
-import time
-import numpy as np
 import logging
-from typing import Dict, List, Any, Optional
+import time
+from typing import Dict, List, Optional
+
+import numpy as np
+import pytest
 
 logger = logging.getLogger(__name__)
 
@@ -109,7 +110,7 @@ def test_phase1_adaptive_collision_cache():
 def test_phase1_early_termination():
     """Verify Phase 1 early termination in ConnectionEvaluator."""
     from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
+    from managers import RealChainManager, RealMemoryManager
     
     memory = RealMemoryManager()
     chains = RealChainManager()
@@ -171,7 +172,7 @@ def test_phase2_spatial_indexing():
 def test_phase2_cache_integration():
     """Test Phase 2 multilevel cache integration with ConnectionEvaluator."""
     from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
+    from managers import RealChainManager, RealMemoryManager
     
     memory = RealMemoryManager()
     chains = RealChainManager()
@@ -193,8 +194,9 @@ def test_phase2_cache_integration():
 def test_phase3_predictive_engine():
     """Test Phase 3 predictive pre-computation engine."""
     from predictive_engine import PredictivePrecomputationEngine
+
     from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
+    from managers import RealChainManager, RealMemoryManager
     
     memory = RealMemoryManager()
     chains = RealChainManager()
@@ -238,8 +240,9 @@ def test_phase3_adaptive_router():
 
 def test_phase3_profiling_engine():
     """Test Phase 3 advanced profiling and tuning."""
-    from auto_tuning_profiler import AdvancedProfiler
     import time
+
+    from auto_tuning_profiler import AdvancedProfiler
     
     profiler = AdvancedProfiler()
     
@@ -322,10 +325,11 @@ def test_scaling_algorithm_routing(n: int):
 
 def test_end_to_end_small_assembly():
     """End-to-end test with small assembly."""
-    from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
     from adaptive_algorithm_router import AdaptiveAlgorithmRouter
     from auto_tuning_profiler import AdvancedProfiler
+
+    from automated_placement_engine import ConnectionEvaluator
+    from managers import RealChainManager, RealMemoryManager
     
     assembly = IntegrationAssembly(n=50)
     memory = RealMemoryManager()
@@ -353,10 +357,10 @@ def test_end_to_end_small_assembly():
 
 def test_end_to_end_medium_assembly():
     """End-to-end test with medium assembly."""
-    from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
-    from spatial_index import SpatialIndexedCollisionValidator
     from adaptive_algorithm_router import AdaptiveAlgorithmRouter
+
+    from automated_placement_engine import ConnectionEvaluator
+    from managers import RealChainManager, RealMemoryManager
     
     assembly = IntegrationAssembly(n=500)
     memory = RealMemoryManager()
@@ -376,9 +380,10 @@ def test_end_to_end_medium_assembly():
 @pytest.mark.slow
 def test_end_to_end_large_assembly():
     """End-to-end test with large assembly."""
-    from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
     from adaptive_algorithm_router import AdaptiveAlgorithmRouter
+
+    from automated_placement_engine import ConnectionEvaluator
+    from managers import RealChainManager, RealMemoryManager
     
     assembly = IntegrationAssembly(n=2000)
     memory = RealMemoryManager()
@@ -400,7 +405,7 @@ def test_end_to_end_large_assembly():
 def test_cache_impact():
     """Compare cache vs no cache impact."""
     from automated_placement_engine import ConnectionEvaluator
-    from managers import RealMemoryManager, RealChainManager
+    from managers import RealChainManager, RealMemoryManager
     
     assembly = IntegrationAssembly(n=200)
     memory = RealMemoryManager()

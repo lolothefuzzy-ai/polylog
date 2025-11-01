@@ -9,6 +9,7 @@ existing implementation under `Code/` for compatibility.
 """
 
 import sys
+
 from Code import main as code_main
 
 if __name__ == '__main__':

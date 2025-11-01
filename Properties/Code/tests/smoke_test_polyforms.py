@@ -4,14 +4,9 @@ Verifies that core polyform functionality works after cleanup.
 """
 
 import sys
-from pathlib import Path
 
-from random_polyform_generator import (
-    RandomPolyformGenerator, 
-    GenerationParams, 
-    DistributionMode, 
-    ShapeVariety
-)
+from random_polyform_generator import DistributionMode, GenerationParams, RandomPolyformGenerator, ShapeVariety
+
 
 def test_basic_generation():
     """Test basic polyform generation."""

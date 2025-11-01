@@ -12,11 +12,10 @@ Usage:
     python cleanup.py --all        # Remove caches and demo outputs
     python cleanup.py --logs       # Also remove log files
 """
+import argparse
 import os
 import shutil
 import sys
-import argparse
-from pathlib import Path
 
 
 def remove_pycache(root_dir: str, verbose: bool = True) -> int:

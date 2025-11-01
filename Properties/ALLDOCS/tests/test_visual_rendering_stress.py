@@ -17,11 +17,12 @@ Verify:
 - Visual quality maintained
 """
 
-import sys
 import pathlib
-import numpy as np
+import sys
 import time
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Any, Dict, List, Tuple
+
+import numpy as np
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:

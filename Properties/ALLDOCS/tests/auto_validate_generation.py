@@ -1,17 +1,30 @@
-import sys, time, pathlib
+import pathlib
+import sys
+import time
+
 # Ensure project root in path
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from automated_placement_engine import (
+    AutomatedPlacementEngine,
+    ConnectionEvaluator,
+    DecayManager,
+    FoldSequencer,
+)
+from continuous_exploration_engine import (
+    ContinuousExplorationEngine,
+    ExplorationConfig,
+    ExplorationStrategy,
+    SuggestionEngine,
+)
 from managers import (
-    RealMemoryManager,
     RealChainManager,
     RealFoldValidator,
-    RealWorkspaceManager,
+    RealMemoryManager,
     RealProvenanceTracker,
+    RealWorkspaceManager,
 )
-from automated_placement_engine import ConnectionEvaluator, FoldSequencer, DecayManager, AutomatedPlacementEngine
-from continuous_exploration_engine import SuggestionEngine, ContinuousExplorationEngine, ExplorationConfig, ExplorationStrategy
 
 
 class Assembly:

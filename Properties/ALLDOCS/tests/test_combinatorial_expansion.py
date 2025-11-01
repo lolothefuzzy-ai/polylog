@@ -11,11 +11,12 @@ Tests stability as polygon side counts expand combinatorially:
 - State consistency across expansions
 """
 
-import sys
 import pathlib
-import numpy as np
+import sys
 import time
-from typing import Dict, List, Any, Tuple, Optional
+from typing import Any, Dict
+
+import numpy as np
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -218,8 +219,8 @@ def test_scaling_interaction_across_n():
     print("\n[TEST] Interaction Scaling Across N Values")
     print("=" * 70)
     
-    from polygon_utils import create_polygon
     from interaction_manager import RaycastingEngine
+    from polygon_utils import create_polygon
     
     tracker = CombinatorExpansionTracker()
     
@@ -371,8 +372,9 @@ def test_memory_stability_across_expansion():
     print("\n[TEST] Memory Stability Across Expansion")
     print("=" * 70)
     
-    from polygon_utils import create_polygon
     import sys
+
+    from polygon_utils import create_polygon
     
     tracker = CombinatorExpansionTracker()
     memory_by_n = {}

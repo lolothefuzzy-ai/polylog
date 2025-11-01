@@ -7,8 +7,9 @@ Features:
 - Environment validation
 - Auto-launch GUI if all checks pass
 """
-import sys
 import os
+import sys
+
 
 def print_header():
     """Print welcome header."""
@@ -148,6 +149,7 @@ def launch_gui():
         # Fallback to direct launch
         try:
             from PySide6.QtWidgets import QApplication
+
             from gui.main_window import MainWindow
             
             app = QApplication(sys.argv)

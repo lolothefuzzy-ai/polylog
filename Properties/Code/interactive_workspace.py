@@ -9,13 +9,13 @@ Features:
 5. Smart snapping and bond suggestion
 """
 
-import numpy as np
-from typing import Dict, List, Optional, Callable, Tuple, Any
-from dataclasses import dataclass, field
-from enum import Enum
 import logging
 import time
-from collections import deque
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any, Callable, Dict, List, Optional, Tuple
+
+import numpy as np
 
 logger = logging.getLogger(__name__)
 

@@ -4,8 +4,8 @@ Persistent storage for learned scale factors and bond probabilities.
 This database learns optimal sizes for polygons based on usage patterns
 and tracks success probabilities for different bond types.
 """
-import os
 import json
+import os
 from typing import Dict, Tuple
 
 

@@ -8,15 +8,25 @@ Provides UI controls for:
 - Managing hinge creation
 """
 
-from typing import Dict, Any, List, Optional
-from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QLabel,
-    QPushButton, QListWidget, QListWidgetItem, QProgressBar,
-    QSpinBox, QDoubleSpinBox, QFormLayout
-)
-from PySide6.QtCore import Signal, Qt
+from typing import Any, Dict, List, Optional
 
-from unified_bonding_system import UnifiedBondingSystem, BondCandidate
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtWidgets import (
+    QDoubleSpinBox,
+    QFormLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QListWidget,
+    QListWidgetItem,
+    QProgressBar,
+    QPushButton,
+    QSpinBox,
+    QVBoxLayout,
+    QWidget,
+)
+
+from unified_bonding_system import BondCandidate, UnifiedBondingSystem
 
 
 class BondCandidateItem(QListWidgetItem):

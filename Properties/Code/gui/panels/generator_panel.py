@@ -8,15 +8,24 @@ Provides UI controls for:
 - Toggling 3D mode
 """
 
-from typing import Dict, Any, Optional
-from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QGroupBox, QLabel,
-    QComboBox, QSpinBox, QDoubleSpinBox, QPushButton, QCheckBox,
-    QFormLayout, QFrame
-)
-from PySide6.QtCore import Signal, Qt
+from typing import Any, Dict, Optional
 
-from generator_protocol import get_generator_registry, GeneratorCapability
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import (
+    QCheckBox,
+    QComboBox,
+    QDoubleSpinBox,
+    QFormLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QSpinBox,
+    QVBoxLayout,
+    QWidget,
+)
+
+from generator_protocol import get_generator_registry
 
 
 class GeneratorPanel(QWidget):

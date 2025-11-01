@@ -8,11 +8,10 @@ Provides comprehensive settings including:
 - Performance options
 - Accessibility features
 """
-from PySide6 import QtWidgets, QtCore, QtGui
+from typing import Any, Dict
+
+from PySide6 import QtWidgets
 from PySide6.QtCore import Qt, Signal
-from typing import Dict, Any
-import json
-import os
 
 
 class SettingsDialog(QtWidgets.QDialog):

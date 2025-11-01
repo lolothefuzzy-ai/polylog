@@ -1,5 +1,6 @@
-import sys
 import pathlib
+import sys
+
 from PySide6 import QtCore, QtWidgets
 
 # Ensure project root on path

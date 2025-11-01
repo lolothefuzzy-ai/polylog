@@ -5,9 +5,8 @@ Provides persistence for polygon designs to disk.
 """
 
 import json
-import os
-from typing import List, Dict, Any, Optional
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 
 class AssemblyManager:

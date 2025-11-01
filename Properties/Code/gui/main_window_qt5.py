@@ -2,15 +2,21 @@
 
 import json
 import time
+
 from PyQt5.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QLabel, QStatusBar, QToolBar,
-    QAction, QFileDialog, QMessageBox
+    QAction,
+    QFileDialog,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QStatusBar,
+    QToolBar,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtCore import Qt, pyqtSignal as Signal
-from PyQt5.QtGui import QIcon
-from gui.viewport_qt5 import Viewport3D
-from gui.utils import get_polygon_color
+
 
 class MainWindow(QMainWindow):
     """Main application window with 3D viewport and controls."""

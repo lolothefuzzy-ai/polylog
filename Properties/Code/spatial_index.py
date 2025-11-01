@@ -9,10 +9,10 @@ Key Classes:
 - SpatialIndexedCollisionValidator: Enhanced collision validator with spatial culling
 """
 
-import numpy as np
-from typing import Dict, List, Tuple, Optional, Any
-from collections import OrderedDict
 import logging
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 logger = logging.getLogger(__name__)
 

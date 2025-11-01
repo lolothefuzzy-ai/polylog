@@ -5,13 +5,13 @@ Integrates BVH collision detection into the assembly validation pipeline.
 Provides utilities to detect self-intersections and inter-mesh collisions.
 """
 
-from typing import Dict, List, Tuple, Optional, Any
-import numpy as np
 import logging
 from collections import OrderedDict
+from typing import Any, Dict, List, Optional, Tuple
+
+from polygon_utils import get_polyform_mesh
 
 from bvh3d import TriangleCollisionDetector
-from polygon_utils import get_polyform_mesh
 
 logger = logging.getLogger(__name__)
 

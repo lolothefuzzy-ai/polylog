@@ -15,14 +15,14 @@ Key Components:
 - ExplorationEngine: Background autonomous assembly growth
 """
 
-import numpy as np
-from typing import List, Dict, Tuple, Optional, Set, Any
+import time
+import uuid
+from collections import defaultdict
 from dataclasses import dataclass, field
 from enum import Enum
-import uuid
-import time
-from collections import defaultdict
+from typing import Any, Dict, List, Optional, Tuple
 
+import numpy as np
 
 # ═══════════════════════════════════════════════════════════════
 # CORE DATA STRUCTURES
@@ -500,6 +500,7 @@ class ConnectionEvaluator:
 # ═══════════════════════════════════════════════════════════════
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
 
 class FoldSequencer:
     """
@@ -1356,11 +1357,11 @@ class AutomatedPlacementEngine:
 
 if __name__ == "__main__":
     from managers import (
-        RealMemoryManager,
         RealChainManager,
         RealFoldValidator,
+        RealMemoryManager,
+        RealProvenanceTracker,
         RealWorkspaceManager,
-        RealProvenanceTracker
     )
     
     print("╔════════════════════════════════════════════════════════╗")

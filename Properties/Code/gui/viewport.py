@@ -6,13 +6,10 @@ Phase 1: Basic placeholder with grid and camera controls.
 Phase 2: Full 3D rendering implementation.
 """
 
-from PySide6.QtWidgets import QOpenGLWidget
-from PySide6.QtCore import Qt, Signal, QTimer, QMimeData
-from PySide6.QtGui import QColor, QDrag
 from OpenGL.GL import *
 from OpenGL.GLU import *
-import math
-import json
+from PySide6.QtCore import QTimer, Signal
+from PySide6.QtWidgets import QOpenGLWidget
 
 
 class Viewport3D(QOpenGLWidget):

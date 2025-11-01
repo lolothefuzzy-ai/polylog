@@ -3,6 +3,7 @@ Theme Manager for Polylog Desktop App
 Applies native Qt dark theme with bold colors (red, blue, purple)
 """
 from pathlib import Path
+
 from PySide6 import QtWidgets
 
 

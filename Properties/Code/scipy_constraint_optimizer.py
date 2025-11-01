@@ -11,11 +11,12 @@ Replaces manual constraint propagation with scipy.optimize for:
 Uses SLSQP (Sequential Least Squares Programming) and trust-constr methods.
 """
 
-import numpy as np
-from scipy.optimize import minimize
-from typing import Dict, List, Optional, Tuple, Callable
 import logging
 import time
+from typing import Dict, List, Optional
+
+import numpy as np
+from scipy.optimize import minimize
 
 logger = logging.getLogger(__name__)
 

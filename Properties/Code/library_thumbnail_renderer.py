@@ -10,12 +10,13 @@ Features:
 - Caching for performance
 - Multiple thumbnail sizes
 """
-import numpy as np
-from typing import Dict, Any, Tuple, Optional, List
-from dataclasses import dataclass
-from PIL import Image, ImageDraw, ImageFont
 import hashlib
 import json
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
 
 
 @dataclass

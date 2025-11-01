@@ -4,7 +4,7 @@ Camera animation helper for smooth transitions.
 Provides smooth camera movement and transitions.
 """
 
-from typing import Tuple, Optional
+from typing import Tuple
 
 
 class CameraAnimator:

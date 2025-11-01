@@ -4,9 +4,14 @@ Test 3D mesh integration functionality.
 Run this to verify geometry3d, hinge_manager, and polygon_utils work together.
 """
 import numpy as np
-from polygon_utils import create_polygon, create_polygon_3d, get_polyform_mesh, add_3d_mesh_to_polyform
-from geometry3d import MeshData, extrude_polygon, rotation_matrix_axis_angle, transform_mesh
-from hinge_manager import HingeManager, Hinge
+from geometry3d import extrude_polygon, rotation_matrix_axis_angle, transform_mesh
+from hinge_manager import Hinge, HingeManager
+from polygon_utils import (
+    add_3d_mesh_to_polyform,
+    create_polygon,
+    create_polygon_3d,
+    get_polyform_mesh,
+)
 
 
 def test_polygon_extrusion():

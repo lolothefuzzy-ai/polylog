@@ -9,7 +9,6 @@ Implements the Polylog color scheme:
 - Accent: Green (#00FF00)
 """
 
-from PySide6.QtGui import QColor
 
 
 # Color definitions

@@ -8,8 +8,9 @@ Tests complete workflow:
 4. Validate 3D collisions
 5. Save/load with persistence
 """
-import sys
 import os
+import sys
+
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -141,8 +142,9 @@ except Exception as e:
 print("\nTEST 4: BVH Collision Detection")
 print("-" * 70)
 try:
-    from bvh3d import AABB, TriangleCollisionDetector
     from geometry3d import extrude_polygon
+
+    from bvh3d import AABB, TriangleCollisionDetector
     
     # Test AABB
     aabb1 = AABB(np.array([0, 0, 0], dtype=float), np.array([1, 1, 1], dtype=float))
@@ -196,9 +198,10 @@ except Exception as e:
 print("\nTEST 6: 3D Persistence")
 print("-" * 70)
 try:
-    from stable_library import StableLibrary
-    import tempfile
     import os
+    import tempfile
+
+    from stable_library import StableLibrary
     
     # Create temporary library
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.jsonl')

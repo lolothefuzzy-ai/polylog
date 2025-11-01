@@ -3,9 +3,10 @@ BVH (Bounding Volume Hierarchy) collision detection for 3D triangle meshes.
 
 Implements fast triangle-triangle intersection using spatial partitioning.
 """
-from typing import List, Tuple, Optional, Dict, Any
-import numpy as np
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 @dataclass

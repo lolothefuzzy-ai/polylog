@@ -8,11 +8,10 @@ Features:
 - Compare metrics across different population sizes
 """
 
-import numpy as np
-from typing import Dict, List, Tuple, Optional
-from collections import defaultdict
 from dataclasses import dataclass
-import sys
+from typing import Dict, List
+
+import numpy as np
 
 
 @dataclass

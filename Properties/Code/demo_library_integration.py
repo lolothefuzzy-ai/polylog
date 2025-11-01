@@ -11,16 +11,16 @@ Run: python demo_library_integration.py
 """
 import os
 import sys
-from typing import Dict, Any
+from typing import Any, Dict
 
 # Ensure imports work
 sys.path.insert(0, os.path.dirname(__file__))
 
-from random_assembly_generator import RandomAssemblyGenerator, get_random_assembly
-from library_thumbnail_renderer import LibraryThumbnailRenderer, ThumbnailConfig, render_thumbnail
 from library_drag_drop import LibraryDragDropHandler
-from polyform_library import PolyformLibraryManager, get_library
+from library_thumbnail_renderer import LibraryThumbnailRenderer, ThumbnailConfig
 from managers import RealWorkspaceManager
+from polyform_library import get_library
+from random_assembly_generator import RandomAssemblyGenerator
 
 
 class MockAssembly:

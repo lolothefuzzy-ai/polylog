@@ -7,7 +7,8 @@ Provides adapters and helpers for converting between:
 - Renderable vertex/face data for OpenGL
 """
 
-from typing import Dict, List, Tuple, Any
+from typing import Any, Dict, List, Tuple
+
 import numpy as np
 
 

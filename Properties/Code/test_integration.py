@@ -9,6 +9,7 @@ Tests all major integration points:
 """
 import sys
 
+
 def test_imports():
     """Test that all required modules can be imported."""
     print("Testing imports...")
@@ -16,6 +17,7 @@ def test_imports():
     try:
         from PySide6.QtWidgets import QApplication
         print("  ✓ PySide6 imported")
+        _ = QApplication
     except ImportError as e:
         print(f"  ✗ PySide6 import failed: {e}")
         return False
@@ -23,6 +25,7 @@ def test_imports():
     try:
         from OpenGL.GL import glClearColor
         print("  ✓ OpenGL imported")
+        _ = glClearColor
     except ImportError as e:
         print(f"  ✗ OpenGL import failed: {e}")
         return False
@@ -30,6 +33,7 @@ def test_imports():
     try:
         from gui.main_window import MainWindow
         print("  ✓ MainWindow imported")
+        _ = MainWindow
     except ImportError as e:
         print(f"  ✗ MainWindow import failed: {e}")
         return False
@@ -37,6 +41,7 @@ def test_imports():
     try:
         from generator_protocol import get_generator_registry
         print("  ✓ Generator protocol imported")
+        _ = get_generator_registry
     except ImportError as e:
         print(f"  ✗ Generator protocol import failed: {e}")
         return False
@@ -44,6 +49,7 @@ def test_imports():
     try:
         from unified_bonding_system import UnifiedBondingSystem
         print("  ✓ Bonding system imported")
+        _ = UnifiedBondingSystem
     except ImportError as e:
         print(f"  ✗ Bonding system import failed: {e}")
         return False
@@ -51,6 +57,7 @@ def test_imports():
     try:
         from hinge_manager import HingeManager
         print("  ✓ Hinge manager imported")
+        _ = HingeManager
     except ImportError as e:
         print(f"  ✗ Hinge manager import failed: {e}")
         return False
@@ -58,6 +65,7 @@ def test_imports():
     try:
         from collision_validator import CollisionValidator
         print("  ✓ Collision validator imported")
+        _ = CollisionValidator
     except ImportError as e:
         print(f"  ✗ Collision validator import failed: {e}")
         return False
@@ -65,6 +73,7 @@ def test_imports():
     try:
         from stable_library import StableLibrary
         print("  ✓ Stable library imported")
+        _ = StableLibrary
     except ImportError as e:
         print(f"  ✗ Stable library import failed: {e}")
         return False
@@ -83,19 +92,19 @@ def test_backend_systems():
         print(f"  ✓ Generator registry initialized ({len(generators)} generators)")
         
         from unified_bonding_system import UnifiedBondingSystem
-        bonding = UnifiedBondingSystem()
+        _ = UnifiedBondingSystem()
         print("  ✓ Bonding system initialized")
         
         from hinge_manager import HingeManager
-        hinge_mgr = HingeManager()
+        _ = HingeManager()
         print("  ✓ Hinge manager initialized")
         
         from collision_validator import CollisionValidator
-        validator = CollisionValidator()
+        _ = CollisionValidator()
         print("  ✓ Collision validator initialized")
         
         from stable_library import StableLibrary
-        library = StableLibrary('test_stable_library.jsonl')
+        _ = StableLibrary('test_stable_library.jsonl')
         print("  ✓ Stable library initialized")
         
         return True
@@ -112,6 +121,7 @@ def test_gui_initialization():
     
     try:
         from PySide6.QtWidgets import QApplication
+
         from gui.main_window import MainWindow
         
         # Create application
@@ -159,6 +169,7 @@ def test_integration_points():
     
     try:
         from PySide6.QtWidgets import QApplication
+
         from gui.main_window import MainWindow
         
         app = QApplication.instance()

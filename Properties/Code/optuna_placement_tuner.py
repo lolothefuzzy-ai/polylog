@@ -26,16 +26,17 @@ Example:
     )
 """
 
+import json
+import logging
+import time
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, List, Optional, Tuple
+
 import optuna
 from optuna.pruners import MedianPruner, SuccessiveHalvingPruner
 from optuna.samplers import TPESampler
 from optuna.trial import Trial
-from typing import Dict, List, Optional, Tuple
-import logging
-import time
-import json
-from dataclasses import dataclass, asdict
-from datetime import datetime
 
 logger = logging.getLogger(__name__)
 

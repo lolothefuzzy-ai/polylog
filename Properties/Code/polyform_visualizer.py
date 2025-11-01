@@ -4,25 +4,52 @@ Self-contained script for visualizing polyform data structures.
 """
 
 import sys
+
 import numpy as np
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QVBoxLayout, QWidget, 
-    QPushButton, QOpenGLWidget, QLabel
+from OpenGL.GL import (
+    GL_AMBIENT,
+    GL_COLOR_BUFFER_BIT,
+    GL_COLOR_MATERIAL,
+    GL_COMPILE,
+    GL_DEPTH_BUFFER_BIT,
+    GL_DEPTH_TEST,
+    GL_DIFFUSE,
+    GL_LIGHT0,
+    GL_LIGHTING,
+    GL_LINE_LOOP,
+    GL_LINES,
+    GL_MODELVIEW,
+    GL_POLYGON,
+    GL_POSITION,
+    GL_PROJECTION,
+    glBegin,
+    glCallList,
+    glClear,
+    glColor3f,
+    glDeleteLists,
+    glDisable,
+    glEnable,
+    glEnd,
+    glEndList,
+    glFrustum,
+    glGenLists,
+    glLightfv,
+    glLineWidth,
+    glLoadIdentity,
+    glMatrixMode,
+    glNewList,
+    glPopMatrix,
+    glPushMatrix,
+    glRotatef,
+    glTranslatef,
+    glVertex3f,
+    glViewport,
 )
 from PyQt5.QtCore import pyqtSignal
-from OpenGL.GL import (
-    glEnable, glDisable, glViewport, glMatrixMode, glLoadIdentity,
-    glFrustum, glClear, glTranslatef, glRotatef, glColor3f,
-    glVertex3f, glBegin, glEnd, glPushMatrix, glPopMatrix,
-    glLineWidth, glLightfv, glGenLists, glNewList, glEndList,
-    glCallList, glDeleteLists,
-    GL_DEPTH_TEST, GL_LIGHTING, GL_LIGHT0, GL_COLOR_MATERIAL,
-    GL_POSITION, GL_AMBIENT, GL_DIFFUSE,
-    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_PROJECTION,
-    GL_MODELVIEW, GL_LINES, GL_POLYGON, GL_LINE_LOOP,
-    GL_COMPILE
-)
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QOpenGLWidget, QPushButton, QVBoxLayout, QWidget
+
 from random_assembly_generator import RandomAssemblyGenerator
+
 
 class Viewport3D(QOpenGLWidget):
     status_changed = pyqtSignal(str)

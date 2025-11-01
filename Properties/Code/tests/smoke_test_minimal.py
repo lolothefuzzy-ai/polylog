@@ -3,12 +3,9 @@ Small smoke test for polyform generation functionality.
 """
 
 import sys
-from random_polyform_generator import (
-    RandomPolyformGenerator, 
-    GenerationParams, 
-    DistributionMode, 
-    ShapeVariety
-)
+
+from random_polyform_generator import DistributionMode, GenerationParams, RandomPolyformGenerator, ShapeVariety
+
 
 def test_basic_polyform():
     """Test simple polyform generation."""

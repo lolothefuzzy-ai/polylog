@@ -23,11 +23,7 @@ except Exception as e:
 print("\n[2/5] Testing GUI enhancements...")
 try:
     from gui_enhancements_v2 import (
-        StatusBarManager,
-        UndoRedoManager,
-        FoldAnimationEngine,
         PolygonInfluenceSlider,
-        create_menu_bar,
         create_toolbar,
     )
     print("✓ All GUI enhancement modules imported")
@@ -104,7 +100,6 @@ try:
         '_on_placement_complete',
     ]
     
-    from inspect import getmembers, ismethod
     
     # We can't instantiate MainWindow without Qt, but we can check the class
     for callback_name in required_callbacks:

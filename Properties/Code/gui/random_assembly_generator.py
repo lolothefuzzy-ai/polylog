@@ -2,8 +2,10 @@
 Simplified random assembly generator for visualization testing.
 """
 
+from typing import Any, Dict, List
+
 import numpy as np
-from typing import List, Dict, Any
+
 
 class RandomAssemblyGenerator:
     def __init__(self):

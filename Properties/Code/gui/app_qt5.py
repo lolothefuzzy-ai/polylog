@@ -4,11 +4,12 @@ Contains the top-level code for initializing and running the GUI.
 Uses PyQt5 for the UI framework with OpenGL support.
 """
 
-import sys
 import os
-from PyQt5.QtWidgets import QApplication, QMessageBox
-from PyQt5.QtCore import QCoreApplication
+import sys
+
 from PyQt5.QtOpenGL import QGLFormat
+from PyQt5.QtWidgets import QApplication, QMessageBox
+
 from gui.main_window_qt5 import MainWindow
 
 # Set environment variable to enable software OpenGL if needed

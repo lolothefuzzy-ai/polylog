@@ -4,14 +4,15 @@ Polylog GUI Launcher
 Launches the Polylog Simulator GUI with all integrated systems.
 """
 
-import sys
 import os
+import sys
 
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Import and run
 from PySide6.QtWidgets import QApplication
+
 from gui.main_window import MainWindow
 
 

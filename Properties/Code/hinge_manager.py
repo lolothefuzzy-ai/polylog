@@ -4,10 +4,11 @@ Hinge Manager for tracking fold relationships and 3D rotations.
 This module maintains a graph of hinge connections between polyforms
 and provides utilities for computing and applying 3D rotations around hinge axes.
 """
-from typing import Dict, List, Tuple, Any, Optional
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
+
 import numpy as np
-from dataclasses import dataclass, field
-from geometry3d import rotation_matrix_axis_angle, transform_mesh, MeshData
+from geometry3d import MeshData, rotation_matrix_axis_angle, transform_mesh
 
 
 @dataclass

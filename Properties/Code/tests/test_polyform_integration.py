@@ -3,19 +3,18 @@ Integration tests for the polyform adapter and data pipeline.
 Tests data flow through the main components using the normalized format.
 """
 
-import unittest
-from PySide6.QtWidgets import QApplication
-import sys
-
 import os
 import sys
+import unittest
+
+from PySide6.QtWidgets import QApplication
 
 # Add project root to Python path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 
-from gui.polyform_adapter import normalize_polyform
-from polyform_visualizer import PolyformVisualizer, Viewport3D
+from polyform_visualizer import PolyformVisualizer
+
 
 class TestPolyformIntegration(unittest.TestCase):
     @classmethod

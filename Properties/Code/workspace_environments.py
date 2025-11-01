@@ -8,10 +8,9 @@ Allows users to change the entire visual environment including:
 - Camera presets (isometric, perspective, orthographic)
 - Lighting schemes (natural, dramatic, soft, neon)
 """
-import numpy as np
-from typing import Dict, Any, Tuple, List
-from enum import Enum
 from dataclasses import dataclass
+from enum import Enum
+from typing import Any, Dict, List, Tuple
 
 
 class EnvironmentTheme(Enum):

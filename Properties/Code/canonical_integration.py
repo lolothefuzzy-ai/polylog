@@ -9,11 +9,12 @@ Integrates with:
 - Performance metrics
 """
 
-from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
+
 import numpy as np
-from canonical_estimator import canonical_estimate
-from convergence_canonical_tracker import CanonicalNTracker, CanonicalConvergencePoint
+
+from convergence_canonical_tracker import CanonicalConvergencePoint, CanonicalNTracker
 
 
 @dataclass
@@ -343,7 +344,7 @@ def example_integration_with_assembly():
     """
     Example showing how to integrate canonical tracking with assembly system.
     """
-    from canonical_integration import CanonicalIntegrator, AssemblyObserver
+    from canonical_integration import AssemblyObserver, CanonicalIntegrator
     
     # Create integrator
     integrator = CanonicalIntegrator(enable_tracking=True)

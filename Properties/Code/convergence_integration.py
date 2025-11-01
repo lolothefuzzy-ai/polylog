@@ -1,19 +1,17 @@
+#!/usr/bin/env python3
 """
 Integration module - Connect convergence tracker to EvolutionaryGenerator
 
-Usage:
-    generator = EvolutionaryGenerator(assembly)
-    tracker_window = setup_convergence_tracking(generator)
-    tracker_window.show()
-    
-    # Then call generator.evolve() as normal
-    best_genome = generator.evolve(...)
+# JUPYTER NOTEBOOK INTEGRATION
+%matplotlib inline
 """
 
 from typing import Optional
-from evolutionary_generator import EvolutionaryGenerator
-from convergence_visualizer import ConvergenceVisualizerWindow
 
+from evolutionary_generator import EvolutionaryGenerator
+
+from convergence_visualizer import ConvergenceVisualizerWindow
+import matplotlib.pyplot as plt
 
 class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
     """Extended EvolutionaryGenerator with convergence tracking."""
@@ -30,10 +28,10 @@ class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
         if allowed_types is None:
             allowed_types = [3, 4, 5, 6]
         
-        print(f"🧬 Starting evolution:\"")
-        print(f\"   Population: {self.population_size}\")
-        print(f\"   Generations: {generations}\")
-        print(f\"   Target polyforms: {target_polyform_count}\")
+        print("Starting evolution:")
+        print(f"   Population: {self.population_size}")
+        print(f"   Generations: {generations}")
+        print(f"   Target polyforms: {target_polyform_count}")
         
         # Initialize population
         population = self._initialize_population(target_polyform_count, allowed_types)
@@ -87,7 +85,7 @@ class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
             population = elite + offspring[:self.population_size - self.elite_size]
             self.generation += 1
         
-        print(f"✓ Evolution complete! Best fitness: {best_fitness:.3f}")
+        print(f"Evolution complete! Best fitness: {best_fitness:.3f}")
         
         return best_genome
 
@@ -128,10 +126,10 @@ def setup_convergence_tracking(generator: EvolutionaryGenerator,
         generations = kwargs.get('generations', args[2] if len(args) > 2 else 50)
         target_count = kwargs.get('target_polyform_count', args[0] if len(args) > 0 else 8)
         
-        print(f"🧬 Starting evolution with convergence tracking:\")
-        print(f\"   Population: {generator.population_size}\")
-        print(f\"   Generations: {generations}\")
-        print(f\"   Target polyforms: {target_count}\")
+        print("Starting evolution with convergence tracking:")
+        print(f"   Population: {generator.population_size}")
+        print(f"   Generations: {generations}")
+        print(f"   Target polyforms: {target_count}")
         
         population = generator._initialize_population(target_count, allowed_types)
         best_genome = None
@@ -167,12 +165,25 @@ def setup_convergence_tracking(generator: EvolutionaryGenerator,
             
             import numpy as np
             elite = [population[i] for i in np.argsort(fitness_scores)[-generator.elite_size:]]
+            
             population = elite + offspring[:generator.population_size - generator.elite_size]
             generator.generation += 1
         
-        print(f"✓ Evolution complete! Best fitness: {best_fitness:.3f}")
+        print(f"Evolution complete! Best fitness: {best_fitness:.3f}")
+        generator.evolve = original_evolve
         return best_genome
     
     generator.evolve = evolve_with_tracking
     
     return window
+
+
+def plot_convergence(history):
+    """Visualize convergence history"""
+    plt.figure(figsize=(10, 6))
+    plt.plot(history['generation'], history['fitness'], 'b-o')
+    plt.title('Convergence History')
+    plt.xlabel('Generation')
+    plt.ylabel('Fitness')
+    plt.grid(True)
+    plt.show()

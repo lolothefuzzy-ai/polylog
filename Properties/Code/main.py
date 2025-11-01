@@ -31,8 +31,8 @@ API Options:
   -v, --verbose - Verbose output
 """
 
-import sys
 import argparse
+import sys
 
 
 def main():
@@ -119,11 +119,13 @@ def _launch_gui(verbose: bool = False):
     try:
         # Try PyQt5 first as it's proven to work with Python 3.13
         print("Attempting to load PyQt5...")
+        from code.gui.qt5.app_qt5 import main as qt5_main
+
         import PyQt5
         import PyQt5.QtCore
         import PyQt5.QtWidgets
         from PyQt5.QtOpenGL import QGLFormat
-        from code.gui.qt5.app_qt5 import main as qt5_main
+        _ = (PyQt5.QtCore, PyQt5.QtWidgets, QGLFormat)
         
         # Verify OpenGL support
         fmt = QGLFormat()
@@ -142,6 +144,8 @@ def _launch_gui(verbose: bool = False):
             import PySide6.QtCore
             import PySide6.QtWidgets
             from PySide6.QtOpenGL import QOpenGLWidget
+            _ = (PySide6.QtCore, PySide6.QtWidgets, QOpenGLWidget)
+
             from gui.app import run_gui
             
             print("✓ Using PySide6 backend")
@@ -150,13 +154,13 @@ def _launch_gui(verbose: bool = False):
         except ImportError as e2:
             print("\n❌ Error: Could not import GUI modules")
             print("\nTo use PyQt5 (recommended for Python 3.13):")
-            print("pip install PyQt5 PyQt5-Qt5 PyQt5-sip PyQtOpenGL")
-            print("\nOr to use PySide6:")
+            print("   pip install PySide6 PySide6-Qt6 PySide6-Essentials")
+            print("   # Uses the PySide6 backend")
             print("pip install PySide6")
-            print(f"\nDetails:\nPyQt5 error: {e1}\nPySide6 error: {e2}")
+            print("\nDetails:\nPyQt5 error: {}\nPySide6 error: {}".format(e1, e2))
             return 1
     except Exception as e:
-        print(f"\n❌ Error running GUI: {e}")
+        print("\n❌ Error running GUI: {}".format(e))
         import traceback
         traceback.print_exc()
         return 1

@@ -8,11 +8,13 @@ Generates randomized assemblies with:
 - Learning from successful configurations
 """
 import random
-import numpy as np
 import time
-from typing import Dict, Any, List, Tuple
+from typing import Any, Dict, List, Tuple
+
+import numpy as np
 from polygon_utils import create_polygon, create_polygon_3d
-from generator_protocol import BaseGenerator, register_generator, GeneratorCapability
+
+from generator_protocol import BaseGenerator, GeneratorCapability, register_generator
 
 
 @register_generator('random_assembly', [GeneratorCapability.BASIC])

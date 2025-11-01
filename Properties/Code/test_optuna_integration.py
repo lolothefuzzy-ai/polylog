@@ -13,11 +13,10 @@ Run with:
     pytest test_optuna_integration.py
 """
 
-import pytest
-import time
 import logging
-from typing import Dict, List
-import json
+import time
+
+import pytest
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

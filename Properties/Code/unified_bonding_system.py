@@ -10,9 +10,10 @@ Consolidates all bonding mechanisms:
 
 Provides single interface for bond management across 2D and 3D modes.
 """
-from typing import Dict, List, Any, Optional, Tuple
-import numpy as np
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 
 @dataclass

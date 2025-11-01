@@ -10,27 +10,23 @@ Implements the core window layout with:
 Phase 1: Foundation structure with basic layout and signal/slot connections.
 """
 
-from PySide6.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QLabel, QPushButton, QToolBar, QStatusBar, QDockWidget,
-    QMessageBox
-)
-from PySide6.QtCore import Qt, QSize, Signal, QTimer
-from PySide6.QtGui import QIcon, QColor, QAction, QKeySequence, QShortcut
+from PySide6.QtCore import QSize, Qt, Signal
+from PySide6.QtGui import QAction, QIcon, QKeySequence, QShortcut
+from PySide6.QtWidgets import QHBoxLayout, QLabel, QMainWindow, QMessageBox, QPushButton, QToolBar, QVBoxLayout, QWidget
 
-from gui.viewport import Viewport3D
-from gui.panels.controls_panel import ControlsPanel
-from gui.panels.library_panel import LibraryPanel
-from gui.panels.generator_panel import GeneratorPanel
-from gui.panels.bonding_panel import BondingPanel
-from gui.theme import apply_theme
+from collision_validator import CollisionValidator
 
 # Backend systems
 from generator_protocol import get_generator_registry
-from unified_bonding_system import UnifiedBondingSystem
+from gui.panels.bonding_panel import BondingPanel
+from gui.panels.controls_panel import ControlsPanel
+from gui.panels.generator_panel import GeneratorPanel
+from gui.panels.library_panel import LibraryPanel
+from gui.theme import apply_theme
+from gui.viewport import Viewport3D
 from hinge_manager import HingeManager
-from collision_validator import CollisionValidator
 from stable_library import StableLibrary
+from unified_bonding_system import UnifiedBondingSystem
 
 
 class MainWindow(QMainWindow):
@@ -483,7 +479,7 @@ class MainWindow(QMainWindow):
                 return
             
             # Create selection dialog
-            from PySide6.QtWidgets import QDialog, QListWidget, QDialogButtonBox, QVBoxLayout, QLabel
+            from PySide6.QtWidgets import QDialog, QDialogButtonBox, QLabel, QListWidget, QVBoxLayout
             
             dialog = QDialog(self)
             dialog.setWindowTitle("Load Assembly")
@@ -958,7 +954,7 @@ class MainWindow(QMainWindow):
     
     def _on_show_shortcuts_help(self):
         """Show keyboard shortcuts help dialog."""
-        from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QScrollArea, QWidget
+        from PySide6.QtWidgets import QDialog, QLabel, QScrollArea, QVBoxLayout
         
         dialog = QDialog(self)
         dialog.setWindowTitle("Keyboard Shortcuts")
