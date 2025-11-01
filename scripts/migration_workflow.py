@@ -9,7 +9,7 @@ from pathlib import Path
 import alembic.config
 import alembic.command
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]  # Now two levels up
 SRC_PATH = ROOT / "src"
 
 

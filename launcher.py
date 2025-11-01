@@ -1,142 +1,81 @@
-#!/usr/bin/env python
-"""Portable launcher for Polylog6.
-
-The script performs light-touch environment checks and then delegates execution
-to the canonical entry point in ``Properties.Code.main``. It avoids modifying
-system state so the project remains portable across different machines.
+#!/usr/bin/env python3
 """
-from __future__ import annotations
+Polylog Launcher - Simplified project startup
 
-import argparse
-import importlib
+Automates environment setup and mode selection
+"""
+
 import os
 import sys
-from types import ModuleType
-from typing import Iterable
+import subprocess
+from pathlib import Path
 
-REQUIRED_PACKAGES: tuple[str, ...] = (
-    "numpy",
-    "scipy",
-    "celery",
-    "prometheus_client",
-)
+PROJECT_ROOT = Path(__file__).parent.resolve()
+
+# Update the path to migration_workflow
+MIGRATION_SCRIPT = "scripts/migration_workflow.py"
+
+def ensure_venv():
+    """Ensure virtual environment exists and is activated"""
+    venv_path = PROJECT_ROOT / "venv"
+    if not venv_path.exists():
+        print("Creating virtual environment...")
+        subprocess.run([sys.executable, "-m", "venv", "venv"], cwd=PROJECT_ROOT)
+    
+    # Activate venv
+    if sys.platform == "win32":
+        activate_script = "venv\\Scripts\\activate.bat"
+        activate_cmd = f"call {activate_script}"
+    else:
+        activate_script = "venv/bin/activate"
+        activate_cmd = f"source {activate_script}"
+    
+    print(f"Activating virtual environment: {activate_cmd}")
+    return activate_cmd
 
 
-# ---------------------------------------------------------------------------
-# Environment helpers
-# ---------------------------------------------------------------------------
-
-def _running_inside_virtualenv() -> bool:
-    """Return True when the interpreter appears to be inside a virtualenv."""
-
-    if hasattr(sys, "real_prefix") or (
-        hasattr(sys, "base_prefix") and sys.base_prefix != sys.prefix
-    ):
-        return True
-    return bool(os.environ.get("VIRTUAL_ENV"))
+def install_dependencies():
+    """Install required packages"""
+    requirements = PROJECT_ROOT / "requirements.txt"
+    if requirements.exists():
+        print("Installing dependencies...")
+        subprocess.run(["pip", "install", "-r", "requirements.txt"], cwd=PROJECT_ROOT)
+    else:
+        print("Warning: requirements.txt not found")
 
 
-def _warn_if_outside_venv() -> None:
-    if _running_inside_virtualenv():
+def run_main(mode):
+    """Run main.py with specified mode"""
+    main_script = PROJECT_ROOT / "Properties" / "Code" / "main.py"
+    if not main_script.exists():
+        print("Error: main.py not found")
         return
-
-    print(
-        "\n[launcher] Warning: running outside a virtual environment.\n"
-        "Consider activating your project venv before launching Polylog6 to\n"
-        "ensure dependency isolation (e.g. .\\.venv\\Scripts\\activate on Windows).\n"
-    )
+    
+    print(f"Starting Polylog in {mode} mode...")
+    subprocess.run(["python", "Properties/Code/main.py", mode], cwd=PROJECT_ROOT)
 
 
-def _check_dependencies(packages: Iterable[str]) -> None:
-    missing: list[str] = []
-    for pkg in packages:
-        module_name = pkg.replace("-", "_")
-        try:
-            importlib.import_module(module_name)
-        except ImportError:
-            missing.append(pkg)
-
-    if missing:
-        print(
-            "[launcher] Warning: missing optional dependencies: "
-            + ", ".join(sorted(missing))
-            + "\n  Run `pip install -r requirements.txt` to install them.\n"
-        )
-
-
-# ---------------------------------------------------------------------------
-# Delegation into Polylog6 entry point
-# ---------------------------------------------------------------------------
-
-def _load_polylog_module() -> ModuleType:
-    try:
-        return importlib.import_module("Properties.Code.main")
-    except ImportError as exc:  # pragma: no cover - fatal path
-        print(
-            "[launcher] Error: unable to import Properties.Code.main.\n"
-            "Ensure you are running from the Polylog6 project root and that\n"
-            "dependencies are installed (pip install -r requirements.txt).\n"
-            f"Details: {exc}",
-            file=sys.stderr,
-        )
-        raise SystemExit(1) from exc
-
-
-def _delegate_to_polylog(argv: list[str]) -> int:
-    module = _load_polylog_module()
-    main_func = getattr(module, "main", None)
-    if not callable(main_func):
-        print(
-            "[launcher] Error: Properties.Code.main.main() is not callable.",
-            file=sys.stderr,
-        )
-        return 1
-
-    original_argv = sys.argv
-    sys.argv = [original_argv[0], *argv]
-    try:
-        result = main_func()
-        return int(result) if result is not None else 0
-    finally:
-        sys.argv = original_argv
-
-
-# ---------------------------------------------------------------------------
-# CLI plumbing
-# ---------------------------------------------------------------------------
-
-def _parse_launcher_args(args: list[str]) -> tuple[argparse.Namespace, list[str]]:
-    parser = argparse.ArgumentParser(
-        prog="polylog-launcher",
-        description="Polylog6 launcher wrapper",
-        add_help=False,
-    )
-    parser.add_argument("--no-env-check", action="store_true", help="Skip venv warning")
-    parser.add_argument(
-        "--no-deps-check", action="store_true", help="Skip dependency import checks"
-    )
-    parser.add_argument("-h", "--help", action="store_true", help="Show Polylog help")
-
-    opts, remainder = parser.parse_known_args(args)
-
-    # If the user asked the launcher for help, forward --help to the inner app
-    if opts.help and "--help" not in remainder and "-h" not in remainder:
-        remainder = ["--help", *remainder]
-
-    return opts, remainder
-
-
-def main(argv: list[str] | None = None) -> int:
-    raw_args = list(sys.argv[1:] if argv is None else argv)
-    opts, remainder = _parse_launcher_args(raw_args)
-
-    if not opts.no_env_check:
-        _warn_if_outside_venv()
-    if not opts.no_deps_check:
-        _check_dependencies(REQUIRED_PACKAGES)
-
-    return _delegate_to_polylog(remainder)
+def main():
+    # Ensure environment
+    activate_cmd = ensure_venv()
+    install_dependencies()
+    
+    # Mode selection
+    print("\nSelect mode:")
+    print("  1. GUI")
+    print("  2. API")
+    print("  3. Demo")
+    choice = input("Enter choice (1-3): ").strip()
+    
+    if choice == "1":
+        run_main("gui")
+    elif choice == "2":
+        run_main("api")
+    elif choice == "3":
+        run_main("demo")
+    else:
+        print("Invalid choice")
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

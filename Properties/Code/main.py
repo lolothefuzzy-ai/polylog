@@ -31,8 +31,15 @@ API Options:
   -v, --verbose - Verbose output
 """
 
-import argparse
 import sys
+import io
+
+# Fix UTF-8 encoding on Windows
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
+import argparse
 
 
 def main():
@@ -119,7 +126,7 @@ def _launch_gui(verbose: bool = False):
     try:
         # Try PyQt5 first as it's proven to work with Python 3.13
         print("Attempting to load PyQt5...")
-        from code.gui.qt5.app_qt5 import main as qt5_main
+        from gui.qt5.app_qt5 import main as qt5_main
 
         import PyQt5
         import PyQt5.QtCore
@@ -154,9 +161,9 @@ def _launch_gui(verbose: bool = False):
         except ImportError as e2:
             print("\n❌ Error: Could not import GUI modules")
             print("\nTo use PyQt5 (recommended for Python 3.13):")
-            print("   pip install PySide6 PySide6-Qt6 PySide6-Essentials")
-            print("   # Uses the PySide6 backend")
-            print("pip install PySide6")
+            print("   pip install PyQt5")
+            print("\nTo use PySide6:")
+            print("   pip install PySide6")
             print("\nDetails:\nPyQt5 error: {}\nPySide6 error: {}".format(e1, e2))
             return 1
     except Exception as e:
