@@ -7,6 +7,8 @@ Integration module - Connect convergence tracker to EvolutionaryGenerator
 """
 
 from typing import Optional
+from pathlib import Path
+import sqlite3
 
 from evolutionary_generator import EvolutionaryGenerator
 
@@ -15,6 +17,23 @@ import matplotlib.pyplot as plt
 import json
 import os
 
+DB_PATH = Path(__file__).parent / "convergence.db"
+
+def init_db() -> sqlite3.Connection:
+    """Initialize the convergence database."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS convergence (
+        run_id TEXT,
+        generation INTEGER,
+        best_fitness REAL,
+        avg_fitness REAL,
+        PRIMARY KEY (run_id, generation)
+    )
+    """)
+    conn.commit()
+    return conn
+
 class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
     """Extended EvolutionaryGenerator with convergence tracking."""
     
@@ -22,6 +41,7 @@ class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
                  convergence_window: Optional[ConvergenceVisualizerWindow] = None):
         super().__init__(assembly, population_size)
         self.convergence_window = convergence_window
+        self.db_conn = init_db()
     
     def evolve(self, target_polyform_count: int = 8, 
               generations: int = 50,
@@ -57,6 +77,16 @@ class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
                     len(population)
                 )
             
+            # Persist metrics to database
+            import numpy as np
+            best_fitness_gen = max(fitness_scores)
+            avg_fitness_gen = np.mean(fitness_scores)
+            self.db_conn.execute(
+                "INSERT INTO convergence (run_id, generation, best_fitness, avg_fitness) VALUES (?, ?, ?, ?)",
+                (f"run_{id(self)}", gen, best_fitness_gen, avg_fitness_gen)
+            )
+            self.db_conn.commit()
+            
             # Track best
             gen_best_idx = fitness_scores.index(max(fitness_scores))
             if fitness_scores[gen_best_idx] > best_fitness:
@@ -79,7 +109,6 @@ class EvolutionaryGeneratorWithTracking(EvolutionaryGenerator):
                 offspring.append(self._mutate(child1, allowed_types))
                 offspring.append(self._mutate(child2, allowed_types))
             
-            # Elitism: keep best individuals
             import numpy as np
             elite = [population[i] for i in np.argsort(fitness_scores)[-self.elite_size:]]
             

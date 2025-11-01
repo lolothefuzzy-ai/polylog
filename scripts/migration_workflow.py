@@ -6,6 +6,8 @@ from __future__ import annotations
 import subprocess
 import sys
 from pathlib import Path
+import alembic.config
+import alembic.command
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC_PATH = ROOT / "src"
@@ -50,22 +52,30 @@ def verify_package_structure() -> bool:
     return True
 
 
+def run_database_migrations():
+    """Execute database migrations using Alembic."""
+    print("Running database migrations...")
+    alembic_cfg = alembic.config.Config("alembic.ini")
+    alembic.command.upgrade(alembic_cfg, "head")
+    print("Database migrations complete")
+
+
 def run_migration():
     """Execute the full migration workflow"""
     print("Starting migration workflow...")
-    # Add actual migration steps here
-    print("Migration completed successfully")
-
-
-def main() -> None:
-    print("=== Unity Bridge Migration Workflow ===")
     run_ruff_cleanup()
     if verify_package_structure():
-        print("Migration ready to proceed!")
+        run_database_migrations()
+        print("Migration completed successfully")
     else:
         print("Migration blocked - fix imports first")
         sys.exit(1)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    print("=== Unity Bridge Migration Workflow ===")
     run_migration()
+
+
+if __name__ == "__main__":
+    main()
