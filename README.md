@@ -20,3 +20,10 @@ python launcher.py
 ## Development
 - Debug configurations: `.vscode/launch.json`
 - Recommended extensions: `.vscode/extensions.json`
+
+## GitHub Repository Setup
+1. Create a new repository on GitHub
+2. Run the setup script:
+```powershell
+./setup_remote.ps1
+```
