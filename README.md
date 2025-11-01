@@ -1,5 +1,8 @@
 # Polylog6
 
+[![CI Status](https://github.com/Nauti/polylog/workflows/Python%20CI/badge.svg)](https://github.com/Nauti/polylog/actions)
+[![Coverage](https://codecov.io/gh/Nauti/polylog/branch/main/graph/badge.svg)](https://codecov.io/gh/Nauti/polylog)
+
 Polygon simulation and visualization toolkit
 
 ## Features
