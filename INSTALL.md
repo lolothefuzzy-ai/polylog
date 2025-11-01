@@ -20,20 +20,25 @@ The launcher will automatically:
 ```bash
 python -m venv venv
 venv\Scripts\activate
-pip install -r requirements.txt
-python Properties/Code/main.py [gui|api|demo]
+pip install -r PolylogCore/requirements.txt
+
+# GUI Mode
+python PolylogCore/Properties/Code/main.py gui
+
+# API Mode
+python PolylogCore/Properties/Code/main.py api
 ```
 
 ## Running
 
 ### GUI Mode
 ```bash
-python Properties/Code/main.py gui
+python PolylogCore/Properties/Code/main.py gui
 ```
 
 ### API Mode
 ```bash
-python Properties/Code/main.py api
+python PolylogCore/Properties/Code/main.py api
 ```
 
 ### Troubleshooting
