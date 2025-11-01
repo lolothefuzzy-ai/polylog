@@ -10,7 +10,7 @@ from typing import Optional
 from pathlib import Path
 import sqlite3
 
-from evolutionary_generator import EvolutionaryGenerator
+from .evolutionary_generator import EvolutionaryGenerator
 
 from convergence_visualizer import ConvergenceVisualizerWindow
 import matplotlib.pyplot as plt
