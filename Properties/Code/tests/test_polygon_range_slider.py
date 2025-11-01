@@ -2,7 +2,7 @@
 """Tests for PolygonRangeSlider module."""
 
 import unittest
-from Properties.Code import PolygonRangeSlider
+from Properties.Code.PolygonRangeSlider import PolygonRangeSlider
 
 class TestPolygonRangeSlider(unittest.TestCase):
     def test_initialization(self):
