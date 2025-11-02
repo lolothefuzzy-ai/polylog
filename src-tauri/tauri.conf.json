@@ -1,0 +1,25 @@
+{
+  "build": {
+    "distDir": "../dist",
+    "devPath": "http://localhost:3000"
+  },
+  "tauri": {
+    "embeddedServer": {
+      "active": true
+    },
+    "bundle": {
+      "active": true
+    },
+    "allowlist": {
+      "all": true
+    },
+    "windows": [
+      {
+        "title": "Polylog6 Research Simulator",
+        "width": 800,
+        "height": 600,
+        "resizable": true
+      }
+    ]
+  }
+}

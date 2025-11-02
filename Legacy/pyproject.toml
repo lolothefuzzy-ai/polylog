@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polylog"
+version = "0.1.0"
+description = "Interactive polyform design and exploration tool with 3D visualization"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Polylog Team"}
+]
+keywords = ["polyform", "geometry", "3d", "visualization", "simulation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.7.0",
+    "numpy>=1.24.0",
+    "PySide6>=6.6.0",
+    "pyqtgraph>=0.13.3",
+    "psutil>=5.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+packaging = [
+    "pyinstaller>=6.0.0",
+    "setuptools>=61.0",
+    "wheel>=0.40.0",
+]
+
+[project.scripts]
+polylog = "main:main"  # Unified entry point supporting gui, api, cli, both modes
+
+[project.urls]
+Homepage = "https://github.com/yourusername/polylog"
+Repository = "https://github.com/yourusername/polylog"
+Documentation = "https://github.com/yourusername/polylog/docs"
+
+[tool.setuptools]
+packages = {find = {}}
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 120
+target-version = ['py39', 'py310', 'py311']
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true

@@ -29,6 +29,16 @@ python PolylogCore/Properties/Code/main.py gui
 python PolylogCore/Properties/Code/main.py api
 ```
 
+## Desktop Application
+
+1. Download installer for your platform:
+   - Windows: `Polylog6-Setup.exe`
+   - macOS: `Polylog6.dmg`
+   - Linux: `Polylog6.AppImage`
+
+2. Run installer
+3. Launch from Start Menu/Applications
+
 ## Running
 
 ### GUI Mode
@@ -47,3 +57,13 @@ python PolylogCore/Properties/Code/main.py api
 pip install PyQt5==5.15.10
 ```
 - **API Issues**: Ensure the root directory contains `polylog_main.py`
+
+## Development
+
+```bash
+# With Electron
+cd electron
+npm start
+
+# With Docker
+docker-compose up

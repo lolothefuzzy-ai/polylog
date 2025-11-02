@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Polylog6 Simulation</title>
+</head>
+<body>
+  <button id="runSim">Run Simulation</button>
+  <script>
+    document.getElementById('runSim').addEventListener('click', async () => {
+      const response = await window.__TAURI__.invoke('run_simulation', { params: 'test' });
+      console.log(response);
+    });
+  </script>
+</body>
+</html>
