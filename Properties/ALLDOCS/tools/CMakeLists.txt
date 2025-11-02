@@ -1,1 +1,0 @@
-# Tools CMakeLists\n\n# Shader compiler tools\nadd_subdirectory(shader_compiler)\n\nmessage(STATUS \"Tools configured:\")\nmessage(STATUS \"  - Shader compiler (DXC + SPIRV-Cross)\")\nmessage(STATUS \"  - Asset pipeline tools\")\nmessage(STATUS \"  - Record/replay tools\")\n

@@ -1,1 +1,0 @@
-"""Core simulation and processing components."""

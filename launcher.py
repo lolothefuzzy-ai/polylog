@@ -5,7 +5,6 @@ Polylog Launcher - Simplified project startup
 Automates environment setup and mode selection
 """
 
-import os
 import sys
 import subprocess
 from pathlib import Path
@@ -55,7 +54,7 @@ def run_main(mode):
 
 def main():
     # Ensure environment
-    activate_cmd = ensure_venv()
+    ensure_venv()
     install_dependencies()
     
     # Mode selection

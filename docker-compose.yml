@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ./PolylogCore
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+
+  portal:
+    build:
+      context: ./web_portal
+    ports:
+      - "5000:5000"
+    depends_on:
+      - api
+    environment:
+      - FLASK_ENV=development

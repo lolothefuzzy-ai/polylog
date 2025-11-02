@@ -1,7 +1,7 @@
 """KPI schema loader and registry utilities.
 
 This module wires the stability KPI definitions (STAB-003) into the runtime by
-loading ``Properties/ALLDOCS/metrics/kpi_schema.json`` and exposing an
+loading ``Properties/Code/data/kpi_schema.json`` and exposing an
 in-memory registry.  The registry can be shared across subsystems (CI, runtime
 telemetry, dashboards) to ensure a single source of truth for thresholds,
 owners, and SLO metadata.
@@ -20,7 +20,7 @@ except Exception:  # pragma: no cover - Prometheus support is optional
     start_http_server = None
 
 
-_SCHEMA_DEFAULT = Path(__file__).resolve().parents[1] / "ALLDOCS" / "metrics" / "kpi_schema.json"
+_SCHEMA_DEFAULT = Path(__file__).resolve().parent / "data" / "kpi_schema.json"
 
 
 @dataclass(frozen=True)

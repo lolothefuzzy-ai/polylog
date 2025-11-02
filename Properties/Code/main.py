@@ -33,13 +33,42 @@ API Options:
 
 import sys
 import io
+from pathlib import Path
+import argparse
+
+
+def _ensure_utf8_streams() -> None:
+    """Wrap stdout/stderr with UTF-8 encoding on Windows without breaking handles."""
+    if sys.platform != "win32":
+        return
+
+    for attr in ("stdout", "stderr"):
+        stream = getattr(sys, attr)
+        if isinstance(stream, io.TextIOWrapper):
+            try:
+                stream.reconfigure(encoding="utf-8", errors="replace")
+            except (AttributeError, ValueError):
+                # Fall back to wrapping the underlying buffer below if reconfigure unavailable
+                pass
+            else:
+                continue
+        buffer = getattr(stream, "buffer", None)
+        if buffer is None:
+            continue
+        try:
+            wrapped = io.TextIOWrapper(buffer, encoding="utf-8", errors="replace")
+        except (AttributeError, io.UnsupportedOperation):
+            continue
+        setattr(sys, attr, wrapped)
+
 
 # Fix UTF-8 encoding on Windows
-if sys.platform == "win32":
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+_ensure_utf8_streams()
 
-import argparse
+# Ensure project root is on sys.path so legacy entry points resolve
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 
 def main():
@@ -176,11 +205,11 @@ def _launch_gui(verbose: bool = False):
 def _launch_combined(host: str, port: int, verbose: bool = False):
     """Launch both API server and interactive demo"""
     if verbose:
-        print(f"Launching Polylog Simulator (Combined: API + Demo)...")
+        print("Launching Polylog Simulator (Combined: API + Demo)...")
     
-    print(f"\nMode: COMBINED (API + Demo)")
-    print(f"API Server: {host}:{port}")
-    print(f"API Documentation: http://{host}:{port}/docs\n")
+    print("\nMode: COMBINED (API + Demo)")
+    print("API Server: " + host + ":" + str(port))
+    print("API Documentation: http://" + host + ":" + str(port) + "/docs\n")
     
     # For now, just launch demo (API integration pending)
     print("[Note: API server integration in progress]")
@@ -193,7 +222,7 @@ def _launch_api(host: str, port: int, verbose: bool = False):
     if verbose:
         print(f"Launching Polylog Simulator - API Server Mode...")
     
-    print(f"\nMode: API SERVER")
+    print("\nMode: API SERVER")
     print(f"Host: {host}")
     print(f"Port: {port}")
     print(f"Swagger UI: http://{host}:{port}/docs")
@@ -229,6 +258,14 @@ def _launch_demo(verbose: bool = False):
         import traceback
         traceback.print_exc()
         return 1
+
+
+def start_api(host: str = "127.0.0.1", port: int = 8000) -> None:
+    """Expose API launcher for legacy entry points."""
+
+    from .api_launcher import start_api as _start_api
+
+    _start_api(host, port)
 
 
 if __name__ == '__main__':
