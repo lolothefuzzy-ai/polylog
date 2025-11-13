@@ -1,8 +1,0 @@
-[package]
-name = "polylog6-desktop"
-version = "1.0.0"
-edition = "2021"
-
-[dependencies]
-tauri = { version = "1.0", features = ["api-all"] }
-pyo3 = "0.20"
