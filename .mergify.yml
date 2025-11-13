@@ -1,0 +1,18 @@
+pull_request_rules:
+  - name: auto-merge when tests pass and review granted
+    conditions:
+      - or:
+          - base=main
+          - base=develop
+      - label=auto-merge
+      - status-success~=tests?
+      - '#approved-reviews-by>=1'
+    actions:
+      merge:
+        method: squash
+      delete_head_branch: {}
+      comment:
+        message: |
+          ✅ This pull request satisfied the auto-merge policy (label `auto-merge`,
+          required checks succeeded, and at least one approval is present).
+          Merging via Mergify.

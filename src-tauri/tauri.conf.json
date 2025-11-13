@@ -4,11 +4,9 @@
     "devPath": "http://localhost:3000"
   },
   "tauri": {
-    "embeddedServer": {
-      "active": true
-    },
     "bundle": {
-      "active": true
+      "active": true,
+      "identifier": "com.polylog.desktop"
     },
     "allowlist": {
       "all": true

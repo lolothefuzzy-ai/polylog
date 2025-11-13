@@ -1,0 +1,5 @@
+{
+  "symmetry_threshold": 1.0,
+  "fft_strength_threshold": 0.0,
+  "fft_peak_median": 12.0
+}

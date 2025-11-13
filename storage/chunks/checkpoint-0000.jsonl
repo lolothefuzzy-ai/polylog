@@ -1,0 +1,3 @@
+{"type": "meta", "chunk_size": 10000, "snapshot_interval": 3}
+{"type": "chunk", "index": 0, "count": 1, "payload": "PA\u24ff\ue000\ue000\ue000\ue000", "registry_state": {"clusters": {}, "assemblies": {}, "megas": {}}}
+{"type": "summary", "total_polygons": 1, "chunks": 1}
