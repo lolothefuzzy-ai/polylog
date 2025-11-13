@@ -1,0 +1,9 @@
+enabled: true
+
+context_brief:
+  path: "memory/coordination/context-brief.jsonl"
+  fallback_paths:
+    - "/var/log/polylog/context-brief.jsonl"
+    - "C:/ProgramData/Polylog/context-brief.jsonl"
+  create_if_missing: true
+  poll_interval_ms: 500

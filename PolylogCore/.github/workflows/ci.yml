@@ -48,10 +48,41 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-cov hypothesis
+          pip install pytest pytest-cov hypothesis pytest-json-report
       - name: Run test suite
         run: |
           pytest -m "not ui" --cov=src --cov-report=xml
+      - name: Generate compression metrics summary
+        run: |
+          python scripts/run_compression_metrics.py --label ci
+      - name: Enforce compression thresholds
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          metrics_path = Path("compression_metrics.json")
+          if not metrics_path.exists():
+              raise SystemExit("compression_metrics.json not produced by telemetry step")
+
+          data = json.loads(metrics_path.read_text(encoding="utf-8"))
+          summary = data.get("summary", {})
+          averages = summary.get("averages", {})
+          tier1 = float(averages.get("compression_ratio_tier1_pct", 0.0))
+          tier2 = float(averages.get("compression_ratio_tier2_pct", 0.0))
+
+          if tier1 < 85.0:
+              raise SystemExit(f"Tier1 compression {tier1}% below 85% threshold")
+          if tier2 < 65.0:
+              raise SystemExit(f"Tier2 compression {tier2}% below 65% threshold")
+
+          print(f"✓ Compression thresholds met (Tier1={tier1}%, Tier2={tier2}%)")
+          PY
+      - name: Upload compression metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: compression-metrics
+          path: compression_metrics.json
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:

@@ -23,12 +23,24 @@ electron/node_modules/
 electron/dist/
 electron/out/
 
-# Test coverage
+# Frontend build output
+node_modules/
+dist/
+build/
+
+# Tauri build output
+src-tauri/target/
+src-tauri/gen/
+src-tauri/icons/
+
+# Logs / diagnostics
+*.log
+.pytest_cache/
+.ruff_cache/
+
+# Coverage
 .coverage
 htmlcov/
-
-# Logs
-*.log
 
 # OS
 Thumbs.db

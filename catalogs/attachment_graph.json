@@ -1,0 +1,17 @@
+{
+  "A\u2194A": {
+    "pairs": [
+      {
+        "fold_angles": [],
+        "polyform_uuid": "97a540f98ba042a2a8d002435f6e7414",
+        "stability_score": 0.8
+      },
+      {
+        "fold_angles": [],
+        "polyform_uuid": "a69590434c47465e976697c79ff406a2",
+        "stability_score": 0.8
+      }
+    ],
+    "scores": {}
+  }
+}
