@@ -46,3 +46,4 @@ pull_request_rules:
 
           Sorry about that, but you can requeue the PR by using `@mergifyio
           requeue` if you think this was a mistake.
+queue_rules: []
