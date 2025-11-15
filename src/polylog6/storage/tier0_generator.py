@@ -14,14 +14,53 @@ from typing import Dict, List, Optional, Tuple
 from .tier0_enrichment import Tier0Metadata, build_tier0_metadata
 import json
 
-# Series reference table (canonical edge counts)
-# Updated with C₇↔C₈ swap and D reordering to eliminate position conflicts
+# Series reference table (canonical edge counts – definitive spec)
 SERIES_TABLE: Dict[str, List[int]] = {
-    "A": [11, 13, 3, 15, 5, 17, 7, 19, 9],     # Odds/primes
-    "B": [20, 4, 6, 8, 10, 12, 14, 16, 18],    # Evens
-    "C": [3, 6, 9, 12, 15, 18, 8, 7, 10],      # Multiples of 3 (C₇↔C₈ swapped)
-    "D": [14, 20, 13, 11, 4, 16, 17, 5, 19],   # Complementary (reordered)
+    "A": [3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "B": [20, 4, 6, 8, 10, 12, 14, 16, 18],
+    "C": [3, 6, 9, 12, 15, 18, 8, 7, 10],
+    "D": [14, 20, 13, 11, 4, 16, 17, 5, 19],
 }
+
+
+def _build_edge_to_series_refs() -> Dict[int, List[Tuple[str, int]]]:
+    """Invert ``SERIES_TABLE`` to expose redundancy paths."""
+
+    mapping: Dict[int, List[Tuple[str, int]]] = {}
+    for series, entries in SERIES_TABLE.items():
+        for position, edge_count in enumerate(entries, start=1):
+            mapping.setdefault(edge_count, []).append((series, position))
+    return mapping
+
+
+EDGE_TO_SERIES_REFS: Dict[int, List[Tuple[str, int]]] = _build_edge_to_series_refs()
+
+
+def _get_secondary_series_for_base_and_hundreds(base_series: str, hundreds: int) -> str:
+    """Route hundreds digit to the appropriate secondary series."""
+
+    cyclic_map: Dict[str, List[str]] = {
+        "A": ["C", "D", "B"],
+        "B": ["D", "A", "C"],
+        "C": ["A", "B", "D"],
+        "D": ["B", "C", "A"],
+    }
+
+    if base_series not in cyclic_map:
+        raise ValueError(f"Invalid base series: {base_series!r}")
+
+    sequence = cyclic_map[base_series]
+
+    if hundreds in (1, 2):
+        return sequence[hundreds - 1]
+
+    if hundreds in (3, 4, 5):
+        return sequence[hundreds - 3]
+
+    if hundreds in (6, 7, 8):
+        return sequence[hundreds - 6]
+
+    raise ValueError(f"Invalid hundreds digit for secondary selection: {hundreds}")
 
 
 @dataclass(slots=True)
@@ -64,6 +103,112 @@ class ConnectivityChain:
         return payload
 
 
+def _require_uppercase_series(symbol: str) -> None:
+    if not symbol or len(symbol) < 2:
+        raise ValueError(f"Invalid Tier 0 symbol: {symbol!r}")
+
+    series = symbol[0]
+    if series not in SERIES_TABLE:
+        raise ValueError(f"Invalid series in Tier 0 symbol: {symbol!r}")
+
+    if series != series.upper():
+        raise ValueError(f"Tier 0 series must be uppercase: {symbol!r}")
+
+
+def _decode_single_digit(series: str, position: int, symbol: str) -> ConnectivityChain:
+    if position < 1 or position > 9:
+        raise ValueError(f"Invalid position for single-digit Tier 0 symbol: {symbol!r}")
+
+    edge_count = SERIES_TABLE[series][position - 1]
+    return ConnectivityChain(symbol=symbol, polygons=[edge_count], positions=[position], series=[series])
+
+
+def _decode_two_digit(series: str, tens: int, ones: int, symbol: str) -> ConnectivityChain:
+    if ones == 0:
+        raise ValueError(f"Invalid {symbol!r}: skip rule prohibits X0 patterns")
+
+    if tens < 1 or tens > 9 or ones < 1 or ones > 9:
+        raise ValueError(f"Invalid digits for Tier 0 two-digit symbol: {symbol!r}")
+
+    base_edges = SERIES_TABLE[series][tens - 1]
+    bridge_edges = SERIES_TABLE["B"][ones - 1]
+
+    return ConnectivityChain(
+        symbol=symbol,
+        polygons=[base_edges, bridge_edges],
+        positions=[tens, ones],
+        series=[series, "B"],
+    )
+
+
+def _decode_three_digit(series: str, hundreds: int, tens: int, ones: int, symbol: str) -> ConnectivityChain:
+    if hundreds == 9:
+        raise ValueError(f"Reserved Tier 0 range: {symbol!r}")
+
+    if tens == 0 or ones == 0:
+        raise ValueError(f"Invalid {symbol!r}: skip rule prohibits X00, X0Y, and XY0 patterns")
+
+    if hundreds < 1 or hundreds > 8 or tens < 1 or tens > 9 or ones < 1 or ones > 9:
+        raise ValueError(f"Invalid digits for Tier 0 three-digit symbol: {symbol!r}")
+
+    base_edges = SERIES_TABLE[series][tens - 1]
+
+    secondary = _get_secondary_series_for_base_and_hundreds(series, hundreds)
+    secondary_edges = SERIES_TABLE[secondary][ones - 1]
+
+    if hundreds <= 2:
+        return ConnectivityChain(
+            symbol=symbol,
+            polygons=[base_edges, secondary_edges],
+            positions=[tens, ones],
+            series=[series, secondary],
+        )
+
+    bridge_edges = SERIES_TABLE["B"][ones - 1]
+
+    if hundreds <= 5:
+        return ConnectivityChain(
+            symbol=symbol,
+            polygons=[base_edges, bridge_edges, secondary_edges],
+            positions=[tens, ones, tens],
+            series=[series, "B", secondary],
+        )
+
+    return ConnectivityChain(
+        symbol=symbol,
+        polygons=[base_edges, bridge_edges, secondary_edges],
+        positions=[tens, ones, ones],
+        series=[series, "B", secondary],
+    )
+
+
+def decode_tier0_symbol(symbol: str) -> ConnectivityChain:
+    """Decode any Tier 0 symbol according to the definitive specification."""
+
+    _require_uppercase_series(symbol)
+
+    series = symbol[0]
+    digits = symbol[1:]
+
+    if not digits.isdigit():
+        raise ValueError(f"Tier 0 subscript must be numeric: {symbol!r}")
+
+    if len(symbol) == 2:
+        position = int(digits)
+        return _decode_single_digit(series, position, symbol)
+
+    if len(symbol) == 3:
+        tens = int(digits[0])
+        ones = int(digits[1])
+        return _decode_two_digit(series, tens, ones, symbol)
+
+    if len(symbol) == 4:
+        hundreds = int(digits[0])
+        tens = int(digits[1])
+        ones = int(digits[2])
+        return _decode_three_digit(series, hundreds, tens, ones, symbol)
+
+    raise ValueError(f"Unsupported Tier 0 symbol length: {symbol!r}")
 class Tier0Generator:
     """Generate the complete Tier 0 hierarchical vocabulary."""
 
