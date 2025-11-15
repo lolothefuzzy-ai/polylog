@@ -314,10 +314,10 @@ class CatalogBackedHydrator(PolyformHydrator):
         return polygons
 
     def _load_catalogs(self) -> PolyformHydrator.HydratorCatalogs:
-        geometry = self._load_json("geometry_catalog.json")
-        attachment = self._load_json("attachment_graph.json")
-        scaler = self._load_json("scaler_tables.json")
-        lod = self._load_json("lod_metadata.json")
+        geometry = self._load_json("geometry/geometry_catalog.json")
+        attachment = self._load_json("attachments/attachment_graph.json")
+        scaler = self._load_json("geometry/scaler_tables.json")
+        lod = self._load_json("geometry/lod_metadata.json")
         return PolyformHydrator.HydratorCatalogs(
             geometry=geometry,
             attachment=attachment,
