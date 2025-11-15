@@ -7,6 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import json
 from pathlib import Path
 
+from polylog6.api.tier1_polyhedra import router as tier1_router
+from polylog6.api.storage import router as storage_router
+
 app = FastAPI(title="Polyform Backend")
 
 # CORS for Tauri frontend
@@ -17,6 +20,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Register routers
+app.include_router(tier1_router)
+app.include_router(storage_router)
 
 @app.get("/health")
 async def health_check():
