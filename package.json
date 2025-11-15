@@ -13,7 +13,7 @@
     "@babylonjs/core": "^8.37.0",
     "@babylonjs/loaders": "^8.37.0",
     "@babylonjs/materials": "^8.37.0",
-    "@tanstack/react-query": "^5.0.0",
+    "@tanstack/react-query": "^5.90.9",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
