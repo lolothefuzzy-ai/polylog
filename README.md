@@ -2,21 +2,27 @@
 
 Polylog6 is an experimental polyform simulation and compression toolkit.
 
-## Documentation Hub
+## Quick Status
 
-All integration, roadmap, architecture, and research notes now live under:
+**Current Phase:** Phase 2 (Frontend Integration - Ready to Start)
+**Status:** Ready to Execute | **Blockers:** None
 
-```text
-PolylogStructure and Science/integration_architecture/
-```
+**Check Status First:** See `EXECUTION_READY.md` for current system status and next steps.
 
-Key entry points:
+## Documentation
 
-- `roadmap/` – current delivery priorities and status.
-- `tickets/` – integration backlog (Path A/B, dependencies, owners).
-- `architecture/` – compression, dictionary, simulator, and backbone specs.
-- `design/` – catalog generation, engine requirements, structure/science synthesis.
-- `reference/` – legacy briefs and reference PDFs.
+### Active Status (Check These First)
+- **EXECUTION_READY.md** - Current phase, blockers, next actions
+- **OPTIMIZED_PHASE_2_PLAN.md** - Phase 2 implementation details
+
+### Reference Architecture (For Understanding)
+- **PROJECT_SCOPE_AND_BLOCKERS.md** - Project scope and 10 identified blockers
+- **IMPLEMENTATION_ROADMAP.md** - 6-phase roadmap with timelines
+- **EDGE_FACE_MATCHING_ARCHITECTURE.md** - Geometric validation architecture
+- **SYSTEM_OPTIMIZATION_ANALYSIS.md** - System optimization strategy
+
+### Legacy Documentation
+- **PolylogStructure and Science/integration_architecture/** - Original architecture docs
 
 ## Core Workflows
 
