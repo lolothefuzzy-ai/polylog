@@ -9,11 +9,14 @@ from typing import List, Dict, Any, Optional
 from polylog6.simulation.placement.fold_sequencer import FoldSequencer
 from polylog6.simulation.placement.runtime import PlacementRuntime
 from polylog6.storage.manager import PolyformStorageManager
+from pathlib import Path
 
 router = APIRouter(prefix="/api/attachment", tags=["attachment"])
 
 # Initialize storage manager for PlacementRuntime
-_storage_manager = PolyformStorageManager()
+# Use a temporary directory for storage
+_storage_base_path = Path(__file__).parent.parent.parent.parent.parent / "storage" / "caches"
+_storage_manager = PolyformStorageManager(base_path=_storage_base_path)
 _placement_runtime = PlacementRuntime(storage_manager=_storage_manager)
 _fold_sequencer = FoldSequencer(
     geometry_catalog={},  # Will load from catalog
