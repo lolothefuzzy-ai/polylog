@@ -112,11 +112,16 @@ def start_servers():
 def run_test_suite(test_type="all"):
     """Run test suite"""
     global _test_processes
+    import os
+    import platform
     
     test_suites = {
         "backend-stability": "tests/visual/backend-stability.spec.js",
         "backend-integration": "tests/visual/backend-integration-stability.spec.js",
         "frontend-integration": "tests/integration/backend-frontend-integration.spec.js",
+        "full-system": "tests/integration/full-system-integration.spec.js",
+        "workspace-interaction": "tests/integration/workspace-interaction.spec.js",
+        "api-coverage": "tests/integration/api-coverage.spec.js",
         "all": None  # Run all tests
     }
     
@@ -128,29 +133,55 @@ def run_test_suite(test_type="all"):
     print(f"Running Test Suite: {test_type}")
     print("=" * 70)
     
+    # Windows compatibility: use shell=True and check for npm/npx
+    is_windows = platform.system() == "Windows"
+    shell_mode = is_windows
+    
+    # Check if npx is available
+    try:
+        subprocess.run(
+            ["npx", "--version"],
+            capture_output=True,
+            shell=shell_mode,
+            timeout=5
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        print("[ERROR] npx not found. Please ensure Node.js and npm are installed and in PATH.")
+        return False
+    
+    def run_playwright_test(suite_path):
+        """Run a single Playwright test suite"""
+        cmd = ["npx", "playwright", "test", suite_path, "--headed", "--project=chromium"]
+        print(f"[TEST] Running: {' '.join(cmd)}")
+        print(f"[TEST] Working directory: {FRONTEND_DIR}")
+        
+        result = subprocess.run(
+            cmd,
+            cwd=FRONTEND_DIR,
+            capture_output=False,
+            shell=shell_mode
+        )
+        return result.returncode == 0
+    
     if test_type == "all":
         # Run all test suites
         all_passed = True
         for suite_name, suite_path in test_suites.items():
             if suite_path:
                 print(f"\n[TEST] Running {suite_name}...")
-                result = subprocess.run(
-                    ["npx", "playwright", "test", suite_path, "--headed", "--project=chromium"],
-                    cwd=FRONTEND_DIR,
-                    capture_output=False
-                )
-                if result.returncode != 0:
+                if not run_playwright_test(suite_path):
                     all_passed = False
+                    print(f"[FAIL] {suite_name} failed")
+                else:
+                    print(f"[PASS] {suite_name} passed")
         return all_passed
     else:
         # Run specific test suite
         suite_path = test_suites[test_type]
-        result = subprocess.run(
-            ["npx", "playwright", "test", suite_path, "--headed", "--project=chromium"],
-            cwd=FRONTEND_DIR,
-            capture_output=False
-        )
-        return result.returncode == 0
+        if not suite_path:
+            print(f"[ERROR] Test suite '{test_type}' not found")
+            return False
+        return run_playwright_test(suite_path)
 
 def main():
     import argparse
@@ -163,7 +194,8 @@ def main():
     parser = argparse.ArgumentParser(description="Automated Test Suite")
     parser.add_argument(
         "--type",
-        choices=["all", "backend-stability", "backend-integration", "frontend-integration"],
+        choices=["all", "backend-stability", "backend-integration", "frontend-integration", 
+                 "full-system", "workspace-interaction", "api-coverage"],
         default="all",
         help="Test suite to run"
     )

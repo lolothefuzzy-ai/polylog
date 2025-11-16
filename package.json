@@ -7,6 +7,9 @@
     "test": "python scripts/automated_test_suite.py --type all",
     "test:backend": "python scripts/automated_test_suite.py --type backend-stability",
     "test:integration": "python scripts/automated_test_suite.py --type frontend-integration",
+    "test:workspace": "python scripts/automated_test_suite.py --type workspace-interaction",
+    "test:api": "python scripts/automated_test_suite.py --type api-coverage",
+    "test:full": "python scripts/automated_test_suite.py --type full-system",
     "test:all": "python scripts/automated_test_suite.py --type all",
     "build": "python scripts/unified_launcher.py build",
     "clean": "python scripts/final_cleanup.py"
