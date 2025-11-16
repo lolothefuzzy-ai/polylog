@@ -371,7 +371,10 @@ Examples:
     # Automated testing
     subparsers.add_parser("test:auto", help="Run automated test suite")
     subparsers.add_parser("test:watch", help="Watch files and auto-test on changes")
-    subparsers.add_parser("test:visual:workspace", help="Run visual tests in workspace browser")
+        subparsers.add_parser("test:visual:workspace", help="Run visual tests in workspace browser")
+        subparsers.add_parser("test:watch", help="Watch mode - run tests on file changes")
+        subparsers.add_parser("test:ui", help="Open Playwright UI for interactive testing")
+        subparsers.add_parser("test:headed", help="Run browser tests in visible mode")
     
     # Packaging
     subparsers.add_parser("package", help="Package application for distribution")
@@ -449,6 +452,21 @@ Examples:
             visual_test = PROJECT_ROOT / "scripts" / "run_visual_tests_in_workspace.py"
             if visual_test.exists():
                 run_command([sys.executable, str(visual_test)], check=False)
+        elif args.command == "test:watch":
+            import sys
+            watch_test = PROJECT_ROOT / "scripts" / "watch_tests.py"
+            if watch_test.exists():
+                run_command([sys.executable, str(watch_test)], check=False)
+        elif args.command == "test:ui":
+            import sys
+            test_runner = PROJECT_ROOT / "scripts" / "run_tests_in_workspace.py"
+            if test_runner.exists():
+                run_command([sys.executable, str(test_runner), "--type", "ui"], check=False)
+        elif args.command == "test:headed":
+            import sys
+            test_runner = PROJECT_ROOT / "scripts" / "run_tests_in_workspace.py"
+            if test_runner.exists():
+                run_command([sys.executable, str(test_runner), "--type", "visual", "--headed"], check=False)
     except KeyboardInterrupt:
         print_info("\nOperation cancelled by user")
     except Exception as e:
