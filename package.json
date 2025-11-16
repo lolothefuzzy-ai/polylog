@@ -4,7 +4,10 @@
   "description": "Polyform visualization and analysis system",
   "scripts": {
     "dev": "python scripts/unified_launcher.py dev",
-    "test": "python scripts/unified_launcher.py test",
+    "test": "python scripts/automated_test_suite.py --type all",
+    "test:backend": "python scripts/automated_test_suite.py --type backend-stability",
+    "test:integration": "python scripts/automated_test_suite.py --type frontend-integration",
+    "test:all": "python scripts/automated_test_suite.py --type all",
     "build": "python scripts/unified_launcher.py build",
     "clean": "python scripts/final_cleanup.py"
   },
@@ -13,4 +16,3 @@
     "src/desktop"
   ]
 }
-
