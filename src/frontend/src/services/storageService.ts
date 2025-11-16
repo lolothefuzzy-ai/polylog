@@ -11,8 +11,37 @@ interface GetSymbolsOptions {
   limit?: number;
 }
 
+export interface Polyhedron {
+  symbol: string;
+  name: string;
+  classification: 'platonic' | 'archimedean' | 'johnson';
+  vertices?: number[][];
+  faces?: number[][];
+  compression_ratio?: number;
+  metadata?: Record<string, unknown>;
+}
+
+export interface AttachmentOption {
+  fold_angle: number;
+  stability: number;
+  context: string;
+  edge_a: number;
+  edge_b: number;
+}
+
+export interface AttachmentMatrix {
+  [key: string]: {
+    fold_angles: number[];
+    stability_scores: number[];
+    contexts: string[];
+  };
+}
+
 export class StorageService {
-  private readonly baseUrl = '/api/storage';
+  // API URL - defaults to FastAPI server, can be overridden via env var
+  private readonly baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  private readonly tier1Url = `${this.baseUrl}/tier1`;
+  private readonly storageUrl = `${this.baseUrl}/api/storage`;
 
   async getSymbols(options: GetSymbolsOptions = {}): Promise<SymbolList> {
     const params = new URLSearchParams();
@@ -26,15 +55,85 @@ export class StorageService {
       params.append('limit', String(options.limit));
     }
 
-    const response = await fetch(`${this.baseUrl}/symbols?${params.toString()}`);
+    const response = await fetch(`${this.storageUrl}/symbols?${params.toString()}`);
     if (!response.ok) {
       throw new Error(`Failed to fetch symbols: ${response.statusText}`);
     }
     return response.json();
   }
 
+  // Tier 1 Polyhedra API
+  async getPolyhedraList(page = 0, limit = 20): Promise<{ total: number; items: Polyhedron[] }> {
+    const response = await fetch(`${this.tier1Url}/polyhedra?skip=${page * limit}&limit=${limit}`);
+    if (!response.ok) {
+      // Fallback to empty list if API not available
+      console.warn('API not available, returning empty list');
+      return { total: 0, items: [] };
+    }
+    return response.json();
+  }
+
+  async getPolyhedron(symbol: string): Promise<Polyhedron> {
+    const response = await fetch(`${this.tier1Url}/polyhedra/${symbol}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch polyhedron ${symbol}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getPolyhedronLOD(symbol: string, level: 'full' | 'medium' | 'low' | 'thumbnail'): Promise<any> {
+    const response = await fetch(`${this.tier1Url}/polyhedra/${symbol}/lod/${level}`);
+    if (!response.ok) {
+      // Fallback to basic geometry
+      console.warn(`LOD not available for ${symbol}, using fallback`);
+      return this.getFallbackGeometry(symbol);
+    }
+    return response.json();
+  }
+
+  private getFallbackGeometry(symbol: string): any {
+    // Basic fallback geometry for testing
+    return {
+      vertices: [
+        [0, 0, 0],
+        [1, 0, 0],
+        [0.5, 0.866, 0]
+      ],
+      indices: [0, 1, 2],
+      normals: [[0, 0, 1], [0, 0, 1], [0, 0, 1]]
+    };
+  }
+
+  async getAttachmentOptions(polygonA: string, polygonB: string): Promise<{ options: AttachmentOption[] }> {
+    const response = await fetch(`${this.tier1Url}/attachments/${polygonA}/${polygonB}`);
+    if (!response.ok) {
+      console.warn(`Attachment options not available for ${polygonA}/${polygonB}`);
+      return { options: [] };
+    }
+    return response.json();
+  }
+
+  async getAttachmentMatrix(): Promise<AttachmentMatrix> {
+    const response = await fetch(`${this.tier1Url}/attachments/matrix`);
+    if (!response.ok) {
+      console.warn('Attachment matrix not available');
+      return {};
+    }
+    return response.json();
+  }
+
+  async getTier1Stats(): Promise<any> {
+    const response = await fetch(`${this.tier1Url}/stats`);
+    if (!response.ok) {
+      console.warn('Stats not available');
+      return { total: 0 };
+    }
+    return response.json();
+  }
+
+  // Storage API
   async expandPolyform(symbol: string): Promise<ExpandedPolyform> {
-    const response = await fetch(`${this.baseUrl}/polyform/${symbol}`);
+    const response = await fetch(`${this.storageUrl}/polyform/${symbol}`);
     if (!response.ok) {
       throw new Error(`Failed to expand polyform ${symbol}: ${response.statusText}`);
     }
@@ -42,7 +141,7 @@ export class StorageService {
   }
 
   async createPolyform(composition: string, metadata: Record<string, unknown> = {}): Promise<ExpandedPolyform> {
-    const response = await fetch(`${this.baseUrl}/polyform`, {
+    const response = await fetch(`${this.storageUrl}/polyform`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +155,7 @@ export class StorageService {
   }
 
   async getPromotionCandidates(): Promise<TierCandidateResponse> {
-    const response = await fetch(`${this.baseUrl}/tier3-tier4/candidates`);
+    const response = await fetch(`${this.storageUrl}/tier3-tier4/candidates`);
     if (!response.ok) {
       throw new Error(`Failed to fetch promotion candidates: ${response.statusText}`);
     }
@@ -64,9 +163,18 @@ export class StorageService {
   }
 
   async getStats(): Promise<StorageStats> {
-    const response = await fetch(`${this.baseUrl}/stats`);
+    const response = await fetch(`${this.storageUrl}/stats`);
     if (!response.ok) {
       throw new Error(`Failed to fetch storage stats: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  // Health check
+  async healthCheck(): Promise<{ status: string }> {
+    const response = await fetch(`${this.baseUrl}/health`);
+    if (!response.ok) {
+      throw new Error(`Health check failed: ${response.statusText}`);
     }
     return response.json();
   }

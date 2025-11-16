@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as BABYLON from '@babylonjs/core';
 import '@babylonjs/loaders';
 import { PolyformMesh } from '../utils/PolyformMesh';
+import { storageService } from '../services/storageService';
 
-export const BabylonScene = () => {
+export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null }) => {
   const canvasRef = useRef(null);
   const sceneRef = useRef(null);
   const engineRef = useRef(null);
+  const cameraRef = useRef(null);
+  const meshesRef = useRef([]);
+  const [lodLevel, setLodLevel] = useState('full');
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -14,7 +18,8 @@ export const BabylonScene = () => {
     // Initialize Babylon.js engine and scene
     const engine = new BABYLON.Engine(canvasRef.current, true, {
       preserveDrawingBuffer: true,
-      stencil: true
+      stencil: true,
+      antialias: true
     });
     engineRef.current = engine;
 
@@ -35,6 +40,7 @@ export const BabylonScene = () => {
     camera.wheelPrecision = 50;
     camera.lowerRadiusLimit = 2;
     camera.upperRadiusLimit = 50;
+    cameraRef.current = camera;
 
     // Lighting setup
     const light1 = new BABYLON.HemisphericLight(
@@ -79,15 +85,20 @@ export const BabylonScene = () => {
     );
     gridLines.color = new BABYLON.Color3(0.3, 0.3, 0.4);
 
-    // Test polyform - will be replaced with polyform later
-    const testPolyform = new PolyformMesh('A', scene); // Triangle
-    testPolyform.initialize().then(() => {
-      const mesh = testPolyform.getMesh();
-      if (mesh) {
-        mesh.setPosition(new BABYLON.Vector3(0, 0.5, 0));
+    // LOD switching based on camera distance
+    scene.registerBeforeRender(() => {
+      if (cameraRef.current) {
+        const distance = cameraRef.current.radius;
+        let newLod = 'full';
+        if (distance > 30) newLod = 'thumbnail';
+        else if (distance > 20) newLod = 'low';
+        else if (distance > 10) newLod = 'medium';
+        else newLod = 'full';
+        
+        if (newLod !== lodLevel) {
+          setLodLevel(newLod);
+        }
       }
-    }).catch(error => {
-      console.error('Failed to initialize polyform mesh:', error);
     });
 
     // Render loop
@@ -104,10 +115,66 @@ export const BabylonScene = () => {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
+      meshesRef.current.forEach(mesh => mesh.dispose());
+      meshesRef.current = [];
       scene.dispose();
       engine.dispose();
     };
   }, []);
+
+  // Load polyhedra when selected
+  useEffect(() => {
+    if (!sceneRef.current || selectedPolyhedra.length === 0) return;
+
+    const loadPolyhedron = async (poly, index) => {
+      try {
+        const data = await storageService.getPolyhedronLOD(poly.symbol, lodLevel);
+        
+        if (data && data.vertices) {
+          // Create mesh from vertices
+          const vertices = data.vertices.map(v => new BABYLON.Vector3(v[0], v[1], v[2] || 0));
+          
+          // Create custom mesh
+          const mesh = new BABYLON.Mesh(`polyhedron_${poly.symbol}_${index}`, sceneRef.current);
+          
+          // Create vertex data
+          const vertexData = new BABYLON.VertexData();
+          vertexData.positions = vertices.flatMap(v => [v.x, v.y, v.z]);
+          
+          // Simple triangulation for now
+          const indices = [];
+          for (let i = 1; i < vertices.length - 1; i++) {
+            indices.push(0, i, i + 1);
+          }
+          vertexData.indices = indices;
+          
+          vertexData.applyToMesh(mesh);
+          
+          // Material
+          const material = new BABYLON.StandardMaterial(`mat_${poly.symbol}`, sceneRef.current);
+          material.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.8);
+          material.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+          mesh.material = material;
+          
+          // Position
+          mesh.position = new BABYLON.Vector3(index * 3, 0.5, 0);
+          
+          meshesRef.current.push(mesh);
+        }
+      } catch (error) {
+        console.error(`Failed to load polyhedron ${poly.symbol}:`, error);
+      }
+    };
+
+    // Clear existing meshes
+    meshesRef.current.forEach(mesh => mesh.dispose());
+    meshesRef.current = [];
+
+    // Load new polyhedra
+    selectedPolyhedra.forEach((poly, index) => {
+      loadPolyhedron(poly, index);
+    });
+  }, [selectedPolyhedra, lodLevel]);
 
   return (
     <div className="babylon-container">
@@ -115,6 +182,12 @@ export const BabylonScene = () => {
         ref={canvasRef}
         style={{ width: '100%', height: '100%', display: 'block' }}
       />
+      <div className="scene-overlay">
+        <div className="lod-indicator">LOD: {lodLevel}</div>
+        <div className="polyhedra-count">
+          {selectedPolyhedra.length} polyhedra loaded
+        </div>
+      </div>
     </div>
   );
 };

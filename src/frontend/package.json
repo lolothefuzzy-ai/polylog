@@ -1,9 +1,18 @@
 {
+  "name": "polylog6-frontend",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx",
+    "test": "vitest",
+    "test:ui": "playwright test",
+    "test:visual": "playwright test --headed",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
     "codegen": "openapi-typescript src/polylog6/api/openapi_schema.yaml -o src/api.generated.ts",
     "test:integration": "playwright test tests/ui/suites/integration.spec.ts",
     "build:sidecar": "python build-sidecar.py",
@@ -18,12 +27,16 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@tauri-apps/api": "^1.5.0",
+    "@tauri-apps/cli": "^1.5.0",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.0.0",
+    "@playwright/test": "^1.40.0",
     "eslint": "^8.56.0",
     "openapi-typescript": "^6.7.0",
     "typescript": "^5.4.0",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "vitest": "^1.4.0"
   }
 }
