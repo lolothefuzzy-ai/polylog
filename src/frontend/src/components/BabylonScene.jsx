@@ -2,15 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as BABYLON from '@babylonjs/core';
 import '@babylonjs/loaders';
 import { PolyformMesh } from '../utils/PolyformMesh';
+import { PolygonInteractionManager } from '../utils/polygonInteraction.js';
 import { storageService } from '../services/storageService';
 
-export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null, generatedPolyform = null }) => {
+export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null, generatedPolyform = null, onPolygonAttached }) => {
   const canvasRef = useRef(null);
   const sceneRef = useRef(null);
   const engineRef = useRef(null);
   const cameraRef = useRef(null);
   const meshesRef = useRef([]);
+  const interactionManagerRef = useRef(null);
   const [lodLevel, setLodLevel] = useState('full');
+  const [workspacePolygons, setWorkspacePolygons] = useState([]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -41,6 +44,17 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
     camera.lowerRadiusLimit = 2;
     camera.upperRadiusLimit = 50;
     cameraRef.current = camera;
+
+    // Initialize interaction manager
+    interactionManagerRef.current = new PolygonInteractionManager(
+      scene,
+      camera,
+      (attachment) => {
+        if (onPolygonAttached) {
+          onPolygonAttached(attachment);
+        }
+      }
+    );
 
     // Lighting setup
     const light1 = new BABYLON.HemisphericLight(
@@ -161,6 +175,16 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
     loadGeneratedPolyform();
   }, [generatedPolyform, selectedPolyhedra]);
 
+  // Auto-attach when second polygon added
+  useEffect(() => {
+    if (selectedPolyhedra.length === 2 && interactionManagerRef.current && sceneRef.current) {
+      // Small delay to ensure meshes are loaded
+      setTimeout(() => {
+        interactionManagerRef.current?.attemptAutoAttachment();
+      }, 500);
+    }
+  }, [selectedPolyhedra.length]);
+
   // Load regular polyhedra when no generated polyform
   useEffect(() => {
     if (generatedPolyform || !sceneRef.current) return;
@@ -222,10 +246,28 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
           material.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
           mesh.material = material;
           
-          // Position
-          mesh.position = new BABYLON.Vector3(index * 3, 0.5, 0);
+          // Position - start in 3D space, not flat
+          const angle = (index * Math.PI * 2) / Math.max(selectedPolyhedra.length, 1);
+          const radius = 2;
+          mesh.position = new BABYLON.Vector3(
+            Math.cos(angle) * radius,
+            0.5 + index * 0.1, // Slight vertical offset
+            Math.sin(angle) * radius
+          );
+          
+          // Enable rotation
+          mesh.rotationQuaternion = BABYLON.Quaternion.Identity();
           
           meshesRef.current.push(mesh);
+          
+          // Add to interaction manager for drag/drop
+          if (interactionManagerRef.current) {
+            interactionManagerRef.current.addPolygon(
+              `poly_${poly.symbol}_${index}`,
+              mesh,
+              { symbol: poly.symbol, ...poly }
+            );
+          }
         }
       } catch (error) {
         console.error(`Failed to load polyhedron ${poly.symbol}:`, error);

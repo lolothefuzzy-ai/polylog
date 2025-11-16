@@ -59,6 +59,10 @@ function App() {
           <BabylonScene 
             selectedPolyhedra={selectedPolyhedra}
             selectedAttachment={selectedAttachment}
+            onPolygonAttached={(attachment) => {
+              console.log('Polygons attached:', attachment);
+              // Could trigger generation or update UI here
+            }}
           />
         </div>
 
