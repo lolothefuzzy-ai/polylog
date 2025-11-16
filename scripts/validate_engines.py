@@ -42,19 +42,31 @@ def run_frontend_tests():
 
 def validate_engine_imports():
     """Validate all engine modules can be imported"""
+    import sys
+    import importlib
+    
+    # Add src to path if needed
+    src_path = PROJECT_ROOT / "src"
+    if str(src_path) not in sys.path:
+        sys.path.insert(0, str(src_path))
+    
     engines = [
-        "polylog6.simulation.engine",
         "polylog6.storage.encoder",
         "polylog6.storage.polyform_storage",
-        "polylog6.simulation.placement.runtime",
         "polylog6.simulation.stability.calculator",
         "polylog6.api.generator",
+        "polylog6.folding.engine",  # Test folding first
+        "polylog6.simulation.engine",
+        "polylog6.simulation.placement.runtime",
     ]
     
     results = {}
     for engine in engines:
         try:
-            __import__(engine)
+            # Clear any cached imports
+            if engine in sys.modules:
+                del sys.modules[engine]
+            importlib.import_module(engine)
             results[engine] = True
         except Exception as e:
             results[engine] = str(e)
