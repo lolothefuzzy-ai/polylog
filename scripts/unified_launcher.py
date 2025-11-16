@@ -35,16 +35,28 @@ def print_header(text: str):
     print(f"{Colors.HEADER}{Colors.BOLD}{'='*60}{Colors.ENDC}\n")
 
 def print_success(text: str):
-    print(f"{Colors.OKGREEN}✓ {text}{Colors.ENDC}")
+    try:
+        print(f"{Colors.OKGREEN}[OK] {text}{Colors.ENDC}")
+    except UnicodeEncodeError:
+        print(f"[OK] {text}")
 
 def print_info(text: str):
-    print(f"{Colors.OKCYAN}ℹ {text}{Colors.ENDC}")
+    try:
+        print(f"{Colors.OKCYAN}[INFO] {text}{Colors.ENDC}")
+    except UnicodeEncodeError:
+        print(f"[INFO] {text}")
 
 def print_warning(text: str):
-    print(f"{Colors.WARNING}⚠ {text}{Colors.ENDC}")
+    try:
+        print(f"{Colors.WARNING}[WARN] {text}{Colors.ENDC}")
+    except UnicodeEncodeError:
+        print(f"[WARN] {text}")
 
 def print_error(text: str):
-    print(f"{Colors.FAIL}✗ {text}{Colors.ENDC}")
+    try:
+        print(f"{Colors.FAIL}[ERROR] {text}{Colors.ENDC}")
+    except UnicodeEncodeError:
+        print(f"[ERROR] {text}")
 
 def run_command(cmd: list, cwd: Optional[Path] = None, check: bool = True, silent: bool = False):
     """Run a command with proper error handling"""
