@@ -47,6 +47,12 @@ export function PolyhedraLibrary({ onSelect }) {
     }
   };
 
+  const handleDragStart = (e, poly) => {
+    e.dataTransfer.effectAllowed = 'copy';
+    e.dataTransfer.setData('application/json', JSON.stringify(poly));
+    e.dataTransfer.setData('text/plain', poly.symbol);
+  };
+
   if (loading && polyhedra.length === 0) {
     return (
       <div className="polyhedra-library loading">
@@ -96,6 +102,8 @@ export function PolyhedraLibrary({ onSelect }) {
           <div
             key={p.symbol}
             className="library-item"
+            draggable={true}
+            onDragStart={(e) => handleDragStart(e, p)}
             onClick={() => handleSelect(p)}
             title={p.name || p.symbol}
           >

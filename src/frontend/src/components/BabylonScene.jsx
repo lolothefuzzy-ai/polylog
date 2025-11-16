@@ -284,6 +284,41 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
     });
   }, [selectedPolyhedra, lodLevel, generatedPolyform]);
 
+  // Handle drop from library
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const handleDrop = (e) => {
+      e.preventDefault();
+      const polyData = e.dataTransfer.getData('application/json');
+      if (polyData) {
+        try {
+          const poly = JSON.parse(polyData);
+          if (onPolygonAttached) {
+            // Trigger selection which will add to workspace
+            onPolygonAttached({ type: 'drop', polygon: poly });
+          }
+        } catch (err) {
+          console.error('Failed to parse dropped polygon:', err);
+        }
+      }
+    };
+
+    const handleDragOver = (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    };
+
+    const canvas = canvasRef.current;
+    canvas.addEventListener('drop', handleDrop);
+    canvas.addEventListener('dragover', handleDragOver);
+
+    return () => {
+      canvas.removeEventListener('drop', handleDrop);
+      canvas.removeEventListener('dragover', handleDragOver);
+    };
+  }, [onPolygonAttached]);
+
   return (
     <div className="babylon-container">
       <canvas

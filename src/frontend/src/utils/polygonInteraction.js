@@ -4,6 +4,7 @@
 
 import * as BABYLON from '@babylonjs/core';
 import { EdgeSnapper } from './edgeSnapping.js';
+import { SnapVisualFeedback } from './snapVisualFeedback.js';
 
 export class PolygonInteractionManager {
   constructor(scene, camera, onAttachment) {
@@ -14,6 +15,8 @@ export class PolygonInteractionManager {
     this.dragging = null;
     this.snapGuide = null;
     this.openEdges = new Map(); // polygonId -> Set<edgeIndex>
+    this.visualFeedback = new SnapVisualFeedback(scene);
+    this.rotationEnabled = true;
   }
 
   /**
@@ -163,9 +166,18 @@ export class PolygonInteractionManager {
           
           if (candidates.length > 0) {
             this.snapGuide = candidates[0];
-            // Visual feedback could be added here
+            // Show visual feedback
+            this.visualFeedback.highlightSnapZones(otherMeshes, candidates);
           } else {
             this.snapGuide = null;
+            this.visualFeedback.clearGuides();
+          }
+
+          // Enable free rotation
+          if (this.rotationEnabled && e.shiftKey) {
+            const deltaX = e.movementX || 0;
+            const rotationAngle = deltaX * 0.01;
+            this.visualFeedback.showRotationFeedback(this.dragging.mesh, rotationAngle);
           }
         }
       }
