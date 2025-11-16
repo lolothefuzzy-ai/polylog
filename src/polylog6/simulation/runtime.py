@@ -10,7 +10,16 @@ from .engines.checkpointing.workspace import PolyformWorkspace
 from ..storage.encoder import EncodedPolygon
 from polylog6.folding.engine import FoldingEngine
 from polylog6.storage.polyform_storage import PolyformStorage
-from polylog6.storage.unicode_storage import UnicodeStorage
+# UnicodeStorage - use PolyformStorage or SymbolRegistry instead
+# from polylog6.storage.unicode_storage import UnicodeStorage
+try:
+    from polylog6.storage.polyform_storage import PolyformStorage as UnicodeStorage
+except ImportError:
+    # Fallback: create minimal stub
+    class UnicodeStorage:
+        """Minimal stub for UnicodeStorage"""
+        def __init__(self, *args, **kwargs):
+            pass
 from polylog6.telemetry.simulation_telemetry_bridge import SimulationTelemetryBridge
 from .tier3_ingestion import Tier3CandidateIngestionPipeline
 
