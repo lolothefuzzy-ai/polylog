@@ -10,6 +10,14 @@ coverage/
 .ruff_cache/
 .coverage
 htmlcov/
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.tox/
+.nox/
 
 # Production
 dist/
@@ -25,6 +33,7 @@ build/
 .venv
 venv/
 env/
+.venv*/
 
 # Logs
 npm-debug.log*
@@ -45,24 +54,63 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
+*~
 
 # OS files
 Thumbs.db
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 
 # Temporary files
 *.tmp
 *.temp
+tmp/
+temp/
+*.bak
 
 # Build outputs
 *.tsbuildinfo
 *.egg-info/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg
+MANIFEST
+develop-eggs/
+downloads/
+eggs/
+.installed.cfg
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Node.js
+.npm
+.eslintcache
+
+# Rust/Cargo
+target/
+Cargo.lock
 
 # Electron/Tauri build output
 electron/node_modules/
@@ -71,6 +119,19 @@ electron/out/
 src-tauri/target/
 src-tauri/gen/
 src-tauri/icons/
+
+# Frontend build artifacts
+dist/
+build/
+
+# Storage and cache
+storage/cache/
+storage/chunks/
+*.prof
+
+# Data files (if large)
+data/polyhedra/external/
+data/large_datasets/
 
 # Cursor/Windsurf specific
 .cursor/

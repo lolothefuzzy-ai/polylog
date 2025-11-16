@@ -1,65 +1,69 @@
 pull_request_rules:
-  - name: auto-merge when tests pass and review granted
+  - name: Automatic merge on approval
     conditions:
-      - or:
-          - base=main
-          - base=develop
-      - label=auto-merge
-      - status-success~=tests?
-      - '#approved-reviews-by>=1'
+      - "#approved-reviews-by >= 1"
+      - "check-success = python-tests"
+      - "check-success = frontend-tests"
+      - "check-success = desktop-tests"
+      - "base = main"
+      - "label = automerge"
     actions:
       merge:
-        method: squash
-      delete_head_branch: {}
-      comment:
-        message: |
-          ✅ This pull request satisfied the auto-merge policy (label `auto-merge`,
-          required checks succeeded, and at least one approval is present).
-          Merging via Mergify.
-  - name: Assign t-shirt size to PR
-    description: Assign a t-shirt size label to a pull request based on the number
-      of lines changed.
+        method: merge
+        commit_message: "+title +body"
+
+  - name: Add automerge label when ready
     conditions:
-      - "#modified-lines >= 100"
-      - "#modified-lines < 500"
+      - "#approved-reviews-by >= 1"
+      - "check-success = python-tests"
+      - "check-success = frontend-tests"
+      - "check-success = desktop-tests"
     actions:
       label:
-        toggle:
-          - size/L
-  - name: Request review from team
-    description: Request review from a specific team when checks are green.
+        add:
+          - ready-for-merge
+
+  - name: Request review on draft PR
     conditions:
-      - -closed
-      - "#approved-reviews-by = 0"
-      - "#changes-requested-reviews-by = 0"
-      - review-requested != @TEAM_NAME_HERE
-    actions:
-      request_reviews:
-        teams:
-          - TEAM_NAME_HERE
-  - name: Automatic merge
-    description: Merge when PR passes all branch protection and has label automerge
-    conditions:
-      - label = automerge
-    actions:
-      merge:
-  - name: Make sure PR are up to date before merging
-    description: This automatically updates PRs when they are out-of-date with the
-      base branch to avoid semantic conflicts (next step is using a merge
-      queue).
-    conditions: []
-    actions:
-      update:
-  - name: Notify when a PR is removed from the queue
-    description: Notify the PR author when its pull request is removed from the merge queue.
-    conditions:
-      - queue-dequeue-reason != none
-      - queue-dequeue-reason != pr-merged
+      - draft
     actions:
       comment:
-        message: >
-          Hey @{{author}}, your pull request has been dequeued due to the
-          following reason: {{queue_dequeue_reason}}.
+        message: "This is a draft pull request. Remove draft status when ready for review."
 
-          Sorry about that, but you can requeue the PR by using `@mergifyio
-          requeue` if you think this was a mistake.
+  - name: Delete head branch after merge
+    conditions:
+      - merged
+      - -base~1  # Not the first commit
+    actions:
+      delete_head_branch: {}
+
+  - name: Warn on conflicts
+    conditions:
+      - conflict
+    actions:
+      comment:
+        message: "This pull request has merge conflicts. Please resolve them before merging."
+
+  - name: Add size label
+    conditions:
+      - "-file(*.md)"  # Exclude documentation changes
+      - "-file(*.txt)"  # Exclude text files
+    actions:
+      label:
+        add:
+          - "size/{{diff | size}}"
+
+  - name: Welcome new contributors
+    conditions:
+      - author = first-time-contributor
+    actions:
+      comment:
+        message: |
+          Welcome! 👋 Thank you for your first contribution to Polylog6.
+          
+          Please make sure you've:
+          - [ ] Read our contributing guidelines
+          - [ ] Added tests for your changes
+          - [ ] Updated documentation if needed
+          
+          We'll review your PR shortly!

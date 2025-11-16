@@ -1,15 +1,44 @@
-# Polylog Polyform Visualizer
+# Polylog6
 
-An interactive web-based visualization tool for the Polylog AKAD polyform generator, demonstrating the core principles of non-deformable equilateral polygon assembly.
+A sophisticated polyform visualization and analysis system that combines geometric computation, pattern discovery, and interactive visualization.
 
 ## Overview
 
-This visualizer implements the fundamental concepts from the Polylog6 architecture:
+Polylog6 is a comprehensive system for working with equilateral polyforms, featuring:
 
 - **Non-deformable Polygons**: All polygons (3-20 sided) maintain perfect equilateral geometry
 - **Unit Edge Length**: Every polygon edge has identical length (1.0 units) - no stretching or compression
 - **Edge-to-Edge Attachment**: Polygons connect seamlessly without gaps or overlaps
 - **Geometric Precision**: Internal angles and edge alignment follow strict mathematical rules
+- **Interactive Visualization**: Web-based and desktop applications for exploring polyforms
+- **Pattern Discovery**: Automated detection and analysis of polyform patterns
+
+## Quick Start
+
+```bash
+# Install dependencies
+python scripts/launcher.py install
+
+# Start development environment
+python scripts/launcher.py dev
+
+# Build for production
+python scripts/launcher.py build
+```
+
+## Project Structure
+
+- `src/` - All source code
+  - `polylog6/` - Main Python package
+  - `frontend/` - React/Babylon.js frontend
+  - `desktop/` - Tauri desktop application
+  - `shared/` - Shared types and schemas
+- `tests/` - All test files
+- `docs/` - Documentation
+- `scripts/` - Utility scripts
+- `config/` - Configuration files
+- `data/` - Static data files
+- `catalogs/` - Polyform catalogs and metadata
 
 ## Features
 
@@ -28,13 +57,11 @@ This visualizer implements the fundamental concepts from the Polylog6 architectu
 
 ### Geometric Validation
 - Unit edge length calculation for each polygon type
-- Edge snapping utilities (implemented in `edgeSnapping.ts`)
+- Edge snapping utilities
 - Attachment validation system
 - Maintains geometric integrity across all operations
 
 ## Architecture Alignment
-
-This visualizer aligns with the Polylog6 system architecture:
 
 ### Core Principles
 1. **Equilateral Constraint**: Individual polygons are equilateral (not the overall polyform)
@@ -43,98 +70,66 @@ This visualizer aligns with the Polylog6 system architecture:
 4. **Gap-Free Assembly**: Only valid attachments (3-20 sided polygons can fill any gap)
 
 ### Technical Implementation
-- **Polygon Geometry** (`lib/polygonGeometry.ts`): Generates perfect regular polygons
-- **Edge Snapping** (`lib/edgeSnapping.ts`): Validates edge-to-edge connections
-- **Visual Rendering**: SVG-based for precision and scalability
+- **Polygon Geometry**: Generates perfect regular polygons
+- **Edge Snapping**: Validates edge-to-edge connections
+- **Visual Rendering**: SVG and 3D rendering for precision and scalability
 - **State Management**: React hooks for interactive manipulation
-
-## Usage
-
-### Basic Workflow
-1. **Select** a polygon from the left palette (3-20 sides)
-2. **Place** polygons by clicking on the canvas
-3. **Move** polygons by clicking and dragging
-4. **Rotate** selected polygons using the toolbar
-5. **Delete** unwanted polygons with the delete button
-6. **Clear All** to reset the workspace
-
-### Keyboard Shortcuts
-- Click polygon: Select/deselect
-- Click canvas: Place selected polygon type
-- Drag: Move polygon
-
-## Design System
-
-### Color Palette
-- **Primary**: Indigo (#6366f1) - Main polygon color
-- **Secondary**: Purple (#8b5cf6) - Selected state
-- **Grid**: Subtle indigo overlay
-- **Background**: Clean light theme
-
-### Typography
-- **Font**: Inter (Google Fonts)
-- **Headings**: Bold, clear hierarchy
-- **Body**: Clean, readable sans-serif
-
-## Technical Stack
-
-- **React 19**: Modern UI framework
-- **TypeScript**: Type-safe development
-- **Tailwind CSS 4**: Utility-first styling
-- **shadcn/ui**: Component library
-- **Vite**: Fast build tooling
-
-## Future Enhancements
-
-### Planned Features
-- [ ] 3D visualization with THREE.js
-- [ ] Polyhedra library (97 known polyhedra)
-- [ ] Advanced edge snapping with visual guides
-- [ ] Pattern recognition and validation
-- [ ] Export to Polylog6 format
-- [ ] Undo/redo functionality
-- [ ] Keyboard shortcuts for rotation
-- [ ] Snap-to-grid alignment
-- [ ] Multi-select operations
-
-### Backend Integration
-- [ ] Connect to Polylog6 detection system
-- [ ] Real-time pattern validation
-- [ ] Compression metrics visualization
-- [ ] Storage integration for saving patterns
 
 ## Development
 
 ### Prerequisites
+- Python 3.11+
 - Node.js 18+
-- pnpm
+- Rust (for desktop app)
+- pnpm (recommended) or npm
 
 ### Installation
 ```bash
-# Install dependencies
-pnpm install
+# Install Python dependencies
+pip install -r requirements.txt
 
-# Run development server
-pnpm dev
+# Install frontend dependencies
+cd src/frontend
+npm install
 
-# Build for production
-pnpm build
+# Install desktop dependencies (if building desktop app)
+cd src/desktop/src-tauri
+cargo build
 ```
 
-### Project Structure
+### Running Tests
+```bash
+# Python tests
+pytest
+
+# Frontend tests
+cd src/frontend
+npm test
+
+# Desktop tests
+cd src/desktop/src-tauri
+cargo test
 ```
-client/
-  src/
-    components/
-      PolygonPalette.tsx    # Polygon selection UI
-      Canvas3D.tsx          # 3D canvas wrapper (future)
-      Workspace.tsx         # 3D workspace (future)
-    lib/
-      polygonGeometry.ts    # Polygon math utilities
-      edgeSnapping.ts       # Edge attachment logic
-    pages/
-      Home.tsx              # Main application
-```
+
+## Documentation
+
+- [Architecture Overview](documentation/POLYLOG6_README.md)
+- [Getting Started Guide](INSTALL.md)
+- [API Documentation](src/polylog6/api/openapi_schema.yaml)
+
+## CI/CD
+
+This project uses GitHub Actions for continuous integration:
+
+- **Python Tests**: Automated testing with coverage reporting via Codecov
+- **Frontend Tests**: Node.js tests and build verification
+- **Desktop Tests**: Rust/Tauri build and test verification
+- **Integration Tests**: End-to-end testing of the full system
+- **Automated Merging**: Mergify handles PR merging and branch management
+
+### Required GitHub Secrets
+- `CODECOV_TOKEN` - For coverage reporting
+- `SLACK_WEBHOOK_URL` - For notifications (optional)
 
 ## Mathematical Foundation
 
@@ -158,12 +153,6 @@ vertex_i = (
   cy + r * sin(θ + 2πi/n)
 )
 ```
-
-## References
-
-- **Polylog6 Architecture**: Core system documentation
-- **AKAD Polyform Generator**: Pattern generation algorithms
-- **Equilateral Polygon Theory**: Geometric foundations
 
 ## License
 

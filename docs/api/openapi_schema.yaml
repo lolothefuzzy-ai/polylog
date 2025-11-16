@@ -1,0 +1,284 @@
+openapi: 3.1.0
+info:
+  title: Polylog Storage & Detection API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /api/storage/symbols:
+    get:
+      summary: Fetch symbol palette
+      description: >-
+        Return a paginated list of symbols sourced from Tier 0 through Tier 4.
+      parameters:
+        - name: tier
+          in: query
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1, 3, 4]
+          description: Filter by tier (0 = Tier0, 1 = Tier1, 3 = Tier3, 4 = Tier4)
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+          description: Page number (zero-indexed)
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+          description: Page size (default 100)
+      responses:
+        '200':
+          description: List of symbols for the requested page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SymbolList'
+  /api/storage/polyform/{symbol}:
+    get:
+      summary: Expand a symbol to full polyform data
+      parameters:
+        - name: symbol
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expanded polyform data for the symbol
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpandedPolyform'
+        '404':
+          description: Symbol not found
+  /api/storage/polyform:
+    post:
+      summary: Register a new polyform composition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPolyformRequest'
+      responses:
+        '201':
+          description: Polyform registered and symbol allocated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpandedPolyform'
+  /api/storage/tier3-tier4/candidates:
+    get:
+      summary: Fetch promotion candidates for Tier 3 and Tier 4
+      responses:
+        '200':
+          description: Candidate list grouped by tier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TierCandidateResponse'
+  /api/storage/stats:
+    get:
+      summary: Fetch storage and compression statistics
+      responses:
+        '200':
+          description: Aggregate metrics for storage tiers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageStats'
+  /api/detection/analyze_async:
+    post:
+      summary: Start asynchronous detection job
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                request_id:
+                  type: string
+                  nullable: true
+      responses:
+        '202':
+          description: Job accepted for asynchronous processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+  /api/detection/status/{job_id}:
+    get:
+      summary: Poll detection job status
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status for the requested job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+        '404':
+          description: Job not found
+components:
+  schemas:
+    SymbolList:
+      type: object
+      properties:
+        symbols:
+          type: array
+          items:
+            $ref: '#/components/schemas/SymbolSummary'
+        total:
+          type: integer
+          description: Total number of symbols matching the filter
+        page:
+          type: integer
+        limit:
+          type: integer
+        pages:
+          type: integer
+          description: Total number of pages
+      required: [symbols, total, page, limit, pages]
+    SymbolSummary:
+      type: object
+      properties:
+        symbol:
+          type: string
+        tier:
+          type: integer
+        composition:
+          type: string
+        frequency:
+          type: integer
+          description: Number of times observed/promoted
+        metadata:
+          type: object
+          additionalProperties: true
+      required: [symbol, tier, composition]
+    ExpandedPolyform:
+      type: object
+      properties:
+        symbol:
+          type: string
+        composition:
+          type: string
+        geometry:
+          type: object
+          additionalProperties: true
+        metrics:
+          type: object
+          properties:
+            O:
+              type: number
+            I:
+              type: number
+            symmetry_score:
+              type: number
+            closure_ratio:
+              type: number
+            scaler_stability:
+              type: number
+          additionalProperties: true
+        tier:
+          type: integer
+        metadata:
+          type: object
+          additionalProperties: true
+      required: [symbol, composition, tier]
+    NewPolyformRequest:
+      type: object
+      properties:
+        composition:
+          type: string
+          description: Composition expressed in Tier 0 symbols (e.g., "a3+b2")
+        metadata:
+          type: object
+          additionalProperties: true
+      required: [composition]
+    TierCandidateResponse:
+      type: object
+      properties:
+        tier3:
+          type: array
+          items:
+            $ref: '#/components/schemas/TierCandidate'
+        tier4:
+          type: array
+          items:
+            $ref: '#/components/schemas/TierCandidate'
+      required: [tier3, tier4]
+    TierCandidate:
+      type: object
+      properties:
+        symbol:
+          type: string
+        composition:
+          type: string
+        metrics:
+          type: object
+          additionalProperties: true
+        frequency:
+          type: integer
+        last_seen_at:
+          type: string
+          format: date-time
+      required: [composition, metrics]
+    StorageStats:
+      type: object
+      properties:
+        tiers:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              count:
+                type: integer
+              compression_ratio:
+                type: number
+              last_updated:
+                type: string
+                format: date-time
+        totals:
+          type: object
+          properties:
+            symbols:
+              type: integer
+            bytes_raw:
+              type: integer
+            bytes_compressed:
+              type: integer
+        recalculated_at:
+          type: string
+          format: date-time
+      required: [tiers, totals]
+    JobStatus:
+      type: object
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        result:
+          type: object
+          nullable: true
+        error:
+          type: string
+          nullable: true
+      required: [job_id, status]

@@ -1,0 +1,10 @@
+name: polylog-detection
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.11
+  - scikit-geometry
+  - trimesh
+  - scipy
+  - numpy
+  - shapely
