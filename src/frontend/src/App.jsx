@@ -27,6 +27,7 @@ function App() {
       symbol: polyform.symbol || polyform.unicode,
       name: `Generated: ${polyform.composition}`,
       classification: 'generated',
+      geometry: polyform.geometry,
       ...polyform.metadata
     }]);
   };

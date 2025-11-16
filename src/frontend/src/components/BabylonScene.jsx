@@ -128,7 +128,15 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
 
     const loadPolyhedron = async (poly, index) => {
       try {
-        const data = await storageService.getPolyhedronLOD(poly.symbol, lodLevel);
+        let data;
+        
+        // Check if it's a generated polyform with geometry
+        if (poly.geometry) {
+          data = poly.geometry.lod?.[lodLevel] || poly.geometry.lod?.full;
+        } else {
+          // Regular polyhedron lookup
+          data = await storageService.getPolyhedronLOD(poly.symbol, lodLevel);
+        }
         
         if (data && data.vertices) {
           // Create mesh from vertices
@@ -141,18 +149,26 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
           const vertexData = new BABYLON.VertexData();
           vertexData.positions = vertices.flatMap(v => [v.x, v.y, v.z]);
           
-          // Simple triangulation for now
-          const indices = [];
-          for (let i = 1; i < vertices.length - 1; i++) {
-            indices.push(0, i, i + 1);
+          // Use provided indices or simple triangulation
+          if (data.indices && data.indices.length > 0) {
+            vertexData.indices = data.indices;
+          } else {
+            const indices = [];
+            for (let i = 1; i < vertices.length - 1; i++) {
+              indices.push(0, i, i + 1);
+            }
+            vertexData.indices = indices;
           }
-          vertexData.indices = indices;
           
           vertexData.applyToMesh(mesh);
           
-          // Material
+          // Material - different color for generated polyforms
           const material = new BABYLON.StandardMaterial(`mat_${poly.symbol}`, sceneRef.current);
-          material.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.8);
+          if (poly.classification === 'generated') {
+            material.diffuseColor = new BABYLON.Color3(0.8, 0.4, 0.8); // Purple for generated
+          } else {
+            material.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.8);
+          }
           material.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
           mesh.material = material;
           

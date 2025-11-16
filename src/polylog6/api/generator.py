@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 from polylog6.storage.encoder import TieredUnicodeEncoder
+from polylog6.storage.polyform_storage import PolyformStorage
 from polylog6.simulation.placement.runtime import PlacementRuntime
 from polylog6.simulation.stability.calculator import StabilityCalculator
 
@@ -16,6 +17,7 @@ router = APIRouter(prefix="/api/polyform", tags=["generator"])
 
 # Initialize encoders and calculators
 _encoder = TieredUnicodeEncoder()
+_storage = PolyformStorage()
 _placement_runtime = PlacementRuntime()
 _stability_calc = StabilityCalculator()
 
@@ -192,6 +194,16 @@ async def generate_polyform(request: GenerateRequest):
             "folds": [],
             "metadata": metadata
         }
+        
+        # Store generated polyform
+        storage_data = {
+            "composition": composition,
+            "geometry": geometry_response,
+            "metadata": metadata,
+            "unicode": unicode_symbol,
+            "compression_ratio": compression_ratio
+        }
+        _storage.add(composition, storage_data, frequency)
         
         return GenerateResponse(
             success=True,

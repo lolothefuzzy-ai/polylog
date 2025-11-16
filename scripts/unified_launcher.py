@@ -356,6 +356,10 @@ Examples:
     subparsers.add_parser("monitor", help="Monitor system metrics continuously")
     subparsers.add_parser("profile", help="Run performance profiler")
     
+    # Automated testing
+    subparsers.add_parser("test:auto", help="Run automated test suite")
+    subparsers.add_parser("test:watch", help="Watch files and auto-test on changes")
+    
     # Packaging
     subparsers.add_parser("package", help="Package application for distribution")
     
@@ -417,6 +421,16 @@ Examples:
             package_app()
         elif args.command == "clean":
             clean()
+        elif args.command == "test:auto":
+            import sys
+            auto_test = PROJECT_ROOT / "scripts" / "auto_test.py"
+            if auto_test.exists():
+                run_command([sys.executable, str(auto_test)], check=False)
+        elif args.command == "test:watch":
+            import sys
+            watch_test = PROJECT_ROOT / "scripts" / "watch_and_test.py"
+            if watch_test.exists():
+                run_command([sys.executable, str(watch_test)], check=False)
     except KeyboardInterrupt:
         print_info("\nOperation cancelled by user")
     except Exception as e:
