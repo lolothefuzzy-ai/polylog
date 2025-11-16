@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, HTTPException, Query, Response
+from fastapi import APIRouter, HTTPException, Query, Response, Path
 import hashlib
 
 router = APIRouter(prefix="/tier1", tags=["tier1-polyhedra"])
@@ -181,8 +181,8 @@ def get_polyhedron(symbol: str) -> Dict[str, Any]:
     }
 
 
-@router.get("/polyhedra/{symbol}/lod/{level}")
-def get_polyhedron_lod(symbol: str, level: str = Query("full", regex="^(full|medium|low|thumbnail)$")) -> Dict[str, Any]:
+@router.get("/polyhedra/{symbol}/lod/{level}", response_model=dict)
+def get_polyhedron_lod(symbol: str, level: str = Path(..., regex="^(full|medium|low|thumbnail)$")) -> Dict[str, Any]:
     """Get polyhedron geometry at specific LOD level."""
     polyhedra = _load_polyhedra()
     
