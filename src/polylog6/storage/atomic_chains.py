@@ -18,7 +18,8 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Set, Tuple
 from enum import Enum
 
-from .tier0_generator import decode_tier0_symbol, encode_tier0_symbol, ConnectivityChain
+from .tier0_generator import decode_tier0_symbol, ConnectivityChain
+# encode_tier0_symbol is not available - use tier0Encoder.js on frontend or create encoding function if needed
 
 
 class AtomicChainType(Enum):
