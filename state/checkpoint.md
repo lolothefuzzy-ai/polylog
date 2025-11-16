@@ -33,10 +33,11 @@
 
 ## What Needs Work
 
-- Test suite needs to be run and validated end-to-end
-- Process management in automated test suite needs Windows compatibility verification
-- Documentation needs to be updated to reflect new workflow structure
-- State management system needs initial population
+- Test suite needs to be run and validated end-to-end (Windows compatibility fixed, ready for testing)
+- End-to-end user workflow test needs implementation
+- Performance and load testing for backend API
+- Test coverage report generation
+- Documentation updates for new test protocols
 
 ## Blockers / Ambiguities
 
@@ -52,11 +53,11 @@
 
 (Also written to `/state/next-steps.md`)
 
-1. Run full test suite to validate all fixes
-2. Verify Windows compatibility of process management
-3. Populate initial state files with current project status
-4. Create initial architecture documentation structure
-5. Set up GitHub Actions workflow for manual checkpoints
+1. Run full test suite to validate all fixes and Windows compatibility
+2. Implement end-to-end user workflow test
+3. Add performance and load testing for backend API
+4. Generate test coverage report
+5. Update testing documentation with new test protocols
 
 ## Credit Awareness
 
