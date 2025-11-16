@@ -8,10 +8,13 @@ from typing import List, Dict, Any, Optional
 
 from polylog6.simulation.placement.fold_sequencer import FoldSequencer
 from polylog6.simulation.placement.runtime import PlacementRuntime
+from polylog6.storage.manager import PolyformStorageManager
 
 router = APIRouter(prefix="/api/attachment", tags=["attachment"])
 
-_placement_runtime = PlacementRuntime()
+# Initialize storage manager for PlacementRuntime
+_storage_manager = PolyformStorageManager()
+_placement_runtime = PlacementRuntime(storage_manager=_storage_manager)
 _fold_sequencer = FoldSequencer(
     geometry_catalog={},  # Will load from catalog
     scaler_catalog={}
