@@ -19,26 +19,23 @@ Polylog6 is a comprehensive system for working with equilateral polyforms, featu
 # Install dependencies
 python scripts/unified_launcher.py install
 
-# Start development environment with visual testing
+# Start integrated development (API + Frontend + Tests in browser)
+python scripts/unified_launcher.py dev
+
+# Or start desktop app
 python scripts/unified_launcher.py desktop
-
-# Run tests
-python scripts/unified_launcher.py test
-
-# Performance benchmarks
-python scripts/unified_launcher.py benchmark
 ```
 
-### Optimization & Continuous Testing
+**Recommended**: Use `dev` command - runs everything in browser with hot reload, no desktop app needed.
 
-For novel systems development, we emphasize continuous visual testing and full system integration:
+### Development Workflow
 
-- **Visual Testing**: `python scripts/unified_launcher.py test:visual`
-- **Integration Tests**: `python scripts/unified_launcher.py test:integration`
-- **Performance**: `python scripts/unified_launcher.py benchmark`
-- **Monitoring**: `python scripts/unified_launcher.py monitor`
+- **Integrated Dev**: `python scripts/unified_launcher.py dev` - Everything in one command
+- **Visual Testing**: `python scripts/unified_launcher.py test:visual` - Continuous visual feedback
+- **Integration Tests**: `python scripts/unified_launcher.py test:integration` - Full system tests
+- **Performance**: `python scripts/unified_launcher.py benchmark` - Performance benchmarks
 
-See `QUICK_START_OPTIMIZATION.md` for quick reference and `DEVELOPMENT_WORKFLOW.md` for complete guide.
+See `DEVELOPMENT.md` for complete development guide and `POLYFORM_GENERATOR_DEV.md` for generator development.
 
 ## Project Structure
 

@@ -335,6 +335,7 @@ Examples:
     subparsers.add_parser("install", help="Install all dependencies")
     
     # Development
+    subparsers.add_parser("dev", help="Start integrated dev environment (API + Frontend + Tests)")
     subparsers.add_parser("desktop", help="Start desktop application (dev mode)")
     subparsers.add_parser("dev:api", help="Start API server only")
     subparsers.add_parser("dev:frontend", help="Start frontend dev server only")
@@ -370,6 +371,16 @@ Examples:
     try:
         if args.command == "install":
             install_all()
+        elif args.command == "dev":
+            # Use integrated dev script
+            dev_script = PROJECT_ROOT / "scripts" / "dev_integrated.py"
+            if dev_script.exists():
+                run_command([sys.executable, str(dev_script)], check=False)
+            else:
+                print_warning("Integrated dev script not found, starting basic dev...")
+                start_api_server()
+                time.sleep(2)
+                start_frontend_dev()
         elif args.command == "desktop":
             start_desktop()
         elif args.command == "dev:api":
