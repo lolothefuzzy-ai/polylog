@@ -59,7 +59,13 @@ def run_background(cmd, cwd=None, name=""):
 
 def wait_for_server(url, timeout=30):
     """Wait for server to be ready"""
-    import requests
+    try:
+        import requests
+    except ImportError:
+        # If requests not available, just wait a bit
+        time.sleep(3)
+        return True
+    
     start = time.time()
     while time.time() - start < timeout:
         try:
