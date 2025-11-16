@@ -1,0 +1,15 @@
+{
+  "artifacts": {
+    "attachment_graph": {
+      "checksum": "dc3113925dc8b070874e4101f177e41d6397e2d213461b0918214b1bfe6ed34c",
+      "path": "catalogs\\attachment_graph.json"
+    },
+    "scaler_tables": {
+      "checksum": "4d6339c82186c3ae141d7718b607d3818c35cd244f443aabd0b597c8d7a1568c",
+      "path": "catalogs\\scaler_tables.json"
+    }
+  },
+  "generated_at": "2025-11-09T14:02:53.987877Z",
+  "source_checksum": "9e197f76c9a692245d06de4599d591d78b56ea5bfbed93ab6cf90f740c794921",
+  "source_file": "tier0_dataset.jsonl"
+}

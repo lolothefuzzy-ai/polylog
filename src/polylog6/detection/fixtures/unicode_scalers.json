@@ -1,0 +1,7 @@
+{
+    "tier0": ["U+E000"],
+    "tier1": ["U+E001", "U+E002"],
+    "metadata": {
+        "description": "Minimal scaler table for tests"
+    }
+}

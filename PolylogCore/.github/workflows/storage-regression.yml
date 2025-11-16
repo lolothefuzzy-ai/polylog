@@ -1,0 +1,62 @@
+name: Storage Regression
+
+on:
+  push:
+    branches:
+      - main
+      - feat/**
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compression-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-json-report
+
+      - name: Run storage regression telemetry
+        run: |
+          python scripts/run_compression_metrics.py --label ci
+
+      - name: Enforce compression thresholds
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("compression_metrics.json")
+          if not path.exists():
+              raise SystemExit("compression_metrics.json not produced")
+
+          data = json.loads(path.read_text(encoding="utf-8"))
+          summary = data.get("summary", {})
+          averages = summary.get("averages", {})
+          tier1 = float(averages.get("compression_ratio_tier1_pct", 0.0))
+          tier2 = float(averages.get("compression_ratio_tier2_pct", 0.0))
+
+          if tier1 < 85.0:
+              raise SystemExit(f"Tier1 compression {tier1}% below 85% threshold")
+          if tier2 < 65.0:
+              raise SystemExit(f"Tier2 compression {tier2}% below 65% threshold")
+
+          print(f"✓ Compression thresholds met (Tier1={tier1}%, Tier2={tier2}%)")
+          PY
+
+      - name: Upload compression metrics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compression-metrics
+          path: compression_metrics.json

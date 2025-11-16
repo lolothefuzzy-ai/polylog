@@ -8,25 +8,32 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "codegen": "openapi-typescript src/polylog6/api/openapi_schema.yaml -o src/api.generated.ts",
+    "test:integration": "playwright test tests/ui/suites/integration.spec.ts",
+    "build:sidecar": "python build-sidecar.py",
+    "build:sidecar:all": "python build-sidecar.py && echo 'Built for current platform'"
   },
   "dependencies": {
-    "@babylonjs/core": "^7.0.0",
+    "@babylonjs/core": "^8.37.0",
     "@babylonjs/gui": "^7.0.0",
-    "@babylonjs/loaders": "^7.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@babylonjs/loaders": "^8.37.0",
+    "@babylonjs/materials": "^8.37.0",
+    "@tanstack/react-query": "^5.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "typescript": "^5.2.2",
+    "openapi-typescript": "^6.7.0",
+    "typescript": "^5.4.0",
     "vite": "^5.2.0",
     "vitest": "^1.4.0"
   }

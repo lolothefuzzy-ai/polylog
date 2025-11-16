@@ -1,0 +1,3904 @@
+{
+  "a3": {
+    "a3": [
+      {
+        "fold_angle": 2.411864997362827,
+        "stability": 0.982,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a9100",
+          "\u03a9101",
+          "\u03a9102",
+          "\u03a9103",
+          "\u03a9104",
+          "\u03a925",
+          "\u03a931",
+          "\u03a932",
+          "\u03a934",
+          "\u03a937",
+          "\u03a938",
+          "\u03a94",
+          "\u03a940",
+          "\u03a943",
+          "\u03a950",
+          "\u03a952",
+          "\u03a954",
+          "\u03a957",
+          "\u03a999"
+        ]
+      },
+      {
+        "fold_angle": 2.9904662749192332,
+        "stability": 0.952,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9105"
+        ]
+      },
+      {
+        "fold_angle": 2.865949854373528,
+        "stability": 0.921,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9106"
+        ]
+      },
+      {
+        "fold_angle": 2.971674198862732,
+        "stability": 0.946,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9107",
+          "\u03a9108"
+        ]
+      },
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a966",
+          "\u03a988",
+          "\u03a989"
+        ]
+      },
+      {
+        "fold_angle": 1.0471975511965976,
+        "stability": 1.0,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a919"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a92",
+          "\u03a942",
+          "\u03a949",
+          "\u03a956",
+          "\u03a969",
+          "\u03a993",
+          "\u03a994",
+          "\u03a995",
+          "\u03a996",
+          "\u03a997",
+          "\u03a998"
+        ]
+      },
+      {
+        "fold_angle": 2.22619543690243,
+        "stability": 0.959,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a924"
+        ]
+      },
+      {
+        "fold_angle": 2.5346001497151263,
+        "stability": 0.973,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a926",
+          "\u03a945",
+          "\u03a960",
+          "\u03a970",
+          "\u03a978",
+          "\u03a990"
+        ]
+      },
+      {
+        "fold_angle": 2.687150505637071,
+        "stability": 0.978,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a927",
+          "\u03a964",
+          "\u03a986"
+        ]
+      },
+      {
+        "fold_angle": 2.7783286661990214,
+        "stability": 0.949,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a928",
+          "\u03a946",
+          "\u03a961",
+          "\u03a965",
+          "\u03a972",
+          "\u03a973",
+          "\u03a979",
+          "\u03a980",
+          "\u03a987"
+        ]
+      },
+      {
+        "fold_angle": 2.186276035465284,
+        "stability": 0.971,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a944"
+        ]
+      },
+      {
+        "fold_angle": 2.489234513805425,
+        "stability": 0.959,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a947"
+        ]
+      },
+      {
+        "fold_angle": 1.2309594173407747,
+        "stability": 0.942,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a948",
+          "\u03a955"
+        ]
+      },
+      {
+        "fold_angle": 2.767599501116748,
+        "stability": 0.952,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a951",
+          "\u03a958",
+          "\u03a961",
+          "\u03a972",
+          "\u03a973",
+          "\u03a975",
+          "\u03a979",
+          "\u03a980"
+        ]
+      },
+      {
+        "fold_angle": 2.4619188346815495,
+        "stability": 0.966,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a953",
+          "\u03a968"
+        ]
+      },
+      {
+        "fold_angle": 2.8017557441356713,
+        "stability": 0.942,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a959",
+          "\u03a976",
+          "\u03a977"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a962",
+          "\u03a963",
+          "\u03a981",
+          "\u03a982",
+          "\u03a983",
+          "\u03a984",
+          "\u03a985",
+          "\u03a991",
+          "\u03a992"
+        ]
+      },
+      {
+        "fold_angle": 2.6179938779914944,
+        "stability": 1.0,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a967"
+        ]
+      },
+      {
+        "fold_angle": 1.3047162795687364,
+        "stability": 0.918,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a971"
+        ]
+      },
+      {
+        "fold_angle": 2.0344439357957027,
+        "stability": 0.981,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a974"
+        ]
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 2.865949854373528,
+        "stability": 0.921,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9106"
+        ]
+      },
+      {
+        "fold_angle": 2.971674198862732,
+        "stability": 0.946,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9107",
+          "\u03a9108"
+        ]
+      },
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a988"
+        ]
+      },
+      {
+        "fold_angle": 1.0471975511965976,
+        "stability": 1.0,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a919"
+        ]
+      },
+      {
+        "fold_angle": 2.22619543690243,
+        "stability": 0.959,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a924"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a942",
+          "\u03a949",
+          "\u03a956",
+          "\u03a969",
+          "\u03a993",
+          "\u03a994",
+          "\u03a995",
+          "\u03a996",
+          "\u03a997",
+          "\u03a998"
+        ]
+      },
+      {
+        "fold_angle": 2.186276035465284,
+        "stability": 0.971,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a944"
+        ]
+      },
+      {
+        "fold_angle": 2.5261129449194057,
+        "stability": 0.971,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a945",
+          "\u03a960",
+          "\u03a970",
+          "\u03a978",
+          "\u03a990"
+        ]
+      },
+      {
+        "fold_angle": 2.7767288254763103,
+        "stability": 0.949,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a946",
+          "\u03a951",
+          "\u03a961",
+          "\u03a965",
+          "\u03a972",
+          "\u03a973",
+          "\u03a979",
+          "\u03a980",
+          "\u03a987"
+        ]
+      },
+      {
+        "fold_angle": 1.2309594173407747,
+        "stability": 0.942,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a948",
+          "\u03a955"
+        ]
+      },
+      {
+        "fold_angle": 2.411864997362827,
+        "stability": 0.982,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a950",
+          "\u03a957"
+        ]
+      },
+      {
+        "fold_angle": 2.8017557441356713,
+        "stability": 0.942,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a959",
+          "\u03a976",
+          "\u03a977"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a962",
+          "\u03a963",
+          "\u03a981",
+          "\u03a982",
+          "\u03a983",
+          "\u03a984",
+          "\u03a985",
+          "\u03a991"
+        ]
+      },
+      {
+        "fold_angle": 2.687150505637071,
+        "stability": 0.978,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a964",
+          "\u03a986"
+        ]
+      },
+      {
+        "fold_angle": 2.6179938779914944,
+        "stability": 1.0,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a967"
+        ]
+      },
+      {
+        "fold_angle": 2.4619188346815495,
+        "stability": 0.966,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a968"
+        ]
+      },
+      {
+        "fold_angle": 1.3047162795687364,
+        "stability": 0.918,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a971"
+        ]
+      },
+      {
+        "fold_angle": 2.0344439357957027,
+        "stability": 0.981,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a974"
+        ]
+      },
+      {
+        "fold_angle": 1.7321,
+        "stability": 0.949,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 2.411864997362827,
+        "stability": 0.982,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a9100",
+          "\u03a9101",
+          "\u03a9102",
+          "\u03a9103",
+          "\u03a9104",
+          "\u03a925",
+          "\u03a943",
+          "\u03a950",
+          "\u03a952",
+          "\u03a999"
+        ]
+      },
+      {
+        "fold_angle": 2.9904662749192332,
+        "stability": 0.952,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9105"
+        ]
+      },
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a966",
+          "\u03a988",
+          "\u03a989"
+        ]
+      },
+      {
+        "fold_angle": 2.7767288254763103,
+        "stability": 0.949,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a946",
+          "\u03a961",
+          "\u03a965",
+          "\u03a972",
+          "\u03a973",
+          "\u03a979",
+          "\u03a980",
+          "\u03a987"
+        ]
+      },
+      {
+        "fold_angle": 2.489234513805425,
+        "stability": 0.959,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a947"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a962",
+          "\u03a981",
+          "\u03a982",
+          "\u03a983",
+          "\u03a984"
+        ]
+      },
+      {
+        "fold_angle": 1.3047162795687364,
+        "stability": 0.918,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a971"
+        ]
+      },
+      {
+        "fold_angle": 2.0344439357957027,
+        "stability": 0.981,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a974"
+        ]
+      },
+      {
+        "fold_angle": 2.7641715920226693,
+        "stability": 0.953,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a975"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a993",
+          "\u03a994"
+        ]
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 2.865949854373528,
+        "stability": 0.921,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9106"
+        ]
+      },
+      {
+        "fold_angle": 2.5346001497151263,
+        "stability": 0.973,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a926"
+        ]
+      },
+      {
+        "fold_angle": 2.186276035465284,
+        "stability": 0.971,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a944"
+        ]
+      },
+      {
+        "fold_angle": 2.8017557441356713,
+        "stability": 0.942,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a959"
+        ]
+      },
+      {
+        "fold_angle": 2.9570800796354484,
+        "stability": 0.941,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a963"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a995",
+          "\u03a996",
+          "\u03a997",
+          "\u03a998"
+        ]
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 2.971674198862732,
+        "stability": 0.946,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9107",
+          "\u03a9108"
+        ]
+      },
+      {
+        "fold_angle": 2.687150505637071,
+        "stability": 0.978,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a927",
+          "\u03a964"
+        ]
+      },
+      {
+        "fold_angle": 2.5261129449194057,
+        "stability": 0.971,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a945",
+          "\u03a960"
+        ]
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a966"
+        ]
+      },
+      {
+        "fold_angle": 2.7783286661990214,
+        "stability": 0.949,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a928",
+          "\u03a946",
+          "\u03a961",
+          "\u03a965"
+        ]
+      },
+      {
+        "fold_angle": 2.489234513805425,
+        "stability": 0.959,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a947"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a962"
+        ]
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b2": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 1.5707963267948966,
+        "stability": 1.0,
+        "context": "3d_cubic",
+        "source_polyhedra": [
+          "\u03a91"
+        ]
+      },
+      {
+        "fold_angle": 2.865949854373528,
+        "stability": 0.921,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9106"
+        ]
+      },
+      {
+        "fold_angle": 2.971674198862732,
+        "stability": 0.946,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9107",
+          "\u03a9108"
+        ]
+      },
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a988"
+        ]
+      },
+      {
+        "fold_angle": 1.0471975511965976,
+        "stability": 1.0,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a919"
+        ]
+      },
+      {
+        "fold_angle": 1.884955592153876,
+        "stability": 0.933,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a920"
+        ]
+      },
+      {
+        "fold_angle": 2.0943951023931957,
+        "stability": 1.0,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a921",
+          "\u03a930"
+        ]
+      },
+      {
+        "fold_angle": 2.356194490192345,
+        "stability": 1.0,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a922"
+        ]
+      },
+      {
+        "fold_angle": 2.5132741228718345,
+        "stability": 0.967,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a923"
+        ]
+      },
+      {
+        "fold_angle": 2.22619543690243,
+        "stability": 0.959,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a924"
+        ]
+      },
+      {
+        "fold_angle": 2.411864997362827,
+        "stability": 0.982,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a933",
+          "\u03a936",
+          "\u03a939",
+          "\u03a950",
+          "\u03a957"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a942",
+          "\u03a949",
+          "\u03a956",
+          "\u03a969",
+          "\u03a993",
+          "\u03a994",
+          "\u03a995",
+          "\u03a996",
+          "\u03a997",
+          "\u03a998"
+        ]
+      },
+      {
+        "fold_angle": 2.186276035465284,
+        "stability": 0.971,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a944"
+        ]
+      },
+      {
+        "fold_angle": 2.5261129449194057,
+        "stability": 0.971,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a945",
+          "\u03a960",
+          "\u03a970",
+          "\u03a978",
+          "\u03a990"
+        ]
+      },
+      {
+        "fold_angle": 2.7767288254763103,
+        "stability": 0.949,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a946",
+          "\u03a951",
+          "\u03a961",
+          "\u03a965",
+          "\u03a972",
+          "\u03a973",
+          "\u03a979",
+          "\u03a980",
+          "\u03a987"
+        ]
+      },
+      {
+        "fold_angle": 1.2309594173407747,
+        "stability": 0.942,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a948",
+          "\u03a955"
+        ]
+      },
+      {
+        "fold_angle": 2.8017557441356713,
+        "stability": 0.942,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a959",
+          "\u03a976",
+          "\u03a977"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a962",
+          "\u03a963",
+          "\u03a981",
+          "\u03a982",
+          "\u03a983",
+          "\u03a984",
+          "\u03a985",
+          "\u03a991"
+        ]
+      },
+      {
+        "fold_angle": 2.687150505637071,
+        "stability": 0.978,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a964",
+          "\u03a986"
+        ]
+      },
+      {
+        "fold_angle": 2.6179938779914944,
+        "stability": 1.0,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a967"
+        ]
+      },
+      {
+        "fold_angle": 2.4619188346815495,
+        "stability": 0.966,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a968"
+        ]
+      },
+      {
+        "fold_angle": 1.3047162795687364,
+        "stability": 0.918,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a971"
+        ]
+      },
+      {
+        "fold_angle": 2.0344439357957027,
+        "stability": 0.981,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a974"
+        ]
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 2.865949854373528,
+        "stability": 0.921,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9106"
+        ]
+      },
+      {
+        "fold_angle": 2.0943951023931957,
+        "stability": 1.0,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a921"
+        ]
+      },
+      {
+        "fold_angle": 2.186276035465284,
+        "stability": 0.971,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a944"
+        ]
+      },
+      {
+        "fold_angle": 2.8017557441356713,
+        "stability": 0.942,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a959"
+        ]
+      },
+      {
+        "fold_angle": 2.9570800796354484,
+        "stability": 0.941,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a963"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a995",
+          "\u03a996",
+          "\u03a997",
+          "\u03a998"
+        ]
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 2.971674198862732,
+        "stability": 0.946,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9107",
+          "\u03a9108"
+        ]
+      },
+      {
+        "fold_angle": 2.356194490192345,
+        "stability": 1.0,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a922"
+        ]
+      },
+      {
+        "fold_angle": 2.5261129449194057,
+        "stability": 0.971,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a945",
+          "\u03a960"
+        ]
+      },
+      {
+        "fold_angle": 2.687150505637071,
+        "stability": 0.978,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a964"
+        ]
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111"
+        ]
+      },
+      {
+        "fold_angle": 2.5132741228718345,
+        "stability": 0.967,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a923"
+        ]
+      },
+      {
+        "fold_angle": 2.7767288254763103,
+        "stability": 0.949,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a946",
+          "\u03a961",
+          "\u03a965"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a962"
+        ]
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a5": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a988"
+        ]
+      },
+      {
+        "fold_angle": 1.884955592153876,
+        "stability": 0.933,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a920"
+        ]
+      },
+      {
+        "fold_angle": 2.7767288254763103,
+        "stability": 0.949,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a946",
+          "\u03a961",
+          "\u03a965",
+          "\u03a972",
+          "\u03a973",
+          "\u03a979",
+          "\u03a980",
+          "\u03a987"
+        ]
+      },
+      {
+        "fold_angle": 2.411864997362827,
+        "stability": 0.982,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a950"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a962",
+          "\u03a981",
+          "\u03a982",
+          "\u03a983",
+          "\u03a984"
+        ]
+      },
+      {
+        "fold_angle": 1.3047162795687364,
+        "stability": 0.918,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a971"
+        ]
+      },
+      {
+        "fold_angle": 2.0344439357957027,
+        "stability": 0.981,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a974"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a993",
+          "\u03a994"
+        ]
+      },
+      {
+        "fold_angle": 1.5708,
+        "stability": 1.0,
+        "context": "3d_cubic",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 2.411864997362827,
+        "stability": 0.982,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a9100",
+          "\u03a9101",
+          "\u03a9102",
+          "\u03a9103",
+          "\u03a9104",
+          "\u03a925",
+          "\u03a935",
+          "\u03a941",
+          "\u03a943",
+          "\u03a950",
+          "\u03a952",
+          "\u03a999"
+        ]
+      },
+      {
+        "fold_angle": 2.9904662749192332,
+        "stability": 0.952,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9105"
+        ]
+      },
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a966",
+          "\u03a988",
+          "\u03a989"
+        ]
+      },
+      {
+        "fold_angle": 1.884955592153876,
+        "stability": 0.933,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a920"
+        ]
+      },
+      {
+        "fold_angle": 2.0344439357957027,
+        "stability": 0.981,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a93",
+          "\u03a974"
+        ]
+      },
+      {
+        "fold_angle": 2.7767288254763103,
+        "stability": 0.949,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a946",
+          "\u03a961",
+          "\u03a965",
+          "\u03a972",
+          "\u03a973",
+          "\u03a979",
+          "\u03a980",
+          "\u03a987"
+        ]
+      },
+      {
+        "fold_angle": 2.489234513805425,
+        "stability": 0.959,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a947"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a962",
+          "\u03a981",
+          "\u03a982",
+          "\u03a983",
+          "\u03a984"
+        ]
+      },
+      {
+        "fold_angle": 1.3047162795687364,
+        "stability": 0.918,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a971"
+        ]
+      },
+      {
+        "fold_angle": 2.7641715920226693,
+        "stability": 0.953,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a975"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a993",
+          "\u03a994"
+        ]
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a966"
+        ]
+      },
+      {
+        "fold_angle": 2.7767288254763103,
+        "stability": 0.949,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a946",
+          "\u03a961",
+          "\u03a965"
+        ]
+      },
+      {
+        "fold_angle": 2.489234513805425,
+        "stability": 0.959,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a947"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "mixed_edge_lengths",
+        "source_polyhedra": [
+          "\u03a962"
+        ]
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b3": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 2.865949854373528,
+        "stability": 0.921,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9106"
+        ]
+      },
+      {
+        "fold_angle": 2.0943951023931957,
+        "stability": 1.0,
+        "context": "3d_dodecahedral",
+        "source_polyhedra": [
+          "\u03a921"
+        ]
+      },
+      {
+        "fold_angle": 2.5346001497151263,
+        "stability": 0.973,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a926"
+        ]
+      },
+      {
+        "fold_angle": 2.186276035465284,
+        "stability": 0.971,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a944"
+        ]
+      },
+      {
+        "fold_angle": 2.8017557441356713,
+        "stability": 0.942,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a959"
+        ]
+      },
+      {
+        "fold_angle": 2.9570800796354484,
+        "stability": 0.941,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a963"
+        ]
+      },
+      {
+        "fold_angle": 1.9106332362490186,
+        "stability": 0.942,
+        "context": "3d_tetrahedral",
+        "source_polyhedra": [
+          "\u03a995",
+          "\u03a996",
+          "\u03a997",
+          "\u03a998"
+        ]
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a7": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b4": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 2.971674198862732,
+        "stability": 0.946,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9107",
+          "\u03a9108"
+        ]
+      },
+      {
+        "fold_angle": 2.356194490192345,
+        "stability": 1.0,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a922"
+        ]
+      },
+      {
+        "fold_angle": 2.687150505637071,
+        "stability": 0.978,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a927",
+          "\u03a964"
+        ]
+      },
+      {
+        "fold_angle": 2.5261129449194057,
+        "stability": 0.971,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a945",
+          "\u03a960"
+        ]
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a9": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b5": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 3.0428088727024702,
+        "stability": 0.969,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a9109",
+          "\u03a9110",
+          "\u03a9111",
+          "\u03a966"
+        ]
+      },
+      {
+        "fold_angle": 2.5132741228718345,
+        "stability": 0.967,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a923"
+        ]
+      },
+      {
+        "fold_angle": 2.7783286661990214,
+        "stability": 0.949,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a928",
+          "\u03a946",
+          "\u03a961",
+          "\u03a965"
+        ]
+      },
+      {
+        "fold_angle": 2.489234513805425,
+        "stability": 0.959,
+        "context": "3d_icosahedral",
+        "source_polyhedra": [
+          "\u03a947"
+        ]
+      },
+      {
+        "fold_angle": 2.952882122806231,
+        "stability": 0.94,
+        "context": "3d_general",
+        "source_polyhedra": [
+          "\u03a962"
+        ]
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a1": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b6": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a2": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b7": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a4": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b8": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a6": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b9": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "a8": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  },
+  "b1": {
+    "a3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b3": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b5": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a2": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b7": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a4": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a6": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b9": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "a8": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ],
+    "b1": [
+      {
+        "fold_angle": 0.0,
+        "stability": 0.5,
+        "context": "2d_planar",
+        "source_polyhedra": []
+      }
+    ]
+  }
+}

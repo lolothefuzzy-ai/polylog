@@ -1,0 +1,121 @@
+{
+  "fallback": {
+    "compactness": 0.4111111111111111,
+    "density": 0.5333333333333333,
+    "planar_area": 3.5833333333333335,
+    "thickness": 0.5333333333333333,
+    "volume": 1.1583333333333334
+  },
+  "fallback_backend": "numpy",
+  "max_deviation_pct": {
+    "compactness": 0.0,
+    "density": 2.7755575615628914e-14,
+    "planar_area": 0.0,
+    "thickness": 0.0,
+    "volume": 1.8503717077085944e-14
+  },
+  "primary": {
+    "compactness": 0.4111111111111111,
+    "density": 0.5333333333333333,
+    "planar_area": 3.5833333333333335,
+    "surface_area": 10.166666666666666,
+    "thickness": 0.5333333333333333,
+    "volume": 1.1583333333333332
+  },
+  "primary_backend": "trimesh",
+  "samples": {
+    "rect_prism": {
+      "deviation_pct": {
+        "compactness": 0.0,
+        "density": 0.0,
+        "planar_area": 0.0,
+        "thickness": 0.0,
+        "volume": 0.0
+      },
+      "fallback": {
+        "compactness": 0.2,
+        "density": 0.5,
+        "face_count": 0,
+        "method": "numpy",
+        "planar_area": 3.75,
+        "surface_area": null,
+        "thickness": 0.5,
+        "vertex_count": 8,
+        "volume": 1.875
+      },
+      "primary": {
+        "compactness": 0.2,
+        "density": 0.5,
+        "face_count": 12,
+        "method": "trimesh",
+        "planar_area": 3.75,
+        "surface_area": 11.5,
+        "thickness": 0.5,
+        "vertex_count": 8,
+        "volume": 1.875
+      }
+    },
+    "thin_plate": {
+      "deviation_pct": {
+        "compactness": 0.0,
+        "density": 2.7755575615628914e-14,
+        "planar_area": 0.0,
+        "thickness": 0.0,
+        "volume": 1.8503717077085944e-14
+      },
+      "fallback": {
+        "compactness": 0.03333333333333333,
+        "density": 0.10000000000000002,
+        "face_count": 0,
+        "method": "numpy",
+        "planar_area": 6.0,
+        "surface_area": null,
+        "thickness": 0.1,
+        "vertex_count": 8,
+        "volume": 0.6000000000000001
+      },
+      "primary": {
+        "compactness": 0.03333333333333333,
+        "density": 0.09999999999999999,
+        "face_count": 12,
+        "method": "trimesh",
+        "planar_area": 6.0,
+        "surface_area": 13.0,
+        "thickness": 0.1,
+        "vertex_count": 8,
+        "volume": 0.6
+      }
+    },
+    "unit_cube": {
+      "deviation_pct": {
+        "compactness": 0.0,
+        "density": 0.0,
+        "planar_area": 0.0,
+        "thickness": 0.0,
+        "volume": 0.0
+      },
+      "fallback": {
+        "compactness": 1.0,
+        "density": 1.0,
+        "face_count": 0,
+        "method": "numpy",
+        "planar_area": 1.0,
+        "surface_area": null,
+        "thickness": 1.0,
+        "vertex_count": 8,
+        "volume": 1.0
+      },
+      "primary": {
+        "compactness": 1.0,
+        "density": 1.0,
+        "face_count": 12,
+        "method": "trimesh",
+        "planar_area": 1.0,
+        "surface_area": 6.0,
+        "thickness": 1.0,
+        "vertex_count": 8,
+        "volume": 1.0
+      }
+    }
+  }
+}
