@@ -19,7 +19,18 @@ def run_python_tests():
 
 def run_frontend_tests():
     """Run frontend tests"""
+    import shutil
     frontend_dir = PROJECT_ROOT / "src" / "frontend"
+    
+    # Check if npm exists
+    npm_path = shutil.which("npm")
+    if not npm_path:
+        return False, "", "npm not found in PATH"
+    
+    # Check if package.json exists
+    if not (frontend_dir / "package.json").exists():
+        return False, "", "package.json not found"
+    
     result = subprocess.run(
         ["npm", "run", "test:all"],
         cwd=frontend_dir,
