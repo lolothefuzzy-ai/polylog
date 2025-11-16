@@ -374,6 +374,8 @@ Examples:
     subparsers.add_parser("test:watch", help="Watch mode - run tests on file changes")
     subparsers.add_parser("test:ui", help="Open Playwright UI for interactive testing")
     subparsers.add_parser("test:headed", help="Run browser tests in visible mode")
+    subparsers.add_parser("test:pipeline", help="Automated test pipeline (start servers + run tests)")
+    subparsers.add_parser("test:pipeline:watch", help="Automated test pipeline in watch mode")
     
     # Packaging
     subparsers.add_parser("package", help="Package application for distribution")
@@ -461,6 +463,16 @@ Examples:
             test_runner = PROJECT_ROOT / "scripts" / "run_tests_in_workspace.py"
             if test_runner.exists():
                 run_command([sys.executable, str(test_runner), "--type", "visual", "--headed"], check=False)
+        elif args.command == "test:pipeline":
+            import sys
+            pipeline = PROJECT_ROOT / "scripts" / "automated_test_pipeline.py"
+            if pipeline.exists():
+                run_command([sys.executable, str(pipeline)], check=False)
+        elif args.command == "test:pipeline:watch":
+            import sys
+            pipeline = PROJECT_ROOT / "scripts" / "automated_test_pipeline.py"
+            if pipeline.exists():
+                run_command([sys.executable, str(pipeline), "--watch"], check=False)
     except KeyboardInterrupt:
         print_info("\nOperation cancelled by user")
     except Exception as e:
