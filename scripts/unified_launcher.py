@@ -371,6 +371,7 @@ Examples:
     # Automated testing
     subparsers.add_parser("test:auto", help="Run automated test suite")
     subparsers.add_parser("test:watch", help="Watch files and auto-test on changes")
+    subparsers.add_parser("test:visual:workspace", help="Run visual tests in workspace browser")
     
     # Packaging
     subparsers.add_parser("package", help="Package application for distribution")
@@ -443,6 +444,11 @@ Examples:
             watch_test = PROJECT_ROOT / "scripts" / "watch_and_test.py"
             if watch_test.exists():
                 run_command([sys.executable, str(watch_test)], check=False)
+        elif args.command == "test:visual:workspace":
+            import sys
+            visual_test = PROJECT_ROOT / "scripts" / "run_visual_tests_in_workspace.py"
+            if visual_test.exists():
+                run_command([sys.executable, str(visual_test)], check=False)
     except KeyboardInterrupt:
         print_info("\nOperation cancelled by user")
     except Exception as e:
