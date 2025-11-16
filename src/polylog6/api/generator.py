@@ -9,15 +9,22 @@ import json
 from pathlib import Path
 
 from polylog6.storage.encoder import TieredUnicodeEncoder
-from polylog6.simulation.placement.attachment_resolver import ContextAwareAttachmentResolver
+from polylog6.simulation.placement.runtime import PlacementRuntime
 from polylog6.simulation.stability.calculator import StabilityCalculator
 
 router = APIRouter(prefix="/api/polyform", tags=["generator"])
 
 # Initialize encoders and calculators
 _encoder = TieredUnicodeEncoder()
-_attachment_resolver = ContextAwareAttachmentResolver()
+_placement_runtime = PlacementRuntime()
 _stability_calc = StabilityCalculator()
+
+# Symbol to sides mapping
+SYMBOL_TO_SIDES = {
+    "A": 3, "B": 4, "C": 5, "D": 6, "E": 7, "F": 8, "G": 9, "H": 10,
+    "I": 11, "J": 12, "K": 13, "L": 14, "M": 15, "N": 16, "O": 17,
+    "P": 18, "Q": 19, "R": 20
+}
 
 
 class GenerateRequest(BaseModel):
@@ -107,26 +114,33 @@ async def generate_polyform(request: GenerateRequest):
                 error=f"Could not find geometry for {request.polygonA} or {request.polygonB}"
             )
         
-        # Resolve attachment options using attachment resolver
-        attachment_options = []
+        # Get sides for both polygons
+        sides_a = SYMBOL_TO_SIDES.get(request.polygonA.upper(), 3)
+        sides_b = SYMBOL_TO_SIDES.get(request.polygonB.upper(), 4)
+        
+        # Resolve attachment using placement runtime
+        attachment_option = None
         try:
-            resolved = _attachment_resolver.resolve(request.polygonA, request.polygonB)
-            if resolved:
-                attachment_options = [resolved] if isinstance(resolved, dict) else resolved
+            attachment_option = _placement_runtime.resolve_attachment_schema(
+                source_sides=sides_a,
+                target_sides=sides_b,
+                dimension="3d"
+            )
         except Exception as e:
             # Fallback if resolver fails
             print(f"Attachment resolution warning: {e}")
         
-        # Use provided attachment option or best resolved option
+        # Use provided attachment option or resolved option
         if request.attachmentOption:
             attachment_data = request.attachmentOption
-        elif attachment_options:
-            # Use best option (highest score)
-            best_option = max(attachment_options, key=lambda x: x.get("score", 0))
+        elif attachment_option:
+            # Extract data from AttachmentOption dataclass
             attachment_data = {
-                "fold_angle": best_option.get("fold_angle", 0),
-                "stability": best_option.get("score", 0.75),
-                "context": best_option.get("context", "")
+                "fold_angle": 0,  # Will be extracted from schema if available
+                "stability": attachment_option.score,
+                "context": attachment_option.context,
+                "pair": attachment_option.pair,
+                "schema_code": attachment_option.char
             }
         else:
             # Default attachment
