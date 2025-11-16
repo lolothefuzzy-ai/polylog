@@ -9,13 +9,14 @@ import json
 from pathlib import Path
 
 from polylog6.storage.encoder import TieredUnicodeEncoder
-from polylog6.simulation.placement.attachment_resolver import AttachmentResolver
+from polylog6.simulation.placement.attachment_resolver import ContextAwareAttachmentResolver
 from polylog6.simulation.stability.calculator import StabilityCalculator
 
 router = APIRouter(prefix="/api/polyform", tags=["generator"])
 
 # Initialize encoders and calculators
 _encoder = TieredUnicodeEncoder()
+_attachment_resolver = ContextAwareAttachmentResolver()
 _stability_calc = StabilityCalculator()
 
 
@@ -106,15 +107,39 @@ async def generate_polyform(request: GenerateRequest):
                 error=f"Could not find geometry for {request.polygonA} or {request.polygonB}"
             )
         
+        # Resolve attachment options using attachment resolver
+        attachment_options = []
+        try:
+            resolved = _attachment_resolver.resolve(request.polygonA, request.polygonB)
+            if resolved:
+                attachment_options = [resolved] if isinstance(resolved, dict) else resolved
+        except Exception as e:
+            # Fallback if resolver fails
+            print(f"Attachment resolution warning: {e}")
+        
+        # Use provided attachment option or best resolved option
+        if request.attachmentOption:
+            attachment_data = request.attachmentOption
+        elif attachment_options:
+            # Use best option (highest score)
+            best_option = max(attachment_options, key=lambda x: x.get("score", 0))
+            attachment_data = {
+                "fold_angle": best_option.get("fold_angle", 0),
+                "stability": best_option.get("score", 0.75),
+                "context": best_option.get("context", "")
+            }
+        else:
+            # Default attachment
+            attachment_data = {"stability": 0.75, "fold_angle": 0}
+        
         # Calculate attachment geometry
-        attachment_data = request.attachmentOption or {}
         combined_geometry = _calculate_attachment_geometry(geom_a, geom_b, attachment_data)
         
         # Generate composition string
         composition = _generate_composition(request.polygonA, request.polygonB)
         
-        # Calculate stability (simplified)
-        stability = attachment_data.get("stability", 0.75) if attachment_data else 0.75
+        # Get stability from attachment data
+        stability = attachment_data.get("stability", 0.75)
         
         # Allocate Unicode symbol
         # Use frequency based on stability (higher stability = higher frequency)
