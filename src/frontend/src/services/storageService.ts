@@ -211,6 +211,52 @@ export class StorageService {
     }
     return response.json();
   }
+
+  // Generated Polyforms Management
+  async getGeneratedPolyforms(): Promise<{
+    polyforms: Array<{
+      symbol: string;
+      metadata: any;
+      geometry: any;
+      composition: string;
+    }>;
+    total: number;
+    error?: string;
+  }> {
+    const response = await fetch(`${this.baseUrl}/api/polyform/generated`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch generated polyforms: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getGeneratedPolyform(composition: string): Promise<{
+    success: boolean;
+    polyform?: any;
+    error?: string;
+  }> {
+    const response = await fetch(`${this.baseUrl}/api/polyform/generated/${encodeURIComponent(composition)}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch generated polyform: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  async getStorageStats(): Promise<{
+    success: boolean;
+    stats?: {
+      total_polyforms: number;
+      average_compression_ratio: number;
+      storage_type: string;
+    };
+    error?: string;
+  }> {
+    const response = await fetch(`${this.baseUrl}/api/polyform/stats`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch storage stats: ${response.statusText}`);
+    }
+    return response.json();
+  }
 }
 
 export const storageService = new StorageService();

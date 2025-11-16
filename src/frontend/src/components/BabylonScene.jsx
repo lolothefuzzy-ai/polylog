@@ -4,7 +4,7 @@ import '@babylonjs/loaders';
 import { PolyformMesh } from '../utils/PolyformMesh';
 import { storageService } from '../services/storageService';
 
-export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null }) => {
+export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null, generatedPolyform = null }) => {
   const canvasRef = useRef(null);
   const sceneRef = useRef(null);
   const engineRef = useRef(null);
@@ -101,12 +101,12 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
       }
     });
 
-    // Render loop
+    // Start render loop
     engine.runRenderLoop(() => {
       scene.render();
     });
 
-    // Handle window resize
+    // Handle resize
     const handleResize = () => {
       engine.resize();
     };
@@ -115,60 +115,110 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
-      meshesRef.current.forEach(mesh => mesh.dispose());
-      meshesRef.current = [];
       scene.dispose();
       engine.dispose();
     };
   }, []);
 
-  // Load polyhedra when selected
+  // Load generated polyform when provided
   useEffect(() => {
-    if (!sceneRef.current || selectedPolyhedra.length === 0) return;
+    if (!generatedPolyform || !sceneRef.current) return;
+
+    const loadGeneratedPolyform = async () => {
+      try {
+        // Clear existing meshes first
+        meshesRef.current.forEach(mesh => mesh.dispose());
+        meshesRef.current = [];
+
+        // Create PolyformMesh for the generated polyform
+        const polyformMesh = new PolyformMesh(generatedPolyform.unicode, sceneRef.current);
+        await polyformMesh.initialize();
+        
+        // Position the generated polyform
+        if (polyformMesh.mesh) {
+          polyformMesh.mesh.position = new BABYLON.Vector3(0, 1, 0);
+          
+          // Apply special material for generated polyforms
+          const material = new BABYLON.StandardMaterial('generatedMat', sceneRef.current);
+          material.diffuseColor = new BABYLON.Color3(0.8, 0.4, 0.8); // Purple for generated
+          material.specularColor = new BABYLON.Color3(0.6, 0.6, 0.8);
+          material.emissiveColor = new BABYLON.Color3(0.1, 0.05, 0.1);
+          polyformMesh.mesh.material = material;
+          
+          meshesRef.current.push(polyformMesh.mesh);
+        }
+
+        // Also load the original polyhedra for reference
+        selectedPolyhedra.forEach((poly, index) => {
+          loadPolyhedron(poly, index + 1); // Offset index to avoid collision
+        });
+
+      } catch (error) {
+        console.error('Failed to load generated polyform:', error);
+      }
+    };
+
+    loadGeneratedPolyform();
+  }, [generatedPolyform, selectedPolyhedra]);
+
+  // Load regular polyhedra when no generated polyform
+  useEffect(() => {
+    if (generatedPolyform || !sceneRef.current) return;
 
     const loadPolyhedron = async (poly, index) => {
       try {
-        let data;
-        
-        // Check if it's a generated polyform with geometry
-        if (poly.geometry) {
-          data = poly.geometry.lod?.[lodLevel] || poly.geometry.lod?.full;
-        } else {
-          // Regular polyhedron lookup
-          data = await storageService.getPolyhedronLOD(poly.symbol, lodLevel);
+        // Try to get LOD geometry first
+        let geometry = null;
+        try {
+          geometry = await storageService.getPolyhedronLOD(poly.symbol, lodLevel);
+        } catch (lodError) {
+          // Fallback to basic polyhedron data
+          const polyData = await storageService.getPolyhedron(poly.symbol);
+          geometry = {
+            vertices: polyData.vertices || [],
+            indices: polyData.faces || [],
+            normals: []
+          };
         }
-        
-        if (data && data.vertices) {
-          // Create mesh from vertices
-          const vertices = data.vertices.map(v => new BABYLON.Vector3(v[0], v[1], v[2] || 0));
-          
-          // Create custom mesh
-          const mesh = new BABYLON.Mesh(`polyhedron_${poly.symbol}_${index}`, sceneRef.current);
-          
-          // Create vertex data
+
+        if (geometry && geometry.vertices && geometry.vertices.length > 0) {
+          // Create mesh from geometry data
           const vertexData = new BABYLON.VertexData();
-          vertexData.positions = vertices.flatMap(v => [v.x, v.y, v.z]);
           
-          // Use provided indices or simple triangulation
-          if (data.indices && data.indices.length > 0) {
-            vertexData.indices = data.indices;
-          } else {
+          // Convert vertices to Vector3
+          const positions = [];
+          geometry.vertices.forEach(vertex => {
+            positions.push(...vertex);
+          });
+          vertexData.positions = new Float32Array(positions);
+          
+          // Handle indices/faces
+          if (geometry.indices && geometry.indices.length > 0) {
             const indices = [];
-            for (let i = 1; i < vertices.length - 1; i++) {
-              indices.push(0, i, i + 1);
+            geometry.indices.forEach(face => {
+              if (Array.isArray(face)) {
+                indices.push(...face);
+              } else {
+                indices.push(face);
+              }
+            });
+            vertexData.indices = new Uint32Array(indices);
+          } else {
+            // Generate simple indices if not provided
+            const indices = [];
+            for (let i = 0; i < positions.length / 3 - 2; i++) {
+              indices.push(0, i + 1, i + 2);
             }
-            vertexData.indices = indices;
+            vertexData.indices = new Uint32Array(indices);
           }
           
+          // Create mesh
+          const mesh = new BABYLON.Mesh(`poly_${poly.symbol}`, sceneRef.current);
           vertexData.applyToMesh(mesh);
           
-          // Material - different color for generated polyforms
+          // Material
           const material = new BABYLON.StandardMaterial(`mat_${poly.symbol}`, sceneRef.current);
-          if (poly.classification === 'generated') {
-            material.diffuseColor = new BABYLON.Color3(0.8, 0.4, 0.8); // Purple for generated
-          } else {
-            material.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.8);
-          }
+          material.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.8);
           material.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
           mesh.material = material;
           
@@ -190,7 +240,7 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
     selectedPolyhedra.forEach((poly, index) => {
       loadPolyhedron(poly, index);
     });
-  }, [selectedPolyhedra, lodLevel]);
+  }, [selectedPolyhedra, lodLevel, generatedPolyform]);
 
   return (
     <div className="babylon-container">
@@ -201,8 +251,14 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
       <div className="scene-overlay">
         <div className="lod-indicator">LOD: {lodLevel}</div>
         <div className="polyhedra-count">
-          {selectedPolyhedra.length} polyhedra loaded
+          {generatedPolyform ? 'Generated polyform loaded' : `${selectedPolyhedra.length} polyhedra loaded`}
         </div>
+        {generatedPolyform && (
+          <div className="generated-info">
+            <div>Composition: {generatedPolyform.composition}</div>
+            <div>Compression: {(generatedPolyform.compressionRatio || 0).toFixed(2)}x</div>
+          </div>
+        )}
       </div>
     </div>
   );
