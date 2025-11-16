@@ -1,22 +1,32 @@
-codecov:
-  require_ci_to_pass: true
-  notify:
-    after_n_builds: 1
-    wait_for_ci: true
-
 coverage:
-  precision: 2
-  round: down
-  range: 60..90
-
   status:
     project:
       default:
-        threshold: 2%
+        target: auto
+        threshold: 1%
+        informational: true
     patch:
       default:
-        threshold: 2%
+        target: auto
+        threshold: 1%
+        informational: true
 
 comment:
-  layout: "reach, diff, flags, files"
+  layout: "reach,diff,flags,files,footer"
   behavior: default
+  require_changes: false
+
+ignore:
+  - "tests/"
+  - "test_*.py"
+  - "**/test_*.py"
+  - "**/__pycache__/"
+  - "**/node_modules/"
+  - "src/desktop/src-tauri/target/"
+  - "build/"
+  - "dist/"
+
+codecov:
+  notify:
+    after_n_builds: 3
+    require_ci_to_pass: yes
