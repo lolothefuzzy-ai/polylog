@@ -35,8 +35,13 @@ def check_servers():
     
     return api_running, frontend_running
 
+# Global process reference for cleanup
+_server_process = None
+
 def start_servers():
     """Start servers if not running"""
+    global _server_process
+    
     api_running, frontend_running = check_servers()
     
     if api_running and frontend_running:
@@ -44,7 +49,7 @@ def start_servers():
         return True
     
     print("[INFO] Starting servers...")
-    process = subprocess.Popen(
+    _server_process = subprocess.Popen(
         [sys.executable, str(PROJECT_ROOT / "scripts" / "unified_launcher.py"), "dev"],
         cwd=PROJECT_ROOT,
         stdout=subprocess.PIPE,
@@ -64,6 +69,20 @@ def start_servers():
     
     print("[WARN] Servers may not be ready")
     return False
+
+def cleanup_servers():
+    """Clean up server processes"""
+    global _server_process
+    if _server_process:
+        try:
+            _server_process.terminate()
+            _server_process.wait(timeout=5)
+        except:
+            try:
+                _server_process.kill()
+            except:
+                pass
+        _server_process = None
 
 def run_backend_stability_tests():
     """Run backend stability visual tests"""
@@ -108,30 +127,35 @@ def run_backend_integration_tests():
         return False
 
 def main():
-    print("=" * 70)
-    print("Backend Stability Test Suite")
-    print("=" * 70)
+    import atexit
     
-    # Run backend stability tests
-    stability_passed = run_backend_stability_tests()
+    # Register cleanup handler
+    atexit.register(cleanup_servers)
     
-    # Run backend integration tests
-    integration_passed = run_backend_integration_tests()
-    
-    # Summary
-    print("\n" + "=" * 70)
-    print("Test Summary")
-    print("=" * 70)
-    print(f"Backend Stability: {'PASS' if stability_passed else 'FAIL'}")
-    print(f"Backend Integration: {'PASS' if integration_passed else 'FAIL'}")
-    
-    if stability_passed and integration_passed:
-        print("\n[SUCCESS] All backend stability tests passed!")
-        return 0
-    else:
-        print("\n[WARN] Some tests failed - review output above")
-        return 1
-
-if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        print("=" * 70)
+        print("Backend Stability Test Suite")
+        print("=" * 70)
+        
+        # Run backend stability tests
+        stability_passed = run_backend_stability_tests()
+        
+        # Run backend integration tests
+        integration_passed = run_backend_integration_tests()
+        
+        # Summary
+        print("\n" + "=" * 70)
+        print("Test Summary")
+        print("=" * 70)
+        print(f"Backend Stability: {'PASS' if stability_passed else 'FAIL'}")
+        print(f"Backend Integration: {'PASS' if integration_passed else 'FAIL'}")
+        
+        if stability_passed and integration_passed:
+            print("\n[SUCCESS] All backend stability tests passed!")
+            return 0
+        else:
+            print("\n[WARN] Some tests failed - review output above")
+            return 1
+    finally:
+        cleanup_servers()
 

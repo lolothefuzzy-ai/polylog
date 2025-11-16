@@ -158,7 +158,7 @@ test.describe('Backend System Stability', () => {
   test('Concurrent API Request Stability', async ({ page }) => {
     const concurrentRequests = 20;
     const endpoints = [
-      '/api/health',
+      '/health',
       '/api/geometry/primitive/3',
       '/api/geometry/primitive/4',
       '/api/geometry/fold-angle/3/4',

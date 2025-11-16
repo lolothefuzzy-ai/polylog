@@ -55,7 +55,7 @@ test.describe('Backend Integration Stability', () => {
     
     for (const symbol of testSymbols) {
       // Decode symbol
-      const decodeResponse = await page.request.get(`http://localhost:8000/api/tier0/decode/${symbol}`);
+      const decodeResponse = await page.request.get(`http://localhost:8000/tier0/decode/${symbol}`);
       const decoded = await decodeResponse.json();
       
       expect(decodeResponse.status()).toBe(200);
@@ -107,7 +107,7 @@ test.describe('Backend Integration Stability', () => {
     const invalidRequests = [
       '/api/geometry/primitive/999',
       '/api/tier1/polyhedra/INVALID',
-      '/api/tier0/decode/INVALID'
+      '/tier0/decode/INVALID'
     ];
     
     for (const endpoint of invalidRequests) {
