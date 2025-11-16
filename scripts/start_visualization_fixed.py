@@ -23,9 +23,34 @@ def check_server(url, timeout=2):
     except:
         return False
 
+def check_dependencies():
+    """Check and install missing dependencies"""
+    missing = []
+    try:
+        import psutil
+    except ImportError:
+        missing.append("psutil")
+    
+    if missing:
+        print(f"[INFO] Installing missing dependencies: {', '.join(missing)}")
+        for dep in missing:
+            try:
+                subprocess.run(
+                    [sys.executable, "-m", "pip", "install", "-q", dep],
+                    check=True,
+                    capture_output=True
+                )
+                print(f"[OK] Installed {dep}")
+            except:
+                print(f"[WARN] Failed to install {dep} automatically")
+                print(f"[INFO] Please run: pip install {dep}")
+
 def start_api_server():
     """Start API server directly"""
     print("[INFO] Starting API server...")
+    
+    # Check dependencies first
+    check_dependencies()
     
     # Add src to Python path
     env = os.environ.copy()
