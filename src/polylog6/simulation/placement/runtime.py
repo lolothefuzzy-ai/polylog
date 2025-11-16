@@ -328,7 +328,8 @@ class CatalogBackedHydrator(PolyformHydrator):
     def _load_json(self, name: str) -> Dict[str, Any]:
         path = self.catalog_dir / name
         if not path.exists():
-            raise FileNotFoundError(f"Catalog asset missing: {path}")
+            # Return empty dict instead of raising error for graceful degradation
+            return {}
         with path.open("r", encoding="utf-8") as handle:
             return json.load(handle)
 
