@@ -8,36 +8,30 @@
   - generic [ref=e7]:
     - generic [ref=e9]:
       - generic [ref=e10]:
-        - heading "Polyhedra Library" [level=3] [ref=e11]
-        - generic [ref=e12]: 0 total
+        - heading "Select Polygon" [level=3] [ref=e11]
+        - generic [ref=e12]: 1 / 3
       - generic [ref=e13]:
-        - textbox "Search..." [ref=e14]
-        - combobox [ref=e15]:
-          - option "All (0)" [selected]
-          - option "Platonic (5)"
-          - option "Archimedean (13)"
-          - option "Johnson (79)"
-          - option "Scalar Variants"
-      - generic [ref=e17]: No polyhedra found matching your search.
-      - generic [ref=e18]:
-        - button "Previous" [disabled] [ref=e19]
-        - generic [ref=e20]: Page 1
-        - button "Next" [disabled] [ref=e21]
-    - generic [ref=e23]:
+        - button "←" [ref=e14] [cursor=pointer]
+        - generic [ref=e16]:
+          - generic [ref=e17]: A
+          - generic [ref=e18]: Triangle
+          - generic [ref=e19]: 3 sides
+        - button "→" [ref=e20] [cursor=pointer]
+      - button "Add to Workspace" [ref=e21] [cursor=pointer]
+      - generic [ref=e22]:
+        - button "Triangle" [ref=e23] [cursor=pointer]
+        - button "Square" [ref=e24] [cursor=pointer]
+        - button "Pentagon" [ref=e25] [cursor=pointer]
+    - generic [ref=e27]:
       - generic:
         - generic: "LOD: full"
         - generic: 0 polyhedra loaded
-    - generic [ref=e25]:
-      - generic [ref=e27]: Select two polygons to see attachment options
-      - generic [ref=e28]:
-        - heading "Polyform Generator" [level=3] [ref=e29]
-        - generic [ref=e30]:
-          - generic [ref=e31]:
-            - text: "Generation Mode:"
-            - combobox [ref=e32]:
-              - option "Linear" [selected]
-              - option "Exponential"
-          - button "Generate Polyform" [disabled] [ref=e33]
-          - text: Select at least 2 polyhedra to generate a polyform
-        - paragraph [ref=e35]: No polyforms generated yet. Select polyhedra and click Generate to create your first polyform.
+    - generic [ref=e30]:
+      - heading "Building Polyform Net" [level=3] [ref=e31]
+      - paragraph [ref=e32]: "Add 3 more polygons to enable:"
+      - list [ref=e33]:
+        - listitem [ref=e34]: Fold angle calculation
+        - listitem [ref=e35]: 3D net closure detection
+        - listitem [ref=e36]: Polyform generation
+      - generic [ref=e37]: "Current: 0 / 3+"
 ```

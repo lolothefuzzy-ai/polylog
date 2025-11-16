@@ -14,13 +14,39 @@ export function PolygonSlider({ onSelect }) {
   useEffect(() => {
     const loadPrimitives = async () => {
       try {
-        // Load only primitives (A-R, 18 polygons)
-        const data = await storageService.getPolyhedraList();
-        const primitives = (data || []).slice(0, 18);
-        setPolygons(primitives);
-        if (primitives.length > 0) {
-          setSelectedIndex(0);
+        // First try to load from backend API
+        try {
+          const data = await storageService.getPolyhedraList(0, 18);
+          const items = data?.items || [];
+          if (items.length > 0) {
+            setPolygons(items);
+            setSelectedIndex(0);
+            setLoading(false);
+            return;
+          }
+        } catch (apiError) {
+          console.warn('Backend API not available, using fallback:', apiError);
         }
+        
+        // Fallback: Create basic primitives (A-R)
+        const fallbackPrimitives = [];
+        const symbols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
+        const names = ['Triangle', 'Square', 'Pentagon', 'Hexagon', 'Heptagon', 'Octagon', 'Nonagon', 'Decagon', 
+                      'Hendecagon', 'Dodecagon', 'Tridecagon', 'Tetradecagon', 'Pentadecagon', 'Hexadecagon',
+                      'Heptadecagon', 'Octadecagon', 'Enneadecagon', 'Icosagon'];
+        const sides = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+        
+        for (let i = 0; i < symbols.length; i++) {
+          fallbackPrimitives.push({
+            symbol: symbols[i],
+            name: names[i],
+            sides: sides[i],
+            classification: 'primitive'
+          });
+        }
+        
+        setPolygons(fallbackPrimitives);
+        setSelectedIndex(0);
       } catch (error) {
         console.error('Failed to load primitives:', error);
       } finally {

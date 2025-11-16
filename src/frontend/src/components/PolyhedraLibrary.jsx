@@ -17,38 +17,59 @@ export function PolyhedraLibrary({ onSelect }) {
   const loadPolyhedra = async () => {
     try {
       setLoading(true);
-      // Load base polyhedra
-      const baseData = await storageService.getPolyhedraList(page, 20);
+      
+      // Load base polyhedra from backend
+      let baseData;
+      try {
+        baseData = await storageService.getPolyhedraList(page, 20);
+      } catch (apiError) {
+        console.warn('Backend API not available:', apiError);
+        baseData = { items: [], total: 0 };
+      }
+      
       const baseItems = baseData.items || [];
       
-      // Load scalar variants for first page
-      if (page === 0) {
+      // Filter by classification if needed (Platonic, Archimedean, Johnson)
+      const filteredItems = filter === 'all' 
+        ? baseItems 
+        : baseItems.filter(p => {
+            if (filter === 'platonic') return p.classification === 'platonic';
+            if (filter === 'archimedean') return p.classification === 'archimedean';
+            if (filter === 'johnson') return p.classification === 'johnson';
+            if (filter === 'scalar_variant') return p.classification === 'scalar_variant' || p.is_scalar_variant;
+            return true;
+          });
+      
+      // Load scalar variants for first page only
+      if (page === 0 && filter !== 'scalar_variant') {
         try {
           const scalarData = await storageService.getScalarVariants(undefined, undefined, 0, 100);
           const scalarItems = (scalarData.items || []).map(v => ({
             ...v,
             name: v.name || `${v.base_symbol || v.symbol} (k=${v.scale_factor || 1})`,
-            classification: 'scalar_variant'
+            classification: 'scalar_variant' as const
           }));
           
           // Combine base and scalar variants
-          setPolyhedra([...baseItems, ...scalarItems]);
+          setPolyhedra([...filteredItems, ...scalarItems]);
           setTotal((baseData.total || 0) + (scalarData.total || 0));
         } catch (scalarErr) {
           // Fallback to base only if scalar variants fail
           console.warn('Could not load scalar variants:', scalarErr);
-          setPolyhedra(baseItems);
+          setPolyhedra(filteredItems);
           setTotal(baseData.total || 0);
         }
       } else {
-        setPolyhedra(baseItems);
+        setPolyhedra(filteredItems);
         setTotal(baseData.total || 0);
       }
       
       setError(null);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to load polyhedra:', err);
-      setError(err.message);
+      setError(err.message || 'Failed to load polyhedra');
+      setPolyhedra([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }

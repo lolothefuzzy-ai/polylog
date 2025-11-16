@@ -246,14 +246,21 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
           material.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
           mesh.material = material;
           
-          // Position - start in 3D space, not flat
+          // Position - start in 3D space, native 3D (not flat)
+          // Arrange in 3D circular pattern with vertical spacing
           const angle = (index * Math.PI * 2) / Math.max(selectedPolyhedra.length, 1);
-          const radius = 2;
+          const radius = 2.5;
+          const height = index * 0.3; // Vertical spacing for 3D arrangement
           mesh.position = new BABYLON.Vector3(
             Math.cos(angle) * radius,
-            0.5 + index * 0.1, // Slight vertical offset
+            height, // Native 3D height
             Math.sin(angle) * radius
           );
+          
+          // Apply initial 3D rotation (not flat)
+          mesh.rotation.x = Math.random() * 0.2 - 0.1; // Slight random tilt
+          mesh.rotation.y = angle; // Face outward
+          mesh.rotation.z = Math.random() * 0.2 - 0.1;
           
           // Enable rotation
           mesh.rotationQuaternion = BABYLON.Quaternion.Identity();
