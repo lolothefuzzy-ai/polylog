@@ -17,7 +17,13 @@ router = APIRouter(prefix="/api/attachment", tags=["attachment"])
 # Use a temporary directory for storage
 _storage_base_path = Path(__file__).parent.parent.parent.parent.parent / "storage" / "caches"
 _storage_manager = PolyformStorageManager(base_path=_storage_base_path)
-_placement_runtime = PlacementRuntime(storage_manager=_storage_manager)
+
+# Provide catalog directory for PlacementRuntime
+_catalog_dir = Path(__file__).parent.parent.parent.parent.parent / "catalogs"
+_placement_runtime = PlacementRuntime(
+    storage_manager=_storage_manager,
+    catalog_dir=_catalog_dir
+)
 _fold_sequencer = FoldSequencer(
     geometry_catalog={},  # Will load from catalog
     scaler_catalog={}
