@@ -281,6 +281,39 @@ def clean():
     
     print_success("Clean complete")
 
+def benchmark():
+    """Run performance benchmarks"""
+    print_info("Running performance benchmarks...")
+    import sys
+    from pathlib import Path
+    opt_script = PROJECT_ROOT / "scripts" / "optimization_tasks.py"
+    if opt_script.exists():
+        run_command([sys.executable, str(opt_script), "benchmark"])
+    else:
+        print_warning("Optimization tasks script not found")
+
+def optimize_validate():
+    """Validate optimizations"""
+    print_info("Validating optimizations...")
+    import sys
+    from pathlib import Path
+    opt_script = PROJECT_ROOT / "scripts" / "optimization_tasks.py"
+    if opt_script.exists():
+        run_command([sys.executable, str(opt_script), "validate"])
+    else:
+        print_warning("Optimization tasks script not found")
+
+def monitor():
+    """Monitor system metrics"""
+    print_info("Starting system monitoring...")
+    import sys
+    from pathlib import Path
+    opt_script = PROJECT_ROOT / "scripts" / "optimization_tasks.py"
+    if opt_script.exists():
+        run_command([sys.executable, str(opt_script), "monitor"], check=False)
+    else:
+        print_warning("Optimization tasks script not found")
+
 def main():
     parser = argparse.ArgumentParser(
         description="Polylog6 Unified Desktop Launcher",
@@ -290,7 +323,9 @@ Examples:
   python unified_launcher.py install      # Install all dependencies
   python unified_launcher.py desktop      # Start desktop app
   python unified_launcher.py test:visual  # Run visual tests
-  python unified_launcher.py package      # Package for distribution
+  python unified_launcher.py benchmark    # Performance benchmarks
+  python unified_launcher.py optimize     # Validate optimizations
+  python unified_launcher.py monitor     # Monitor system metrics
         """
     )
     
@@ -312,6 +347,13 @@ Examples:
     # Testing
     subparsers.add_parser("test", help="Run all tests")
     subparsers.add_parser("test:visual", help="Run visual tests with virtual window")
+    subparsers.add_parser("test:integration", help="Run integration tests")
+    
+    # Optimization
+    subparsers.add_parser("benchmark", help="Run performance benchmarks")
+    subparsers.add_parser("optimize", help="Validate optimizations")
+    subparsers.add_parser("monitor", help="Monitor system metrics continuously")
+    subparsers.add_parser("profile", help="Run performance profiler")
     
     # Packaging
     subparsers.add_parser("package", help="Package application for distribution")
@@ -344,6 +386,22 @@ Examples:
             run_tests()
         elif args.command == "test:visual":
             run_visual_tests()
+        elif args.command == "test:integration":
+            import sys
+            opt_script = PROJECT_ROOT / "scripts" / "optimization_tasks.py"
+            if opt_script.exists():
+                run_command([sys.executable, str(opt_script), "integration"])
+        elif args.command == "benchmark":
+            benchmark()
+        elif args.command == "optimize":
+            optimize_validate()
+        elif args.command == "monitor":
+            monitor()
+        elif args.command == "profile":
+            import sys
+            opt_script = PROJECT_ROOT / "scripts" / "optimization_tasks.py"
+            if opt_script.exists():
+                run_command([sys.executable, str(opt_script), "profile"], check=False)
         elif args.command == "package":
             package_app()
         elif args.command == "clean":
