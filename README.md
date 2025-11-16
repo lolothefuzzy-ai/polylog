@@ -17,14 +17,28 @@ Polylog6 is a comprehensive system for working with equilateral polyforms, featu
 
 ```bash
 # Install dependencies
-python scripts/launcher.py install
+python scripts/unified_launcher.py install
 
-# Start development environment
-python scripts/launcher.py dev
+# Start development environment with visual testing
+python scripts/unified_launcher.py desktop
 
-# Build for production
-python scripts/launcher.py build
+# Run tests
+python scripts/unified_launcher.py test
+
+# Performance benchmarks
+python scripts/unified_launcher.py benchmark
 ```
+
+### Optimization & Continuous Testing
+
+For novel systems development, we emphasize continuous visual testing and full system integration:
+
+- **Visual Testing**: `python scripts/unified_launcher.py test:visual`
+- **Integration Tests**: `python scripts/unified_launcher.py test:integration`
+- **Performance**: `python scripts/unified_launcher.py benchmark`
+- **Monitoring**: `python scripts/unified_launcher.py monitor`
+
+See `QUICK_START_OPTIMIZATION.md` for quick reference and `DEVELOPMENT_WORKFLOW.md` for complete guide.
 
 ## Project Structure
 
