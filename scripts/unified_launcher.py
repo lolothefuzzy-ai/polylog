@@ -370,11 +370,10 @@ Examples:
     
     # Automated testing
     subparsers.add_parser("test:auto", help="Run automated test suite")
-    subparsers.add_parser("test:watch", help="Watch files and auto-test on changes")
-        subparsers.add_parser("test:visual:workspace", help="Run visual tests in workspace browser")
-        subparsers.add_parser("test:watch", help="Watch mode - run tests on file changes")
-        subparsers.add_parser("test:ui", help="Open Playwright UI for interactive testing")
-        subparsers.add_parser("test:headed", help="Run browser tests in visible mode")
+    subparsers.add_parser("test:visual:workspace", help="Run visual tests in workspace browser")
+    subparsers.add_parser("test:watch", help="Watch mode - run tests on file changes")
+    subparsers.add_parser("test:ui", help="Open Playwright UI for interactive testing")
+    subparsers.add_parser("test:headed", help="Run browser tests in visible mode")
     
     # Packaging
     subparsers.add_parser("package", help="Package application for distribution")
@@ -442,11 +441,6 @@ Examples:
             auto_test = PROJECT_ROOT / "scripts" / "auto_test.py"
             if auto_test.exists():
                 run_command([sys.executable, str(auto_test)], check=False)
-        elif args.command == "test:watch":
-            import sys
-            watch_test = PROJECT_ROOT / "scripts" / "watch_and_test.py"
-            if watch_test.exists():
-                run_command([sys.executable, str(watch_test)], check=False)
         elif args.command == "test:visual:workspace":
             import sys
             visual_test = PROJECT_ROOT / "scripts" / "run_visual_tests_in_workspace.py"
