@@ -33,13 +33,24 @@ def start_servers():
     print("Starting Visualization System")
     print("=" * 70)
     
-    print("\n[INFO] Starting servers...")
-    process = subprocess.Popen(
-        [sys.executable, str(PROJECT_ROOT / "scripts" / "unified_launcher.py"), "dev"],
-        cwd=PROJECT_ROOT,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
-    )
+    # Use the fixed launcher
+    launcher_script = PROJECT_ROOT / "scripts" / "start_visualization_fixed.py"
+    if launcher_script.exists():
+        print("\n[INFO] Using fixed launcher...")
+        process = subprocess.Popen(
+            [sys.executable, str(launcher_script)],
+            cwd=PROJECT_ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+    else:
+        print("\n[INFO] Starting servers via unified launcher...")
+        process = subprocess.Popen(
+            [sys.executable, str(PROJECT_ROOT / "scripts" / "unified_launcher.py"), "dev"],
+            cwd=PROJECT_ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
     
     return process
 
