@@ -170,6 +170,32 @@ export class StorageService {
     return response.json();
   }
 
+  // Scalar Variants
+  async getScalarVariants(baseSymbol?: string, scaleFactor?: number, page = 0, limit = 20) {
+    const params = new URLSearchParams();
+    if (baseSymbol) params.append('base_symbol', baseSymbol);
+    if (scaleFactor) params.append('scale_factor', scaleFactor.toString());
+    params.append('page', page.toString());
+    params.append('limit', limit.toString());
+
+    const response = await fetch(`${this.baseUrl}/api/scalar/variants?${params}`);
+    if (!response.ok) throw new Error(`Failed to fetch scalar variants: ${response.statusText}`);
+    return response.json();
+  }
+
+  // Attachment Patterns
+  async getAttachmentPatterns(patternType?: string, minLength?: number, page = 0, limit = 20) {
+    const params = new URLSearchParams();
+    if (patternType) params.append('pattern_type', patternType);
+    if (minLength) params.append('min_length', minLength.toString());
+    params.append('page', page.toString());
+    params.append('limit', limit.toString());
+
+    const response = await fetch(`${this.baseUrl}/api/patterns/patterns?${params}`);
+    if (!response.ok) throw new Error(`Failed to fetch attachment patterns: ${response.statusText}`);
+    return response.json();
+  }
+
   // Polyform Generation
   async generatePolyform(request: {
     polygonA: string;

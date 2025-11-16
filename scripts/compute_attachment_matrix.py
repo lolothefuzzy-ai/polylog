@@ -144,7 +144,7 @@ def compute_attachment_matrix():
                 }
                 valid_pairs += 1
     
-    print(f"\n✓ Computed attachment matrix: {valid_pairs} valid pairs")
+    print(f"\n[OK] Computed attachment matrix: {valid_pairs} valid pairs")
     
     # Write matrix
     output_file = polyhedra_file.parent / "attachment_matrix_full.json"

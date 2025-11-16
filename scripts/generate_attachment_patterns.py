@@ -217,7 +217,7 @@ def generate_attachment_patterns():
         for pattern in all_patterns:
             f_out.write(json.dumps(pattern, ensure_ascii=False) + '\n')
     
-    print(f"\n✓ Generated {len(all_patterns)} attachment patterns")
+    print(f"\n[OK] Generated {len(all_patterns)} attachment patterns")
     print(f"  Output: {output_file}")
     
     # Summary by type

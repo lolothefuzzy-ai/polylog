@@ -93,7 +93,7 @@ def generate_scalar_variants():
                 print(f"Warning: Error processing line {line_num}: {e}")
                 continue
     
-    print(f"\n✓ Generated {variant_count} scalar variants (97 × 5 = 485 expected)")
+    print(f"\n[OK] Generated {variant_count} scalar variants (97 x 5 = 485 expected)")
     print(f"  Output: {output_file}")
     return variant_count
 

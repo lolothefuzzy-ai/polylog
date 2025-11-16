@@ -11,6 +11,8 @@ from polylog6.api.tier1_polyhedra import router as tier1_router
 from polylog6.api.storage import router as storage_router
 from polylog6.api.generator import router as generator_router
 from polylog6.api.attachment import router as attachment_router
+from polylog6.api.scalar_variants import router as scalar_router
+from polylog6.api.attachment_patterns import router as patterns_router
 
 app = FastAPI(title="Polyform Backend")
 
@@ -28,6 +30,8 @@ app.include_router(tier1_router)
 app.include_router(storage_router)
 app.include_router(generator_router)
 app.include_router(attachment_router)
+app.include_router(scalar_router)
+app.include_router(patterns_router)
 
 @app.get("/health")
 async def health_check():
