@@ -1,0 +1,23 @@
+{
+  "simple_triangle.png:region_0": {
+    "symmetry": {
+      "horizontal": 0.92,
+      "vertical": 0.90,
+      "rotational_180": 0.95
+    },
+    "fft_peak_count": 12
+  },
+  "grid_pattern.png:region_0": {
+    "symmetry": {
+      "horizontal": 0.88,
+      "vertical": 0.88
+    },
+    "fft_peak_count": 12
+  },
+  "noisy_polyform.png:region_0": {
+    "symmetry": {
+      "horizontal": 0.45
+    },
+    "fft_peak_count": 12
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "grid_pattern.png": {
+    "felzenszwalb_params": {
+      "felzenszwalb_scale": 50.0,
+      "felzenszwalb_sigma": 0.8,
+      "felzenszwalb_min_size": 20
+    },
+    "expected_regions": 256,
+    "tolerance": 76,
+    "min_coverage_ratio": 0.596
+  },
+  "noisy_polyform.png": {
+    "felzenszwalb_params": {
+      "felzenszwalb_scale": 50.0,
+      "felzenszwalb_sigma": 0.5,
+      "felzenszwalb_min_size": 20
+    },
+    "expected_regions": 8,
+    "tolerance": 2,
+    "min_coverage_ratio": 0.003
+  },
+  "simple_triangle.png": {
+    "felzenszwalb_params": {
+      "felzenszwalb_scale": 50.0,
+      "felzenszwalb_sigma": 0.8,
+      "felzenszwalb_min_size": 100
+    },
+    "expected_regions": 12,
+    "tolerance": 3,
+    "min_coverage_ratio": 0.8
+  }
+}

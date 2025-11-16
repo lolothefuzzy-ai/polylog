@@ -1,0 +1,2 @@
+{"uuid": "poly-square", "composition": "AAAA", "vertices": [[0, 0], [1, 0], [1, 1], [0, 1]], "symmetry_group": "D4"}
+{"uuid": "poly-triangle", "composition": "AAA", "vertices": [[0, 0], [1, 0], [0.5, 0.866]], "symmetry_group": "D3"}

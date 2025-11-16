@@ -1,0 +1,7 @@
+cluster_count: 6
+min_region_pixels: 150
+kmeans_attempts: 4
+felzenszwalb:
+  scale: 100.0
+  sigma: 0.8
+  min_size: 100
