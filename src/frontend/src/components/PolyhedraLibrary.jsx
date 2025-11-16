@@ -17,9 +17,34 @@ export function PolyhedraLibrary({ onSelect }) {
   const loadPolyhedra = async () => {
     try {
       setLoading(true);
-      const data = await storageService.getPolyhedraList(page, 20);
-      setPolyhedra(data.items || []);
-      setTotal(data.total || 0);
+      // Load base polyhedra
+      const baseData = await storageService.getPolyhedraList(page, 20);
+      const baseItems = baseData.items || [];
+      
+      // Load scalar variants for first page
+      if (page === 0) {
+        try {
+          const scalarData = await storageService.getScalarVariants(undefined, undefined, 0, 100);
+          const scalarItems = (scalarData.items || []).map(v => ({
+            ...v,
+            name: v.name || `${v.base_symbol || v.symbol} (k=${v.scale_factor || 1})`,
+            classification: 'scalar_variant'
+          }));
+          
+          // Combine base and scalar variants
+          setPolyhedra([...baseItems, ...scalarItems]);
+          setTotal((baseData.total || 0) + (scalarData.total || 0));
+        } catch (scalarErr) {
+          // Fallback to base only if scalar variants fail
+          console.warn('Could not load scalar variants:', scalarErr);
+          setPolyhedra(baseItems);
+          setTotal(baseData.total || 0);
+        }
+      } else {
+        setPolyhedra(baseItems);
+        setTotal(baseData.total || 0);
+      }
+      
       setError(null);
     } catch (err) {
       console.error('Failed to load polyhedra:', err);
@@ -38,6 +63,7 @@ export function PolyhedraLibrary({ onSelect }) {
     if (filter === 'platonic') return p.classification === 'platonic';
     if (filter === 'archimedean') return p.classification === 'archimedean';
     if (filter === 'johnson') return p.classification === 'johnson';
+    if (filter === 'scalar_variant') return p.classification === 'scalar_variant' || p.is_scalar_variant;
     return true;
   });
 
@@ -94,6 +120,7 @@ export function PolyhedraLibrary({ onSelect }) {
           <option value="platonic">Platonic (5)</option>
           <option value="archimedean">Archimedean (13)</option>
           <option value="johnson">Johnson (79)</option>
+          <option value="scalar_variant">Scalar Variants</option>
         </select>
       </div>
 

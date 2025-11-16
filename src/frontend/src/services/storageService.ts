@@ -196,6 +196,38 @@ export class StorageService {
     return response.json();
   }
 
+  // Multi-polygon Generation
+  async generateMultiPolyform(request: {
+    polygons: string[];
+    mode?: string;
+    patternType?: string;
+    maxSteps?: number;
+  }): Promise<{
+    success: boolean;
+    symbol?: string;
+    unicode?: string;
+    composition?: string;
+    geometry?: any;
+    metadata?: any;
+    compressionRatio?: number;
+    error?: string;
+  }> {
+    const response = await fetch(`${this.baseUrl}/api/polyform/generate-multi`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: response.statusText }));
+      throw new Error(error.error || `Failed to generate multi-polyform: ${response.statusText}`);
+    }
+
+    return response.json();
+  }
+
   // Polyform Generation
   async generatePolyform(request: {
     polygonA: string;
