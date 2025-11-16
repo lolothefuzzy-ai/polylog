@@ -2,26 +2,25 @@
 
 ## System Overview
 
-Polylog6 is a polyform visualization and analysis system combining geometric computation, pattern discovery, and interactive visualization.
+Polylog6 is a polyform visualization and analysis system combining geometric computation, pattern discovery, and interactive visualization. The system uses an asynchronous CPU/GPU architecture for optimal performance.
 
 ## Architecture Components
 
 ### Backend (Python)
 - **FastAPI** - REST API server
-- **CGAL Integration** - Geometric computations
-- **Tiered Storage** - Unicode compression system
-- **Netlib Integration** - Precomputed polyhedra data
+- **Unified Geometry Backend** - Netlib integration for precomputed polyhedra
+- **Tiered Storage** - Unicode compression system (Series A/B/C/D)
+- **Tier Generation** - Tier 1 (Platonic/Archimedean/Johnson) and Tier 2+ decomposition
 
 ### Frontend (React + Babylon.js)
 - **React** - UI framework
 - **Babylon.js** - 3D rendering engine
 - **Workspace Manager** - Polygon interaction system
-- **Tier 0 Visualizer** - Unicode symbol rendering
+- **GPU Warming** - Precomputed chain caching
 
 ### Desktop (Tauri)
 - **Rust** - Desktop wrapper
 - **Python Bridge** - Backend integration
-- **Native Performance** - System integration
 
 ## Core Concepts
 
@@ -58,10 +57,12 @@ Polylog6 is a polyform visualization and analysis system combining geometric com
 
 - `src/polylog6/api/main.py` - API entry point
 - `src/polylog6/storage/tier0_generator.py` - Tier 0 encoding
+- `src/polylog6/geometry/unified_backend.py` - Unified geometry system
 - `src/frontend/src/utils/workspaceManager.js` - Workspace management
 - `src/frontend/src/components/BabylonScene.jsx` - 3D rendering
 
 ## See Also
 
 - `docs/WORKSPACE_INTERACTION_ARCHITECTURE.md` - Interaction model
+- `docs/DEVELOPMENT.md` - Development guide
 - `README.md` - Quick start guide
