@@ -1,0 +1,392 @@
+# Polylog6: Comprehensive User Interactivity & 3D Visualization Specification
+
+**Version:** 1.0  
+**Date:** November 15, 2025  
+**Audience:** Manus workspace IDE bot, visualization engineers  
+**Purpose:** Complete reference for user workflows, mathematical foundations, and GPU/CPU architecture for 3D polyform visualization  
+**Status:** Definitive specification for Phase 2–7+ development
+
+---
+
+## PART I: USER EXPERIENCE & INTENDED INTERACTIVITY
+
+### 1.1 The Core User Journey: From Library to Discovery
+
+The user experience spans three phases, each with distinct interactions and backend requirements:
+
+#### **Phase A: Polygon Library (Entry Point)**
+
+**User starts with:**
+- Static library of 18 fundamental equilateral polygons (triangles through 20-gons)
+- Each polygon has fixed unit-edge length
+- All polygons stored as Tier 0 primitives (A–R)
+
+**User can do:**
+1. **Browse polygons** – Click through library, see 3D model of each with rotation controls
+   - Backend: Fetch from Tier 0 catalog
+   - GPU: Render single polygon with LOD=full (low polygon count, smooth shading)
+   - CPU: Track which polygon is selected, pass selection state to GPU
+
+2. **Inspect properties** – View edge count, interior angles, symmetry group
+   - Backend: Compute on-demand (O(1) lookup from polygon metadata)
+   - Display: Text overlay in 3D viewport, synchronized to GPU rendering
+
+3. **Select polygon** – Mark polygon(s) as "active" for assembly
+   - Backend: Store selection state in workspace
+   - GPU: Highlight selected polygon (shader overlay, e.g., glow effect)
+
+**Interaction model:** Read-only browsing, single-polygon inspection. No spatial placement yet.
+
+---
+
+#### **Phase B: Polyform Library (Assembly Mode)**
+
+**User transitions to:**
+- Drag-and-drop 3D workspace where user can place multiple polygons
+- Polygons snap to valid attachment points (edge-to-edge only)
+- System validates in real-time whether attachments are geometrically valid
+
+**User can do:**
+1. **Drag polygon into workspace** – Select polygon from library, click-and-drag into 3D view
+   - Backend: Check attachment matrix (O(1) lookup)
+   - GPU: Render polygon at cursor position (real-time preview)
+   - CPU: Validate non-overlap, check edge compatibility
+   - Feedback: Green outline if attachment valid, red if invalid
+   
+   **GPU/CPU interaction:**
+   ```
+   User drag event (mouse position)
+     ↓ (CPU receives)
+   CPU: Compute potential attachment edge pair
+   CPU: Look up attachment_matrix[polygon_a][polygon_b]
+   CPU: Compute transform (centroid displacement + rotation angle)
+     ↓ (CPU sends to GPU)
+   CPU → GPU: [polygon_id, position, orientation, attachment_stability_score]
+     ↓ (GPU renders)
+   GPU: Render polygon at position, color edges by stability (RED=invalid, YELLOW=conditional, GREEN=stable)
+     ↓ (user confirms placement)
+   User: Click to place
+     ↓ (CPU updates)
+   CPU: Add polygon to liaison graph, update open edge registry
+   ```
+
+2. **Snap to valid attachment points** – When dragging near an open edge, show attachment options
+   - Backend: Query open edge registry (O(1) per edge)
+   - GPU: Render "snap zones" as transparent zones around valid attachment edges
+   - CPU: When user hovers over snap zone, highlight that specific edge pair
+   - Feedback: Numerical display showing fold angle, stability score, closure status
+
+3. **View real-time validation feedback** – Assembly composition updates as polygons are added
+   - CPU: After each polygon placement, recompute:
+     - Open edge count (boundary edges still available)
+     - Stability matrix (which polygons can be removed without collapse)
+     - Tentative O/I calculation (how many orientations are possible with current polygons)
+   - GPU: Update HUD display (edges remaining, stability, O/I estimate)
+   - Feedback: Real-time counters showing "8 boundary edges" → "5 boundary edges" → "0 boundary edges (CLOSED)"
+
+4. **Undo/redo placement** – Remove last polygon or replay sequence
+   - Backend: Maintain placement history in workspace state
+   - GPU: Animate removal (fade out) or addition (fade in)
+   - CPU: Recompute validation state for each undo/redo step
+
+**Interaction model:** Spatial assembly with real-time validation. User builds arbitrarily, system provides visual feedback on validity and closure status.
+
+---
+
+#### **Phase C: Polyform Evolution (Discovery Mode)**
+
+**User enables:**
+- "Continuous generation" toggle – system runs in background, watching for stable subassemblies
+- "Automated promotion" – stable assemblies automatically promoted to Tier 2/3
+
+**User can do:**
+1. **Enable/disable continuous generation** – Toggle background analysis on/off
+   - Backend: Spawn background thread running composition analysis
+   - CPU: Analyze current assembly for stable sub-clusters, check promotion criteria (frequency + stability ≥ thresholds)
+   - Notification: "New structure detected: Tier 2 candidate saved"
+
+2. **Export assembly as Unicode** – Save current assembly as single character or string
+   - Backend: If assembly is known (Tier 1), fetch cached Unicode symbol
+   - Backend: If assembly is novel, allocate new Tier 2/3 symbol
+   - Display: Show Unicode string (e.g., "Ω₅₀" or flat Unicode char like "𝐀")
+   - Feature: Copy-to-clipboard, generate shareable link
+
+3. **View polyform library evolution** – See all discovered polyforms categorized by tier
+   - Backend: Query tier_candidates.jsonl (Tier 2), tier3_catalog.jsonl (Tier 3)
+   - Display: Gallery view of discovered structures, sorted by frequency/discovery date
+   - Metadata: Show composition (e.g., "2 tetrahedra + 1 octahedron"), Unicode symbol, discovery timestamp
+
+4. **Architect with discovered polyforms** – Use discovered polyforms as building blocks
+   - Backend: Treat promoted Tier 3 symbols as new "primitives" in assembly
+   - GPU: Render Tier 3 polyforms with automatic LOD (complex structures shown as bounding boxes until zoomed)
+   - CPU: Validate attachments between Tier 3 symbols (still use attachment matrix, but with expanded symbol set)
+
+**Interaction model:** Semi-autonomous discovery with user control over generation speed and promotion thresholds.
+
+---
+
+### 1.2 Workspace State Machine
+
+The workspace transitions through discrete states, each with different rendering and validation requirements:
+
+```
+STATE MACHINE:
+
+  BROWSING (Polygon Library)
+    ↓ user selects polygon
+  PREVIEW (Single polygon + properties)
+    ↓ user drags into workspace
+  PLACING (Real-time preview of attachment)
+    ↓ user confirms placement OR drags away
+  ASSEMBLING (Multi-polygon workspace)
+    ↓ user continues adding polygons
+  STABLE (Assembly closure detected: 0 boundary edges)
+    ↓ CPU triggers face merging algorithm
+  FACE_MERGING (GPU merges coplanar faces)
+    ↓ GPU completes merge
+  PROMOTED (Assembly promoted to Tier 2/3)
+    ↓ system emits new Unicode symbol
+  LIBRARY_UPDATED (New polyform available in picker)
+    ↓ user can now use promoted polyform as building block
+```
+
+Each state has specific GPU/CPU responsibilities:
+
+| State | CPU Tasks | GPU Tasks |
+|-------|-----------|-----------|
+| BROWSING | Load polygon metadata | Render single polygon, smooth rotation |
+| PREVIEW | Display geometry properties | Render + highlight selected polygon |
+| PLACING | Validate attachment, compute transform | Render at cursor, color by stability |
+| ASSEMBLING | Track open edges, update liaason graph | Render assembly, highlight boundaries RED |
+| STABLE | Trigger face merge, compute scaler symmetries | (idle, awaiting merge command) |
+| FACE_MERGING | (idle, awaiting merge completion) | Update mesh topology, re-render |
+| PROMOTED | Allocate Unicode symbol, save to catalog | Display promotion notification |
+| LIBRARY_UPDATED | Index new symbol in tier catalog | Update polyform picker gallery |
+
+---
+
+## PART II: MATHEMATICAL FOUNDATIONS & COMBINATORIAL ENGINE
+
+### 2.1 The O/I Calculation: Orientations & Symmetries
+
+**Definition:**
+- **O** = number of unique *closed* topologies that can be constructed from a given set of polygon types
+- **I** (number of images) = number of *rotationally distinct orientations* of a given assembly
+
+For image compression (which you're building toward), **I** represents the number of unique images that would result from different rotational states of the same polyform assembly.
+
+**Example 1: Pentominoes**
+- 5 unit squares, all connected
+- Possible distinct *closed* topologies: O = 12 (the 12 pentominoes)
+- For each pentomino, number of unique rotational orientations: I = 4 to 8 depending on symmetry
+  - Straight line (I-pentomino): I = 2 (only 2 unique rotations: horizontal, vertical)
+  - Cross shape (plus pentomino): I = 1 (4-fold rotational symmetry means all rotations identical)
+  - Most pentominoes: I = 4 (no symmetry beyond identity)
+
+**Example 2: Hexominoes**
+- 6 unit squares, all connected
+- Total distinct topologies: O = 35
+- Orientations per hexomino: I varies from 1 (highly symmetric) to 8 (asymmetric)
+
+**Example 3: Your Polyform System**
+
+When user builds assembly with 2 triangles + 1 square:
+
+```
+Step 1: Compute O (number of valid topologies)
+  - Check liaison graph for valid edge connections
+  - Count how many distinct ways these 3 polygons can attach edge-to-edge
+  - Example: Triangle-Triangle can attach 3 ways (different edges), 
+            + Square can attach to resulting pair in 2 ways
+  - O = 6 (6 unique ways to connect this specific set)
+
+Step 2: Compute s_total (orientation count for each topology)
+  - For each polygon, count how many orientations are possible
+  - Triangle: rotational symmetry = 3-fold (3 unique orientations)
+  - Square: rotational symmetry = 4-fold (4 unique orientations, but only 2 unique due to mirror)
+  - But constraint: edge attachment must match (not all orientations are valid)
+  - s_total ≈ product of valid orientation combinations (computed via constraint propagation)
+
+Step 3: Compute A_c (accounting for identical polygons)
+  - Two triangles are identical → divide by 2!
+  - A_c = 3! / 2! = 3
+
+Step 4: Compute C_sym (symmetry factor)
+  - Overall assembly symmetry group size
+  - For 2 triangles + 1 square: may have mirror symmetry or rotational symmetry
+  - C_sym = order of symmetry group
+
+Step 5: Final I calculation
+  I = O × s_total × A_c × C_sym
+  
+  Interpretation: I is the number of distinct *images* (rotational orientations)
+                  of this assembly that would be produced if rendered from all angles.
+```
+
+**Backend implementation requirements:**
+
+```python
+class CombinatoricalEngine:
+    """
+    Computes O/I for polyform assemblies.
+    Must be extremely fast (sub-100ms for workspace feedback).
+    """
+    
+    def compute_O(self, liaison_graph):
+        """
+        Count valid topologies given polygon set and constraints.
+        
+        Args:
+            liaison_graph: Current assembly state (nodes=polygons, edges=attachments)
+        
+        Returns:
+            O: number of closed topologies
+        """
+        # Use decomposition tree to enumerate valid sub-assemblies
+        # Cache result by topology_hash
+        pass
+    
+    def compute_s_total(self, liaison_graph):
+        """
+        Count valid orientations per polygon, subject to attachment constraints.
+        
+        Constraint propagation:
+        - For each unattached edge, track feasible attachments
+        - Narrow orientation domain based on constraints
+        - Return product of remaining orientation domains
+        """
+        # Constraint propagation algorithm
+        # Goal: minimize I_estimate by narrowing feasible orientations
+        pass
+    
+    def compute_I(self, liaison_graph):
+        """
+        Full I calculation: O × s_total × A_c × C_sym
+        
+        For image compression:
+        - I tells you how many unique images this polyform generates under rotation
+        - If I=1: rotationally symmetric (bitmap compresses well, single representative)
+        - If I=24: asymmetric octahedron (24 unique images, but can fold into 1 by symmetry)
+        """
+        O = self.compute_O(liaison_graph)
+        s_total = self.compute_s_total(liaison_graph)
+        A_c = self.compute_identical_polygon_factor(liaison_graph)
+        C_sym = self.compute_symmetry_group_size(liaison_graph)
+        
+        return O * s_total * A_c * C_sym
+```
+
+**Why this matters for visualization:**
+
+The **I value is displayed in real-time** as the user builds:
+
+```
+User adds 2 triangles → I = 6
+User adds 1 square → I = 24
+User adds another square → I = 48
+User closes assembly → I = 1 (only 1 unique orientation: the closed form)
+```
+
+This gives user visual feedback on "how much variation does this structure have?" Lower I = more symmetric = compresses better for image storage.
+
+---
+
+### 2.2 Orientation Space & Rotational Symmetry
+
+**Key insight:** Not all orientations are valid. Each attachment constrains future orientations.
+
+**Orientation model:**
+
+```
+For a single polygon:
+  - Orientation = (position: Vector3, rotation: Quaternion)
+  - Unconstrained orientations: infinite (continuous space)
+  - Constrained by attachment: only discrete orientations where edges align
+
+For an assembly:
+  - Each polygon has constrained orientation set (discrete)
+  - Constraint propagation narrows valid orientation domains
+  - Goal: compute minimum valid orientation set per polygon
+  - Result: I = product of (|valid_orientations_polygon_i| for all polygons)
+```
+
+**Attachment-driven constraint narrowing:**
+
+```
+Assembly: Triangle A attached to Square B
+
+Orientation set for A (unconstrained): 360° / 3 = 120° increments → 3 unique orientations
+Orientation set for B (unconstrained): 360° / 4 = 90° increments → 4 unique orientations
+
+Constraint: A's edge [0] is attached to B's edge [2]
+  - Fixes A's rotation relative to B
+  - Reduces A's orientation set to 1 (fixed by attachment)
+  - Reduces B's orientation set to 1 (fixed by attachment)
+  
+Remaining freedom: How to rotate both A and B together?
+  - Any rotation of the pair is valid (edge alignment maintained)
+  - But edge attachment is FIXED, so relative rotation = 0
+  
+Result: s_total = 1 (fully constrained assembly)
+```
+
+**GPU rendering implication:**
+
+The GPU receives orientations as discrete sets from CPU:
+
+```
+CPU → GPU:
+  {
+    polygon_0: [orientation_1, orientation_2, orientation_3],  // Triangle: 3 valid orientations
+    polygon_1: [orientation_1],                                 // Square: 1 orientation (fixed by attachment)
+    current_orientation_index: {polygon_0: 1, polygon_1: 0}   // Currently rendering orientation_1 for tri, orientation_0 for sq
+  }
+
+GPU:
+  - Render polygon at position + orientation[current_index]
+  - If user clicks "next orientation": CPU increments current_index, GPU re-renders
+  - Animation: Smooth rotation from current → next orientation
+```
+
+---
+
+### 2.3 Open Edge Tracking & Closure Detection
+
+**Core concept:** An assembly is *closed* when all edges are either:
+1. Attached to another polygon (interior edge), or
+2. Part of a face that has been merged with an adjacent face (boundary consolidated)
+
+**Open edge registry (CPU-side data structure):**
+
+```python
+class OpenEdgeRegistry:
+    """
+    Real-time tracking of available edges for attachment.
+    Updated every time a polygon is added/removed.
+    """
+    
+    def __init__(self):
+        self.edges = {}  # (polygon_id, edge_idx) → EdgeState
+    
+    class EdgeState:
+        polygon_id: int
+        edge_index: int
+        edge_centroid: Vector3  # in 3D space
+        edge_orientation: Quaternion
+        available_for_attachment: bool
+        compatible_neighbors: Set[Tuple[polygon_id, edge_idx]]  # which other edges can snap here
+    
+    def add_polygon(self, polygon_id, position, orientation):
+        """Add all edges of new polygon to registry."""
+        for edge_idx in range(polygon.edge_count):
+            edge = EdgeState(...)
+            self.edges[(polygon_id, edge_idx)] = edge
+    
+    def attach_edge_pair(self, edge_a, edge_b):
+        """Remove both edges from "available" set (they're now interior)."""
+        self.edges[edge_a].available_for_attachment = False
+        self.edges[edge_b].available_for_attachment = False
+    
+    def count_boundary_edges(self):
+        """Return count of edges still available (boundary)."""
+(Content truncated due to size limit. Use page ranges or line ranges to read remaining content)
