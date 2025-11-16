@@ -3,7 +3,7 @@
  * Tests complete backend-frontend integration workflow
  */
 
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Full System Integration', () => {
   test.beforeEach(async ({ page }) => {

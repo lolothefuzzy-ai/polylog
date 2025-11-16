@@ -3,7 +3,7 @@
  * Tests backend integration with frontend, data consistency, and system stability
  */
 
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Backend Integration Stability', () => {
   test.beforeEach(async ({ page }) => {

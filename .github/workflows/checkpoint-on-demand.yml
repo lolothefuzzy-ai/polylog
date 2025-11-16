@@ -1,0 +1,24 @@
+name: Manual Checkpoint Saver
+
+on:
+  workflow_dispatch: {}   # Only runs manually
+
+jobs:
+  save-checkpoint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Stamp checkpoint
+        run: |
+          echo "## Checkpoint triggered at $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> state/progress-log.md
+          echo "" >> state/progress-log.md
+      
+      - name: Commit and push
+        run: |
+          git config --global user.email "system@auto"
+          git config --global user.name "AutoCheckpoint"
+          git add state/progress-log.md
+          git commit -m "Manual checkpoint: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" || exit 0
+          git push || exit 0
+

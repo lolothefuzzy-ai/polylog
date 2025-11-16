@@ -3,7 +3,7 @@
  * Tests backend API stability, response times, and error handling
  */
 
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Backend System Stability', () => {
   let apiResponseTimes = [];
