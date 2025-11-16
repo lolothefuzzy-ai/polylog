@@ -137,6 +137,13 @@ data/large_datasets/
 .cursor/
 .windsurf/
 
+# Browser coordinator state
+.browser_coordinator_state.json
+
+# GitKraken
+.gitkraken/
+*.gkuser
+
 # AL (Dynamics 365 Business Central)
 .alcache/
 .alpackages/
@@ -147,3 +154,7 @@ rad.json
 *.g.xlf
 *.flf
 TestResults.xml
+
+# GitKraken
+test-results/
+playwright-report/

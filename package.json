@@ -1,0 +1,16 @@
+{
+  "name": "polylog6",
+  "version": "1.0.0",
+  "description": "Polyform visualization and analysis system",
+  "scripts": {
+    "dev": "python scripts/unified_launcher.py dev",
+    "test": "python scripts/unified_launcher.py test",
+    "build": "python scripts/unified_launcher.py build",
+    "clean": "python scripts/final_cleanup.py"
+  },
+  "workspaces": [
+    "src/frontend",
+    "src/desktop"
+  ]
+}
+

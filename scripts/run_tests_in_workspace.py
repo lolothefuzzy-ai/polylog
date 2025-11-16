@@ -22,11 +22,11 @@ def run_backend_tests() -> tuple[bool, str]:
             cwd=PROJECT_ROOT,
             capture_output=True,
             text=True,
-            timeout=300
+            timeout=60  # 1 minute max
         )
         return result.returncode == 0, result.stdout + result.stderr
     except subprocess.TimeoutExpired:
-        return False, "Tests timed out after 5 minutes"
+        return False, "Tests timed out after 1 minute"
     except Exception as e:
         return False, str(e)
 
@@ -47,11 +47,11 @@ def run_frontend_tests(test_type: str = "all") -> tuple[bool, str]:
             cwd=FRONTEND_DIR,
             capture_output=True,
             text=True,
-            timeout=600  # 10 minutes for browser tests
+            timeout=60  # 1 minute max for browser tests
         )
         return result.returncode == 0, result.stdout + result.stderr
     except subprocess.TimeoutExpired:
-        return False, "Tests timed out after 10 minutes"
+        return False, "Tests timed out after 1 minute"
     except Exception as e:
         return False, str(e)
 
@@ -65,8 +65,18 @@ def run_playwright_ui() -> None:
     )
 
 def run_visual_tests_headed() -> tuple[bool, str]:
-    """Run visual tests in headed mode (visible browser)"""
+    """Run visual tests in headed mode (visible browser) with coordination"""
     try:
+        # Use coordinated test runner if available
+        try:
+            from coordinated_test_runner import TestRunner
+            runner = TestRunner()
+            success, output = runner.run_tests("visual", timeout=600)
+            return success, output
+        except ImportError:
+            # Fallback to direct execution
+            pass
+        
         # Run integration tests (real system tests) in headed mode
         result = subprocess.run(
             ["npx", "playwright", "test", "tests/integration", "--headed", "--project=chromium"],

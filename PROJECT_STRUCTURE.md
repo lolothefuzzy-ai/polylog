@@ -1,65 +1,59 @@
 # Polylog6 Project Structure
 
-## Professional Desktop Application Structure
+## Directory Layout
 
 ```
 polylog6/
-├── README.md                    # Main entry point
-├── .cursorrules                 # Cursor IDE configuration
-├── .gitignore                   # Git ignore rules
-├── .github/                     # GitHub workflows & templates
-│   ├── workflows/
-│   │   ├── ci.yml              # CI/CD pipeline
-│   │   └── storage-regression.yml
-│   ├── dependabot.yml
-│   └── .mergify.yml            # PR automation
-├── src/                         # All source code
-│   ├── polylog6/               # Python backend package
-│   │   ├── api/                # FastAPI endpoints
-│   │   ├── detection/          # Image detection
-│   │   ├── simulation/         # Simulation engines
-│   │   ├── storage/            # Storage layer
-│   │   ├── monitoring/         # System monitoring
-│   │   └── ...
-│   ├── frontend/               # React/Babylon.js frontend
-│   │   ├── src/
-│   │   │   ├── components/     # React components
-│   │   │   ├── services/       # API services
-│   │   │   ├── tests/          # Test suites
-│   │   │   └── ...
-│   │   └── package.json
-│   └── desktop/                # Tauri desktop app
-│       └── src-tauri/          # Rust backend
-├── tests/                       # All test files
-│   ├── test_*.py               # Python tests
-│   └── ...
-├── scripts/                     # Utility scripts
-│   ├── unified_launcher.py     # Main launcher
-│   ├── auto_test.py            # Automated testing
-│   └── ...
-├── docs/                        # Documentation
-│   ├── architecture/           # System architecture
-│   ├── api/                     # API specs
-│   └── archive/                # Historical docs
-├── config/                      # Configuration files
-├── data/                        # Static data
-│   └── catalogs/               # Polyform catalogs
-└── storage/                     # Runtime storage
+├── src/                    # Source code
+│   ├── polylog6/          # Backend Python package
+│   ├── frontend/          # React frontend
+│   └── desktop/           # Tauri desktop app
+├── tests/                 # Test files
+├── scripts/               # Development scripts
+│   ├── unified_launcher.py
+│   ├── run_tests_in_workspace.py
+│   ├── organize_project.py
+│   └── final_cleanup.py
+├── docs/                  # Essential documentation
+│   ├── ARCHITECTURE.md
+│   ├── DEVELOPMENT.md
+│   └── WORKSPACE_INTERACTION_ARCHITECTURE.md
+├── data/                  # Data catalogs
+│   └── catalogs/
+├── .github/              # GitHub Actions workflows
+│   └── workflows/
+├── .vscode/              # VS Code/Cursor settings
+│   ├── settings.json
+│   ├── extensions.json
+│   ├── tasks.json
+│   └── launch.json
+├── README.md             # Main README
+├── requirements.txt       # Python dependencies
+└── package.json          # Root package.json
 ```
 
-## Key Features
+## Key Files
 
-- **Clean root**: Only essential files
-- **Organized source**: All code in `src/`
-- **Centralized tests**: All tests in `tests/`
-- **Documentation**: Organized in `docs/`
-- **Legacy archived**: Old files in `docs/archive/`
+### Scripts
+- `unified_launcher.py` - Main development launcher
+- `run_tests_in_workspace.py` - Test runner
+- `organize_project.py` - Project organization
+- `final_cleanup.py` - Cleanup utility
+- `verify_integration.py` - Integration verification
 
-## Development Commands
+### Configuration
+- `.vscode/settings.json` - Editor settings
+- `.vscode/extensions.json` - Recommended extensions
+- `.vscode/tasks.json` - Build tasks
+- `.vscode/launch.json` - Debug configurations
+- `.github/workflows/ci.yml` - CI/CD pipeline
 
-```bash
-python scripts/unified_launcher.py dev              # Start dev environment
-python scripts/unified_launcher.py test:visual:workspace  # Visual tests in workspace
-python scripts/unified_launcher.py test:auto       # Automated tests
-```
+### Documentation
+- `README.md` - Quick start
+- `docs/ARCHITECTURE.md` - System architecture
+- `docs/DEVELOPMENT.md` - Development guide
+- `docs/WORKSPACE_INTERACTION_ARCHITECTURE.md` - Interaction model
 
+## Development
+
+See `docs/DEVELOPMENT.md` for development workflow.

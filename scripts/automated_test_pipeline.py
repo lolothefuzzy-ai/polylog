@@ -45,7 +45,7 @@ def start_dev_servers():
         time.sleep(10)
         return True
     
-    max_retries = 60  # 2 minutes total
+    max_retries = 30  # 1 minute total (30 * 2s)
     for i in range(max_retries):
         try:
             api_check = requests.get("http://localhost:8000/health", timeout=2)
@@ -55,7 +55,7 @@ def start_dev_servers():
                 return True
         except:
             pass
-        time.sleep(2)
+        time.sleep(2)  # Check every 2 seconds, max 30 retries = 60s
         if i % 5 == 0:
             print(f"[PIPELINE] Still waiting for servers... ({i*2}s/{max_retries*2}s)")
     

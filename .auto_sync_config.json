@@ -1,0 +1,18 @@
+{
+  "auto_commit": true,
+  "auto_push": false,
+  "commit_interval": 300,
+  "exclude_patterns": [
+    "*.log",
+    "*.tmp",
+    "*.pyc",
+    "__pycache__/",
+    "node_modules/",
+    ".git/",
+    "test-results/",
+    "playwright-report/"
+  ],
+  "commit_message_template": "chore: Auto-sync development changes",
+  "branch": "main",
+  "remote": "origin"
+}

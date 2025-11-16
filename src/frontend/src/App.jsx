@@ -4,6 +4,7 @@ import { PolyhedraLibrary } from './components/PolyhedraLibrary.jsx';
 import { PolygonSlider } from './components/PolygonSlider.jsx';
 import { AttachmentValidator } from './components/AttachmentValidator.jsx';
 import { PolyformGenerator } from './components/PolyformGenerator.jsx';
+import { Tier0Display } from './components/Tier0Display.jsx';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [selectedAttachment, setSelectedAttachment] = useState(null);
   const [generatedPolyforms, setGeneratedPolyforms] = useState([]);
   const [warmupComplete, setWarmupComplete] = useState(false);
+  const [babylonScene, setBabylonScene] = useState(null);
   
   // Warmup: Only enable advanced features after 3+ polygons
   const canShowAdvancedFeatures = selectedPolyhedra.length >= 3;
@@ -72,12 +74,16 @@ function App() {
               console.log('Polygons attached:', attachment);
               // Could trigger generation or update UI here
             }}
+            onSceneReady={(scene) => {
+              setBabylonScene(scene);
+            }}
           />
         </div>
 
                 <div className="app-sidebar-right">
                   {canShowAdvancedFeatures ? (
                     <>
+                      <Tier0Display scene={babylonScene} />
                       <AttachmentValidator
                         polygonA={polygonA}
                         polygonB={polygonB}
@@ -96,6 +102,7 @@ function App() {
                         <li>Fold angle calculation</li>
                         <li>3D net closure detection</li>
                         <li>Polyform generation</li>
+                        <li>Tier 0 symbol display</li>
                       </ul>
                       <div className="polygon-count">
                         Current: {selectedPolyhedra.length} / 3+

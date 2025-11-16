@@ -200,5 +200,4 @@ jobs:
           payload=${payload//ACTOR/$GITHUB_ACTOR}
           payload=${payload//COLOR_VALUE/$COLOR}
           payload=${payload//TIMESTAMP/$(date +%s)}
-
           curl -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_URL"

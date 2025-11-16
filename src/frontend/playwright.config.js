@@ -66,10 +66,15 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: [
     {
-      command: 'npm run dev',
+      command: 'python ../../scripts/unified_launcher.py dev',
       url: 'http://localhost:5173',
       reuseExistingServer: !process.env.CI,
-      timeout: 120 * 1000,
+      timeout: 120 * 1000, // 2 minutes max for both servers
+      stdout: 'pipe',
+      stderr: 'pipe',
     },
   ],
+  
+  /* Global timeout for all tests */
+  timeout: 60 * 1000, // 1 minute per test
 });

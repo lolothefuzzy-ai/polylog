@@ -6,7 +6,7 @@ for frontend rendering and testing.
 """
 
 import json
-from pathlib import Path
+from pathlib import Path as PathLib
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException, Query, Response, Path
@@ -14,7 +14,7 @@ import hashlib
 
 router = APIRouter(prefix="/tier1", tags=["tier1-polyhedra"])
 
-_ROOT = Path(__file__).resolve().parents[3]
+_ROOT = PathLib(__file__).resolve().parents[3]
 _CATALOG_ROOT = _ROOT / "catalogs"
 _TIER1_DIR = _CATALOG_ROOT / "tier1"
 _ATTACHMENTS_DIR = _CATALOG_ROOT / "attachments"

@@ -57,8 +57,8 @@ def run_background(cmd, cwd=None, name=""):
     thread.start()
     return thread
 
-def wait_for_server(url, timeout=30):
-    """Wait for server to be ready"""
+def wait_for_server(url, timeout=60):
+    """Wait for server to be ready (max 60 seconds)"""
     try:
         import requests
     except ImportError:
@@ -119,23 +119,10 @@ def main():
     else:
         print_warning("Frontend server may not be ready yet")
     
-    # Open browser
-    print_info("Opening browser preview...")
-    time.sleep(2)
-    try:
-        webbrowser.open(f"http://localhost:{FRONTEND_PORT}")
-        print_success("Browser opened")
-    except:
-        print_warning("Could not open browser automatically")
-        print_info(f"Manually open: http://localhost:{FRONTEND_PORT}")
-    
-    # Start visual test watcher (optional, in background)
-    print_info("Starting visual test watcher...")
-    test_thread = run_background(
-        ["npm", "run", "test:visual", "--", "--watch"],
-        cwd=FRONTEND_DIR,
-        name="Tests"
-    )
+    # Don't auto-open browser - user will open manually
+    print_info(f"Frontend available at: http://localhost:{FRONTEND_PORT}")
+    print_info("Open browser manually when ready")
+    print_info("Playwright tests disabled - run manually when needed")
     
     print(f"\n{Colors.BOLD}{'='*60}{Colors.ENDC}")
     print_success("Development environment ready!")
@@ -143,7 +130,7 @@ def main():
     print_info("Services running:")
     print_info(f"  • API: http://localhost:{API_PORT}")
     print_info(f"  • Frontend: http://localhost:{FRONTEND_PORT}")
-    print_info(f"  • Visual Tests: Watching for changes")
+    print_info(f"  • Tests: Disabled (run manually with 'npm run test:visual')")
     print("\nPress Ctrl+C to stop all services\n")
     
     # Keep running

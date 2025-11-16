@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { storageService } from '../services/storageService';
 import './PolyformGenerator.css';
 
-export function PolyformGenerator({ selectedPolyhedra, onPolyformGenerated }) {
+export function PolyformGenerator({ selectedPolyhedra, onPolyformGenerated, sliderPolygon = null }) {
   const [generating, setGenerating] = useState(false);
   const [generatedPolyforms, setGeneratedPolyforms] = useState([]);
   const [error, setError] = useState(null);
   const [generationMode, setGenerationMode] = useState('linear'); // 'linear' or 'exponential'
   const [storageStats, setStorageStats] = useState(null);
+  const [generationType, setGenerationType] = useState('tier1'); // 'tier1', 'tier2', 'workspace'
+  const [tier1SolidType, setTier1SolidType] = useState('platonic'); // 'platonic', 'archimedean', 'johnson'
 
-  const canGenerate = selectedPolyhedra.length >= 2;
+  // Can generate if: (selected polyhedra >= 2) OR (slider polygon selected)
+  const canGenerate = selectedPolyhedra.length >= 2 || sliderPolygon !== null;
 
   // Load existing generated polyforms on mount
   useEffect(() => {
@@ -41,6 +44,45 @@ export function PolyformGenerator({ selectedPolyhedra, onPolyformGenerated }) {
     }
   };
 
+  const handleTier1Generation = async () => {
+    if (!sliderPolygon) return;
+    
+    try {
+      const response = await fetch('/api/generation/tier1/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          symbol: `Ω${sliderPolygon.sides}`, // Placeholder symbol
+          solid_type: tier1SolidType
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Generation failed: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      const newPolyform = {
+        symbol: data.symbol,
+        name: data.name,
+        solid_type: data.solid_type,
+        stability_score: data.stability_score,
+        tier0_composition: data.tier0_composition,
+        metadata: data.metadata
+      };
+      
+      setGeneratedPolyforms(prev => [newPolyform, ...prev]);
+      
+      if (onPolyformGenerated) {
+        onPolyformGenerated(newPolyform);
+      }
+    } catch (err) {
+      setError(err.message || 'Tier 1 generation failed');
+      throw err;
+    }
+  };
+
   const handleGenerate = async () => {
     if (!canGenerate) return;
 
@@ -48,6 +90,13 @@ export function PolyformGenerator({ selectedPolyhedra, onPolyformGenerated }) {
     setError(null);
 
     try {
+      // If slider polygon is selected, use it for generation
+      if (sliderPolygon && generationType === 'tier1') {
+        await handleTier1Generation();
+        return;
+      }
+      
+      // Otherwise use selected polyhedra
       // Get last two selected polyhedra
       const polyA = selectedPolyhedra[selectedPolyhedra.length - 2];
       const polyB = selectedPolyhedra[selectedPolyhedra.length - 1];

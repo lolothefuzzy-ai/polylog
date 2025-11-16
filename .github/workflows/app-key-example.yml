@@ -1,0 +1,19 @@
+name: App Key Example
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-app-key:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Use App Key
+        env:
+          APP_KEY: ${{ secrets.APP_KEY }}
+        run: |
+          echo "App key configured"
+          # Use APP_KEY for GitHub API calls or authentication
+          # Example: curl -H "Authorization: Bearer $APP_KEY" https://api.github.com/user

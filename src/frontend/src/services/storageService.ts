@@ -82,25 +82,62 @@ export class StorageService {
   }
 
   async getPolyhedronLOD(symbol: string, level: 'full' | 'medium' | 'low' | 'thumbnail'): Promise<any> {
-    const response = await fetch(`${this.tier1Url}/polyhedra/${symbol}/lod/${level}`);
-    if (!response.ok) {
+    try {
+      const response = await fetch(`${this.tier1Url}/polyhedra/${symbol}/lod/${level}`);
+      if (!response.ok) {
+        throw new Error(`LOD fetch failed: ${response.statusText}`);
+      }
+      return response.json();
+    } catch (error) {
       // Fallback to basic geometry
-      console.warn(`LOD not available for ${symbol}, using fallback`);
+      console.warn(`[StorageService] LOD not available for ${symbol}, using fallback:`, error);
       return this.getFallbackGeometry(symbol);
     }
-    return response.json();
   }
-
-  private getFallbackGeometry(symbol: string): any {
-    // Basic fallback geometry for testing
+  
+  getFallbackGeometry(symbol: string): any {
+    // Generate fallback geometry for primitives (A-R = 3-20 sides)
+    const symbolToSides: { [key: string]: number } = {
+      'A': 3, 'B': 4, 'C': 5, 'D': 6, 'E': 7, 'F': 8, 'G': 9, 'H': 10,
+      'I': 11, 'J': 12, 'K': 13, 'L': 14, 'M': 15, 'N': 16, 'O': 17,
+      'P': 18, 'Q': 19, 'R': 20
+    };
+    
+    const sides = symbolToSides[symbol.toUpperCase()] || 3;
+    const vertices: number[][] = [];
+    const indices: number[] = [];
+    const normals: number[][] = [];
+    
+    // Generate regular polygon vertices (unit edge length = 1, centered at origin)
+    // For unit edge length, radius = 0.5 / sin(π/n)
+    const radius = 0.5 / Math.sin(Math.PI / sides);
+    
+    // Add center vertex first (for fan triangulation)
+    vertices.push([0, 0, 0]);
+    normals.push([0, 0, 1]);
+    
+    // Generate vertices around circle
+    for (let i = 0; i < sides; i++) {
+      const angle = (i * 2 * Math.PI) / sides - Math.PI / 2; // Start at top
+      vertices.push([
+        radius * Math.cos(angle),
+        radius * Math.sin(angle),
+        0
+      ]);
+      normals.push([0, 0, 1]);
+    }
+    
+    // Triangulate polygon (fan from center vertex at index 0)
+    // Triangles: (0, 1, 2), (0, 2, 3), ..., (0, sides, 1)
+    for (let i = 1; i <= sides; i++) {
+      const next = (i % sides) + 1; // Wrap around: sides+1 -> 1
+      indices.push(0, i, next);
+    }
+    
     return {
-      vertices: [
-        [0, 0, 0],
-        [1, 0, 0],
-        [0.5, 0.866, 0]
-      ],
-      indices: [0, 1, 2],
-      normals: [[0, 0, 1], [0, 0, 1], [0, 0, 1]]
+      vertices,
+      indices,
+      normals
     };
   }
 

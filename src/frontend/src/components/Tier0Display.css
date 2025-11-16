@@ -1,0 +1,120 @@
+.tier0-display {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.tier0-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tier0-header h3 {
+  margin: 0;
+  color: #e0e0e0;
+  font-size: 1.1rem;
+}
+
+.toggle-visualization {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.toggle-visualization input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.chains-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chain-item {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chain-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.chain-id {
+  font-weight: 600;
+  color: #d0d0d0;
+}
+
+.tier0-symbol {
+  font-family: 'Courier New', monospace;
+  background: rgba(100, 150, 255, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: #90c0ff;
+  font-weight: 600;
+}
+
+.chain-details {
+  font-size: 0.85rem;
+  color: #b0b0b0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.polygon-count {
+  color: #c0c0c0;
+}
+
+.atomic-chain-type {
+  color: #90ff90;
+}
+
+.atomic-chain-type strong {
+  text-transform: capitalize;
+}
+
+.scaffold-applications {
+  color: #ffb090;
+  font-size: 0.8rem;
+}
+
+.empty-state {
+  text-align: center;
+  color: #808080;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.atomic-chains-library {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.atomic-chains-library h4 {
+  margin: 0 0 0.75rem 0;
+  color: #d0d0d0;
+  font-size: 1rem;
+}
+
+.library-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #b0b0b0;
+}
+

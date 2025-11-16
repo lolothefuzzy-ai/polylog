@@ -47,7 +47,7 @@ export function PolyhedraLibrary({ onSelect }) {
           const scalarItems = (scalarData.items || []).map(v => ({
             ...v,
             name: v.name || `${v.base_symbol || v.symbol} (k=${v.scale_factor || 1})`,
-            classification: 'scalar_variant' as const
+            classification: 'scalar_variant'
           }));
           
           // Combine base and scalar variants
@@ -65,7 +65,7 @@ export function PolyhedraLibrary({ onSelect }) {
       }
       
       setError(null);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Failed to load polyhedra:', err);
       setError(err.message || 'Failed to load polyhedra');
       setPolyhedra([]);

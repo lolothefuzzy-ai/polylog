@@ -1,120 +1,36 @@
 # Polylog6 Cursor Rules
 
-## Project Overview
-Polylog6 is a sophisticated polyform visualization and analysis system that combines geometric computation, pattern discovery, and interactive visualization using a hybrid CGAL + Unicode approach.
+## Project Structure
+- Keep only actionable code
+- Remove redundant documentation
+- Organize scripts by purpose
+- Maintain clean project structure
 
-## Architecture
-- **Frontend**: React + Babylon.js (3D visualization)
-- **Desktop**: Tauri (Rust) wrapper with Python bridge
-- **Backend**: Python with CGAL integration
-- **Storage**: Tiered Unicode compression system
-- **Testing**: pytest (Python) + Playwright (frontend)
+## Code Standards
+- Python: PEP 8, type hints, ruff linting
+- TypeScript: Strict mode, ESLint
+- Rust: rustfmt conventions
 
-## Key Directories
-- `src/polylog6/` - Main Python package (detection, simulation, compression, monitoring)
-- `src/frontend/` - React/Babylon.js frontend
-- `src/desktop/` - Tauri desktop application
-- `src/shared/` - Shared types and schemas (currently empty)
-- `tests/` - Test files organized by type
-- `scripts/` - Utility scripts for catalog generation and data processing
-- `data/catalogs/` - Tiered polyform data (tier0, tier1, attachments)
-- `docs/` - Documentation (architecture, API, guides)
+## Development Workflow
+- Use unified_launcher.py for development
+- Run tests before committing
+- Use conventional commits
+- Keep GitHub Actions workflows updated
 
-## Development Guidelines
+## File Organization
+- Source code in src/
+- Tests in tests/
+- Scripts in scripts/
+- Essential docs in docs/
+- Remove redundant summaries and status files
 
-### Code Style
-- **Python**: Follow PEP 8, use type hints
-- **TypeScript**: Strict mode enabled, use interfaces for all data structures
-- **Rust**: Follow rustfmt conventions, use Result<T, Error> for error handling
+## Testing
+- Write tests for all new features
+- Run tests before committing
+- Use GitHub Actions for CI/CD
 
-### File Organization
-- Keep components focused on single responsibilities
-- Use relative imports within modules
-- Store test files close to implementation files
-- Use descriptive file names that indicate purpose
-
-### Key Patterns
-- Unicode symbols for compressed geometry representation
-- Tiered storage architecture (tier0: primitives, tier1: polyhedra, tier2+: assemblies)
-- Event-driven simulation with GeometryRuntime
-- Async/await patterns for all I/O operations
-
-### Testing Strategy
-- Unit tests for all core logic (>95% coverage target)
-- Integration tests for API endpoints
-- Visual regression tests for 3D rendering
-- Performance benchmarks for compression/decompression
-
-### Performance Requirements
-- Sub-100ms API responses
-- 60 FPS rendering for 1000+ polygon assemblies
-- <500MB total memory budget
-- 100-5000x compression ratios for geometry data
-
-## Common Tasks
-
-### Adding New Polyforms
-1. Define geometry in `data/catalogs/geometry_catalog.json`
-2. Generate Unicode symbol allocation
-3. Update LOD metadata
-4. Add tests in `tests/`
-
-### Modifying Compression
-1. Update encoder in `src/polylog6/compression/`
-2. Verify symbol allocation in tier system
-3. Run compression benchmarks
-4. Update documentation
-
-### Frontend Development
-1. Components in `src/frontend/src/components/`
-2. Utils in `src/frontend/src/utils/`
-3. Services in `src/frontend/src/services/`
-4. Use Babylon.js for all 3D operations
-
-### Backend Development
-1. API endpoints in `src/polylog6/api/`
-2. Core logic in appropriate subdirectories
-3. Use FastAPI for all HTTP endpoints
-4. Integrate with CGAL for geometric operations
-
-## Cursor-Specific Features
-
-### Code Navigation
-- Use `Ctrl+Shift+O` to quickly navigate to symbols
-- `F12` to go to definitions
-- `Ctrl+Click` for peek definitions
-
-### Debugging
-- Python: Use integrated debugger with breakpoints
-- TypeScript: Use browser dev tools for frontend debugging
-- Rust: Use `cargo-debug` extension
-
-### Refactoring
-- Rename symbols with `F2`
-- Extract functions with `Ctrl+.` menu
-- Find all references with `Shift+F12`
-
-### Git Integration
-- Use source control panel for commits
-- Inline diff view for changes
-- Stash changes when switching contexts
-
-## Prohibited Actions
-- Do not commit build artifacts (.gitignore covers this)
-- Do not hardcode API keys or secrets
-- Do not modify generated files (e.g., api.generated.ts)
-- Do not break the tiered storage architecture
-- Do not use synchronous I/O in async contexts
-
-## Useful Commands
-- `python scripts/launcher.py dev` - Start development environment
-- `python scripts/launcher.py test` - Run all tests
-- `python scripts/launcher.py build` - Build for production
-- `npm run dev` (in src/frontend) - Frontend dev server
-- `cargo tauri dev` (in src/desktop) - Desktop dev mode
-
-## Getting Help
-- Check `docs/architecture/POLYLOG6_ARCHITECTURE.md` for system overview
-- Review `README.md` for quick start
-- Check test files for usage examples
-- Use existing code as patterns for new features
+## Documentation
+- Keep only essential architecture docs
+- Remove redundant status/summary files
+- Consolidate related documentation
+- Update README.md for quick reference
