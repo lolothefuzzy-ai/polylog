@@ -11,13 +11,22 @@ from pathlib import Path
 from polylog6.storage.encoder import TieredUnicodeEncoder
 from polylog6.storage.polyform_storage import PolyformStorage
 from polylog6.simulation.placement.runtime import PlacementRuntime
+from polylog6.storage.manager import PolyformStorageManager
+from pathlib import Path
 from polylog6.simulation.stability.calculator import StabilityCalculator
 
 router = APIRouter(prefix="/api/polyform", tags=["multi_generator"])
 
 _encoder = TieredUnicodeEncoder()
 _storage = PolyformStorage()
-_placement_runtime = PlacementRuntime()
+# Initialize storage manager and catalog for PlacementRuntime
+_storage_base_path = Path(__file__).parent.parent.parent.parent.parent / "storage" / "caches"
+_storage_manager = PolyformStorageManager(base_path=_storage_base_path)
+_catalog_dir = Path(__file__).parent.parent.parent.parent.parent / "catalogs"
+_placement_runtime = PlacementRuntime(
+    storage_manager=_storage_manager,
+    catalog_dir=_catalog_dir
+)
 _stability_calc = StabilityCalculator()
 
 SYMBOL_TO_SIDES = {
