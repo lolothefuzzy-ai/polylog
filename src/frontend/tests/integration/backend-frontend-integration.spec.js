@@ -67,7 +67,7 @@ test.describe('Backend-Frontend Integration', () => {
   test('Frontend Tier 0 Integration', async ({ page }) => {
     // Test Tier 0 decoding integration
     const tier0Response = await page.evaluate(async () => {
-      const response = await fetch('http://localhost:8000/tier0/decode/A11');
+      const response = await fetch('http://localhost:8000/tier0/symbols/A11');
       return {
         status: response.status,
         data: await response.json()

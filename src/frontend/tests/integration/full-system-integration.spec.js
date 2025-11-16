@@ -47,7 +47,7 @@ test.describe('Full System Integration', () => {
     const errorTests = [
       { url: 'http://localhost:8000/api/geometry/primitive/999', expectedStatus: 404 },
       { url: 'http://localhost:8000/api/tier1/polyhedra/INVALID', expectedStatus: 404 },
-      { url: 'http://localhost:8000/tier0/decode/INVALID', expectedStatus: 404 }
+      { url: 'http://localhost:8000/tier0/symbols/INVALID', expectedStatus: 404 }
     ];
     
     for (const testCase of errorTests) {
