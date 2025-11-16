@@ -1,10 +1,8 @@
-# Virtual environments
-venv/
-.env
-.venv*/
-
 # Python
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
 *.py[cod]
 *$py.class
 *.so
@@ -25,6 +23,13 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# Environment
+.env
+.venv
+venv/
+env/
+.venv*/
 
 # pytest
 .pytest_cache/
@@ -65,6 +70,7 @@ Cargo.lock
 *.swp
 *.swo
 *~
+*.iml
 
 # OS
 .DS_Store
@@ -96,3 +102,31 @@ temp/
 # Data files (if large)
 data/polyhedra/external/
 data/large_datasets/
+
+# Build/artifacts
+*.egg-info/
+electron/node_modules/
+electron/dist/
+electron/out/
+
+# Tauri build output
+src-tauri/target/
+src-tauri/gen/
+src-tauri/icons/
+
+# Logs / diagnostics
+.ruff_cache/
+
+# Coverage
+htmlcov/
+
+# AL Business Central
+.alcache/
+.alpackages/
+.snapshots/
+.output/
+*.app
+rad.json
+*.g.xlf
+*.flf
+TestResults.xml
