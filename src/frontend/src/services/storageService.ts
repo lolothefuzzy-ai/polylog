@@ -170,6 +170,39 @@ export class StorageService {
     return response.json();
   }
 
+  // Polyform Generation
+  async generatePolyform(request: {
+    polygonA: string;
+    polygonB: string;
+    mode?: string;
+    maxSteps?: number;
+    attachmentOption?: any;
+  }): Promise<{
+    success: boolean;
+    symbol?: string;
+    unicode?: string;
+    composition?: string;
+    geometry?: any;
+    metadata?: any;
+    compressionRatio?: number;
+    error?: string;
+  }> {
+    const response = await fetch(`${this.baseUrl}/api/polyform/generate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request),
+    });
+    
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: response.statusText }));
+      throw new Error(error.error || `Failed to generate polyform: ${response.statusText}`);
+    }
+    
+    return response.json();
+  }
+
   // Health check
   async healthCheck(): Promise<{ status: string }> {
     const response = await fetch(`${this.baseUrl}/health`);

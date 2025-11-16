@@ -1,0 +1,160 @@
+.polyform-generator {
+  padding: 1rem;
+  background: var(--bg-secondary, #1a1a2e);
+  border-radius: 8px;
+  color: var(--text-primary, #fff);
+}
+
+.generator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.generator-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary, #fff);
+}
+
+.generator-status {
+  font-size: 0.85rem;
+}
+
+.status-ready {
+  color: #4ade80;
+}
+
+.status-waiting {
+  color: #94a3b8;
+}
+
+.generator-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.control-group label {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.control-group select {
+  padding: 0.5rem;
+  background: var(--bg-tertiary, #16213e);
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 4px;
+  color: var(--text-primary, #fff);
+  font-size: 0.9rem;
+}
+
+.control-group select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.generate-button {
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.generate-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.generate-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.generator-error {
+  padding: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 4px;
+  color: #fca5a5;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.generated-polyforms {
+  margin-top: 1rem;
+}
+
+.generated-polyforms h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: var(--text-primary, #fff);
+}
+
+.polyform-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.generated-polyform-item {
+  padding: 0.75rem;
+  background: var(--bg-tertiary, #16213e);
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 6px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.polyform-symbol {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.polyform-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.polyform-composition {
+  font-size: 0.85rem;
+  color: var(--text-primary, #fff);
+  font-family: monospace;
+}
+
+.polyform-compression,
+.polyform-count {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.generator-hint {
+  padding: 0.75rem;
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 4px;
+  color: var(--text-secondary, #cbd5e1);
+  font-size: 0.85rem;
+  text-align: center;
+}
+

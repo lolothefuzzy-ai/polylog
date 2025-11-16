@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { BabylonScene } from './components/BabylonScene.jsx';
 import { PolyhedraLibrary } from './components/PolyhedraLibrary.jsx';
 import { AttachmentValidator } from './components/AttachmentValidator.jsx';
+import { PolyformGenerator } from './components/PolyformGenerator.jsx';
 import './App.css';
 
 function App() {
   const [selectedPolyhedra, setSelectedPolyhedra] = useState([]);
   const [selectedAttachment, setSelectedAttachment] = useState(null);
+  const [generatedPolyforms, setGeneratedPolyforms] = useState([]);
 
   const handleSelectPolyhedron = (poly) => {
     setSelectedPolyhedra([...selectedPolyhedra, poly]);
@@ -16,6 +18,17 @@ function App() {
     setSelectedAttachment(option);
     // Apply attachment to workspace
     console.log('Selected attachment:', option);
+  };
+
+  const handlePolyformGenerated = (polyform) => {
+    setGeneratedPolyforms(prev => [...prev, polyform]);
+    // Add generated polyform to selected list for visualization
+    setSelectedPolyhedra(prev => [...prev, {
+      symbol: polyform.symbol || polyform.unicode,
+      name: `Generated: ${polyform.composition}`,
+      classification: 'generated',
+      ...polyform.metadata
+    }]);
   };
 
   const getLastTwoPolyhedra = () => {
@@ -53,6 +66,10 @@ function App() {
             polygonA={polygonA}
             polygonB={polygonB}
             onSelect={handleSelectAttachment}
+          />
+          <PolyformGenerator
+            selectedPolyhedra={selectedPolyhedra}
+            onPolyformGenerated={handlePolyformGenerated}
           />
         </div>
       </div>

@@ -9,13 +9,14 @@ from pathlib import Path
 
 from polylog6.api.tier1_polyhedra import router as tier1_router
 from polylog6.api.storage import router as storage_router
+from polylog6.api.generator import router as generator_router
 
 app = FastAPI(title="Polyform Backend")
 
-# CORS for Tauri frontend
+# CORS for Tauri frontend and dev server
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "tauri://localhost"],
+    allow_origins=["http://localhost:3000", "http://localhost:5173", "tauri://localhost"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -24,6 +25,7 @@ app.add_middleware(
 # Register routers
 app.include_router(tier1_router)
 app.include_router(storage_router)
+app.include_router(generator_router)
 
 @app.get("/health")
 async def health_check():
