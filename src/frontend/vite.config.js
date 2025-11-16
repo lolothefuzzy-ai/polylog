@@ -5,8 +5,8 @@ export default defineConfig({
   root: '.',
   plugins: [react()],
   server: {
-    port: 3000,
-    strictPort: true,
+    port: 5173,
+    strictPort: false, // Allow fallback to next available port
   },
   build: {
     outDir: 'dist',

@@ -175,13 +175,13 @@ export const BabylonScene = ({ selectedPolyhedra = [], selectedAttachment = null
     loadGeneratedPolyform();
   }, [generatedPolyform, selectedPolyhedra]);
 
-  // Auto-attach when second polygon added
+  // Only attempt auto-attachment after 3+ polygons (for closure)
   useEffect(() => {
-    if (selectedPolyhedra.length === 2 && interactionManagerRef.current && sceneRef.current) {
-      // Small delay to ensure meshes are loaded
+    if (selectedPolyhedra.length >= 3 && interactionManagerRef.current && sceneRef.current) {
+      // Small delay to ensure meshes are loaded and warmed up
       setTimeout(() => {
         interactionManagerRef.current?.attemptAutoAttachment();
-      }, 500);
+      }, 1000);
     }
   }, [selectedPolyhedra.length]);
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BabylonScene } from './components/BabylonScene.jsx';
 import { PolyhedraLibrary } from './components/PolyhedraLibrary.jsx';
+import { PolygonSlider } from './components/PolygonSlider.jsx';
 import { AttachmentValidator } from './components/AttachmentValidator.jsx';
 import { PolyformGenerator } from './components/PolyformGenerator.jsx';
 import './App.css';
@@ -9,6 +10,10 @@ function App() {
   const [selectedPolyhedra, setSelectedPolyhedra] = useState([]);
   const [selectedAttachment, setSelectedAttachment] = useState(null);
   const [generatedPolyforms, setGeneratedPolyforms] = useState([]);
+  const [warmupComplete, setWarmupComplete] = useState(false);
+  
+  // Warmup: Only enable advanced features after 3+ polygons
+  const canShowAdvancedFeatures = selectedPolyhedra.length >= 3;
 
   const handleSelectPolyhedron = (poly) => {
     setSelectedPolyhedra([...selectedPolyhedra, poly]);
@@ -50,10 +55,14 @@ function App() {
         <div className="app-subtitle">Interactive 3D Polyform Design & Generation</div>
       </div>
 
-      <div className="app-layout">
-        <div className="app-sidebar-left">
-          <PolyhedraLibrary onSelect={handleSelectPolyhedron} />
-        </div>
+              <div className="app-layout">
+                <div className="app-sidebar-left">
+                  {selectedPolyhedra.length < 3 ? (
+                    <PolygonSlider onSelect={handleSelectPolyhedron} />
+                  ) : (
+                    <PolyhedraLibrary onSelect={handleSelectPolyhedron} />
+                  )}
+                </div>
 
         <div className="app-main">
           <BabylonScene 
@@ -66,17 +75,34 @@ function App() {
           />
         </div>
 
-        <div className="app-sidebar-right">
-          <AttachmentValidator
-            polygonA={polygonA}
-            polygonB={polygonB}
-            onSelect={handleSelectAttachment}
-          />
-          <PolyformGenerator
-            selectedPolyhedra={selectedPolyhedra}
-            onPolyformGenerated={handlePolyformGenerated}
-          />
-        </div>
+                <div className="app-sidebar-right">
+                  {canShowAdvancedFeatures ? (
+                    <>
+                      <AttachmentValidator
+                        polygonA={polygonA}
+                        polygonB={polygonB}
+                        onSelect={handleSelectAttachment}
+                      />
+                      <PolyformGenerator
+                        selectedPolyhedra={selectedPolyhedra}
+                        onPolyformGenerated={handlePolyformGenerated}
+                      />
+                    </>
+                  ) : (
+                    <div className="warmup-message">
+                      <h3>Building Polyform Net</h3>
+                      <p>Add {3 - selectedPolyhedra.length} more polygon{3 - selectedPolyhedra.length !== 1 ? 's' : ''} to enable:</p>
+                      <ul>
+                        <li>Fold angle calculation</li>
+                        <li>3D net closure detection</li>
+                        <li>Polyform generation</li>
+                      </ul>
+                      <div className="polygon-count">
+                        Current: {selectedPolyhedra.length} / 3+
+                      </div>
+                    </div>
+                  )}
+                </div>
       </div>
     </div>
   );
