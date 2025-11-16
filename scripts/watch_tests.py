@@ -74,19 +74,22 @@ class TestWatcher(FileSystemEventHandler):
     def run_frontend_tests(self):
         """Run frontend tests"""
         try:
-            # Run visual tests in headed mode for immediate feedback
+            # Run integration tests in headed mode for immediate feedback
+            # Focus on real system tests
             result = subprocess.run(
-                ["npx", "playwright", "test", "tests/visual", "--headed", "--project=chromium", "-x"],
+                ["npx", "playwright", "test", "tests/integration", "--headed", "--project=chromium"],
                 cwd=FRONTEND_DIR,
                 capture_output=True,
                 text=True,
-                timeout=180
+                timeout=300
             )
             if result.returncode == 0:
                 print("[OK] Frontend tests passed")
             else:
                 print("[FAIL] Frontend tests failed")
-                print(result.stdout[-500:] + result.stderr[-500:])
+                # Show more output for debugging
+                output = result.stdout + result.stderr
+                print(output[-1000:] if len(output) > 1000 else output)
         except Exception as e:
             print(f"[ERROR] Failed to run frontend tests: {e}")
 

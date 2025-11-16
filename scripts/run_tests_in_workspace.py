@@ -67,8 +67,9 @@ def run_playwright_ui() -> None:
 def run_visual_tests_headed() -> tuple[bool, str]:
     """Run visual tests in headed mode (visible browser)"""
     try:
+        # Run integration tests (real system tests) in headed mode
         result = subprocess.run(
-            ["npx", "playwright", "test", "tests/visual", "--headed", "--project=chromium"],
+            ["npx", "playwright", "test", "tests/integration", "--headed", "--project=chromium"],
             cwd=FRONTEND_DIR,
             capture_output=True,
             text=True,
