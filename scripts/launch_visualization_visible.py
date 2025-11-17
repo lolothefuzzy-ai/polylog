@@ -140,6 +140,17 @@ def main():
     print("  3. Browser window (http://localhost:5173)")
     print("\n" + "=" * 70 + "\n")
     
+    # Clean up existing processes first
+    try:
+        cleanup_script = PROJECT_ROOT / "scripts" / "cleanup_processes.py"
+        if cleanup_script.exists():
+            print("[INFO] Cleaning up existing processes...")
+            subprocess.run([sys.executable, str(cleanup_script)], 
+                         capture_output=True, timeout=10)
+            time.sleep(2)  # Give processes time to terminate
+    except Exception as e:
+        print(f"[WARN] Cleanup failed: {e}")
+    
     # Check if servers are already running
     api_ready = check_server("http://localhost:8000/health", timeout=2)
     frontend_ready = check_server("http://localhost:5173", timeout=2)
@@ -163,30 +174,25 @@ def main():
     else:
         print("[OK] Frontend server is already running")
     
-    # Open browser only once (check if already opened)
-    print("\n[INFO] Checking if browser is already open...")
+    # Open browser only once - use a lock file to prevent multiple launches
+    print("\n[INFO] Opening browser...")
     time.sleep(2)  # Give servers a moment to fully initialize
     
-    # Check if browser is already open by checking if port 5173 has connections
-    import socket
-    browser_open = False
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        result = sock.connect_ex(('127.0.0.1', 5173))
-        sock.close()
-        if result == 0:
-            # Port is accessible, check if we should open browser
-            # Only open if this is the first launch (no existing browser process)
-            browser_open = True
-    except:
-        pass
+    lock_file = PROJECT_ROOT / ".browser_launched.lock"
+    browser_already_opened = lock_file.exists()
     
-    if not browser_open:
+    if not browser_already_opened:
         print("[INFO] Opening browser (first time only)...")
         webbrowser.open("http://localhost:5173")
+        # Create lock file to prevent duplicate launches
+        try:
+            lock_file.touch()
+        except:
+            pass
     else:
-        print("[INFO] Browser may already be open. Skipping duplicate launch.")
+        print("[INFO] Browser was already opened in this session. Skipping duplicate launch.")
         print("[INFO] If browser is not visible, manually open: http://localhost:5173")
+        print("[INFO] To reset, delete: .browser_launched.lock")
     
     print("\n" + "=" * 70)
     print("Visualization is ready!")
