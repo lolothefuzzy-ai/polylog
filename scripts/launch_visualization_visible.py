@@ -163,10 +163,30 @@ def main():
     else:
         print("[OK] Frontend server is already running")
     
-    # Open browser
-    print("\n[INFO] Opening browser...")
+    # Open browser only once (check if already opened)
+    print("\n[INFO] Checking if browser is already open...")
     time.sleep(2)  # Give servers a moment to fully initialize
-    webbrowser.open("http://localhost:5173")
+    
+    # Check if browser is already open by checking if port 5173 has connections
+    import socket
+    browser_open = False
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        result = sock.connect_ex(('127.0.0.1', 5173))
+        sock.close()
+        if result == 0:
+            # Port is accessible, check if we should open browser
+            # Only open if this is the first launch (no existing browser process)
+            browser_open = True
+    except:
+        pass
+    
+    if not browser_open:
+        print("[INFO] Opening browser (first time only)...")
+        webbrowser.open("http://localhost:5173")
+    else:
+        print("[INFO] Browser may already be open. Skipping duplicate launch.")
+        print("[INFO] If browser is not visible, manually open: http://localhost:5173")
     
     print("\n" + "=" * 70)
     print("Visualization is ready!")
