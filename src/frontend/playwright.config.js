@@ -8,7 +8,8 @@ export default defineConfig({
   testDir: './tests',
   
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  /* Disabled for single window - use workers=1 instead */
+  fullyParallel: false,
   
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -16,8 +17,8 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  /* Single worker to ensure one browser window */
+  workers: 1,
   
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -66,16 +67,18 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: [
-    {
-      command: 'python ../../scripts/unified_launcher.py dev',
-      url: 'http://localhost:5173',
-      reuseExistingServer: !process.env.CI,
-      timeout: 120 * 1000, // 2 minutes max for both servers
-      stdout: 'pipe',
-      stderr: 'pipe',
-    },
-  ],
+  /* DISABLED - servers must be started separately using unified_single_window_test.py */
+  /* This prevents multiple window launches */
+  // webServer: [
+  //   {
+  //     command: 'python ../../scripts/unified_launcher.py dev',
+  //     url: 'http://localhost:5173',
+  //     reuseExistingServer: !process.env.CI,
+  //     timeout: 120 * 1000,
+  //     stdout: 'pipe',
+  //     stderr: 'pipe',
+  //   },
+  // ],
   
   /* Global timeout for all tests */
   timeout: 60 * 1000, // 1 minute per test
