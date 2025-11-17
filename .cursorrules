@@ -1,23 +1,27 @@
 # Polylog6 Cursor Rules
 
 ## Project Structure
+
 - Keep only actionable code
 - Remove redundant documentation
 - Organize scripts by purpose
 - Maintain clean project structure
 
 ## Code Standards
+
 - Python: PEP 8, type hints, ruff linting
 - TypeScript: Strict mode, ESLint
 - Rust: rustfmt conventions
 
 ## Development Workflow
+
 - Use unified_launcher.py for development
 - Run tests before committing
 - Use conventional commits
 - Keep GitHub Actions workflows updated
 
 ## File Organization
+
 - Source code in src/
 - Tests in tests/
 - Scripts in scripts/
@@ -25,11 +29,13 @@
 - Remove redundant summaries and status files
 
 ## Testing
+
 - Write tests for all new features
 - Run tests before committing
 - Use GitHub Actions for CI/CD
 
 ## Documentation
+
 - Keep only essential architecture docs
 - Remove redundant status/summary files
 - Consolidate related documentation
