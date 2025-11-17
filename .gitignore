@@ -161,3 +161,4 @@ TestResults.xml
 # GitKraken
 test-results/
 playwright-report/
+scripts/unified_interactive_dev.py
