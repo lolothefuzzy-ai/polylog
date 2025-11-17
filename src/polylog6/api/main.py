@@ -1,21 +1,22 @@
 """
 FastAPI entry point for Tauri sidecar
 """
-import uvicorn
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 import json
 from pathlib import Path
 
-from polylog6.api.tier1_polyhedra import router as tier1_router
-from polylog6.api.storage import router as storage_router
-from polylog6.api.generator import router as generator_router
+import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from polylog6.api.attachment import router as attachment_router
-from polylog6.api.scalar_variants import router as scalar_router
 from polylog6.api.attachment_patterns import router as patterns_router
-from polylog6.api.multi_generator import router as multi_generator_router
+from polylog6.api.generator import router as generator_router
 from polylog6.api.geometry import router as geometry_router
+from polylog6.api.multi_generator import router as multi_generator_router
+from polylog6.api.scalar_variants import router as scalar_router
+from polylog6.api.storage import router as storage_router
 from polylog6.api.tier0 import router as tier0_router
+from polylog6.api.tier1_polyhedra import router as tier1_router
 
 app = FastAPI(title="Polyform Backend")
 
@@ -48,9 +49,9 @@ async def save_interactions(request: dict):
     """Save user interactions from browser"""
     interactions = request.get("interactions", [])
     # Save to file or database
-    from pathlib import Path
     import json
     from datetime import datetime
+    from pathlib import Path
     
     test_dir = Path(__file__).parent.parent.parent.parent / "test-results" / "interactions"
     test_dir.mkdir(parents=True, exist_ok=True)

@@ -41,16 +41,18 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { 
-        ...devices['Desktop Chrome'],
-        headless: false, // Always show browser
-        viewport: { width: 1280, height: 720 },
-      },
-    },
+        /* Configure projects for major browsers */
+        projects: [
+          {
+            name: 'chromium',
+            use: { 
+              ...devices['Desktop Chrome'],
+              headless: false, // Always show browser
+              viewport: { width: 1280, height: 720 },
+              // Reuse browser context to keep single window
+              channel: 'chrome', // Use installed Chrome for better single-window support
+            },
+          },
 
     /* Test against mobile viewports. */
     // {
