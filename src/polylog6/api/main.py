@@ -43,6 +43,24 @@ app.include_router(tier0_router)
 async def health_check():
     return {"status": "healthy"}
 
+@app.post("/api/test/interactions")
+async def save_interactions(request: dict):
+    """Save user interactions from browser"""
+    interactions = request.get("interactions", [])
+    # Save to file or database
+    from pathlib import Path
+    import json
+    from datetime import datetime
+    
+    test_dir = Path(__file__).parent.parent.parent.parent / "test-results" / "interactions"
+    test_dir.mkdir(parents=True, exist_ok=True)
+    
+    session_file = test_dir / f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    with open(session_file, 'w') as f:
+        json.dump(interactions, f, indent=2)
+    
+    return {"status": "saved", "count": len(interactions)}
+
 # Mapping from numeric polygon IDs to letter symbols
 POLYGON_ID_TO_SYMBOL = {
     11: "A",  # triangle
