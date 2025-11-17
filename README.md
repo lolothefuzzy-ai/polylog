@@ -57,9 +57,11 @@ See `docs/DEVELOPMENT.md` for development guide.
 
 ## Documentation
 
-- `docs/ARCHITECTURE.md` - System architecture
+- `docs/ARCHITECTURE_UNIFIED.md` - **Unified architecture documentation** (start here)
+- `docs/ARCHITECTURE.md` - System architecture (legacy, see ARCHITECTURE_UNIFIED.md)
 - `docs/WORKSPACE_INTERACTION_ARCHITECTURE.md` - Interaction model
 - `docs/DEVELOPMENT.md` - Development guide
+- `docs/INTEGRATION_ROADMAP.md` - Integration phases
 
 ## License
 

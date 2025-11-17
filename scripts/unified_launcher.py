@@ -393,12 +393,12 @@ Examples:
         if args.command == "install":
             install_all()
         elif args.command == "dev":
-            # Use integrated dev script
-            dev_script = PROJECT_ROOT / "scripts" / "dev_integrated.py"
+            # Use unified interactive dev service
+            dev_script = PROJECT_ROOT / "scripts" / "unified_interactive_dev.py"
             if dev_script.exists():
                 run_command([sys.executable, str(dev_script)], check=False)
             else:
-                print_warning("Integrated dev script not found, starting basic dev...")
+                print_warning("Unified interactive dev script not found, starting basic dev...")
                 start_api_server()
                 time.sleep(2)
                 start_frontend_dev()
