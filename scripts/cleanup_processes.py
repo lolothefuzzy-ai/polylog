@@ -14,7 +14,7 @@ def kill_processes_on_ports(ports):
     for port in ports:
         for proc in psutil.process_iter(['pid', 'name']):
             try:
-                connections = proc.connections()
+                connections = proc.net_connections()
                 for conn in connections:
                     if conn.laddr.port == port:
                         print(f"[KILL] Killing process {proc.info['name']} (PID {proc.info['pid']}) on port {port}")
