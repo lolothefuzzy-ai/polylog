@@ -89,7 +89,7 @@ def start_servers():
     
     print("[INFO] Starting servers...")
     _server_process = subprocess.Popen(
-        [sys.executable, str(PROJECT_ROOT / "scripts" / "unified_launcher.py"), "dev"],
+        [sys.executable, str(PROJECT_ROOT / "scripts" / "dev.py")],
         cwd=PROJECT_ROOT,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE

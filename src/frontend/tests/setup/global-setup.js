@@ -27,7 +27,7 @@ async function globalSetup(config) {
   
   if (!apiRunning || !frontendRunning) {
     console.log('\n[Test Setup] WARNING: Servers not running!');
-    console.log('[Test Setup] Start servers with: python scripts/unified_launcher.py dev');
+    console.log('[Test Setup] Start servers with: python scripts/dev.py');
     console.log('[Test Setup] Tests may fail if servers are not available.\n');
   } else {
     console.log('[Test Setup] All servers ready!\n');

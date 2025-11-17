@@ -209,10 +209,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python unified_interactive_dev.py              # Start dev environment
-  python unified_interactive_dev.py --test       # Start dev + run tests
-  python unified_interactive_dev.py --api-only   # Start API only
-  python unified_interactive_dev.py --frontend-only  # Start frontend only
+  python dev.py              # Start dev environment
+  python dev.py --test       # Start dev + run tests
+  python dev.py --api-only   # Start API only
+  python dev.py --frontend-only  # Start frontend only
         """
     )
     

@@ -71,7 +71,7 @@ export default defineConfig({
   /* This prevents multiple window launches */
   // webServer: [
   //   {
-  //     command: 'python ../../scripts/unified_launcher.py dev',
+  //     command: 'python ../../scripts/dev.py',
   //     url: 'http://localhost:5173',
   //     reuseExistingServer: !process.env.CI,
   //     timeout: 120 * 1000,

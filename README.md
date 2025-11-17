@@ -6,13 +6,13 @@ Polyform visualization and analysis system combining geometric computation, patt
 
 ```bash
 # Start development
-python scripts/unified_launcher.py dev
+python scripts/dev.py
 
 # Run all tests (backend-frontend integration)
-python scripts/automated_test_suite.py --type all
+python scripts/test.py
 
-# Quick visualization test
-python scripts/test_visualization_quick.py
+# Build for production
+python scripts/build.py
 ```
 
 ## Architecture
@@ -37,13 +37,7 @@ All tests focus on backend-frontend integration:
 
 ```bash
 # Run all tests
-python scripts/automated_test_suite.py --type all
-
-# Backend stability tests
-python scripts/automated_test_suite.py --type backend-stability
-
-# Backend-frontend integration tests
-python scripts/automated_test_suite.py --type frontend-integration
+python scripts/test.py
 
 # Or use npm scripts
 npm test
@@ -53,15 +47,11 @@ npm run test:integration
 
 ## Development
 
-See `docs/DEVELOPMENT.md` for development guide.
+See `docs/ARCHITECTURE.md` for architecture and development guide.
 
 ## Documentation
 
-- `docs/ARCHITECTURE_UNIFIED.md` - **Unified architecture documentation** (start here)
-- `docs/ARCHITECTURE.md` - System architecture (legacy, see ARCHITECTURE_UNIFIED.md)
-- `docs/WORKSPACE_INTERACTION_ARCHITECTURE.md` - Interaction model
-- `docs/DEVELOPMENT.md` - Development guide
-- `docs/INTEGRATION_ROADMAP.md` - Integration phases
+- `docs/ARCHITECTURE.md` - **Single source of truth** (architecture, code references, Track A/B)
 
 ## License
 
