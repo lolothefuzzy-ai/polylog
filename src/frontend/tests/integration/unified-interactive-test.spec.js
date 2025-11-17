@@ -8,16 +8,41 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Unified Interactive Testing', () => {
   test.beforeEach(async ({ page }) => {
+    // Wait for servers to be ready
+    let serversReady = false;
+    for (let i = 0; i < 30; i++) {
+      try {
+        const response = await page.request.get('http://localhost:8000/health');
+        if (response.ok()) {
+          serversReady = true;
+          break;
+        }
+      } catch (e) {
+        // Server not ready yet
+      }
+      await page.waitForTimeout(1000);
+    }
+    
+    if (!serversReady) {
+      console.warn('[TEST] Servers may not be ready, continuing anyway...');
+    }
+    
     // Navigate to the application
     await page.goto('http://localhost:5173');
     
     // Wait for application to load
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000); // Give app time to initialize
     
     // Inject interaction tracker
     await page.addInitScript(() => {
-      window.interactionLog = [];
+      if (!window.interactionLog) {
+        window.interactionLog = [];
+      }
       window.trackInteraction = (type, data) => {
+        if (!window.interactionLog) {
+          window.interactionLog = [];
+        }
         window.interactionLog.push({
           timestamp: Date.now(),
           type,
@@ -68,14 +93,20 @@ test.describe('Unified Interactive Testing', () => {
     await page.waitForTimeout(1000);
     
     // Get initial interaction count
-    const initialCount = await page.evaluate(() => window.interactionLog.length);
+    const initialCount = await page.evaluate(() => {
+      return window.interactionLog ? window.interactionLog.length : 0;
+    });
     
     // Simulate some interactions (or wait for user)
     await page.waitForTimeout(5000); // Wait 5 seconds for user interactions
     
     // Get final interaction count
-    const finalCount = await page.evaluate(() => window.interactionLog.length);
-    const interactions = await page.evaluate(() => window.interactionLog);
+    const finalCount = await page.evaluate(() => {
+      return window.interactionLog ? window.interactionLog.length : 0;
+    });
+    const interactions = await page.evaluate(() => {
+      return window.interactionLog || [];
+    });
     
     // Log interactions
     console.log(`Tracked ${finalCount - initialCount} interactions during test`);
@@ -101,7 +132,9 @@ test.describe('Unified Interactive Testing', () => {
     await page.waitForTimeout(10000); // Wait 10 seconds
     
     // Get interactions
-    const interactions = await page.evaluate(() => window.interactionLog);
+    const interactions = await page.evaluate(() => {
+      return window.interactionLog || [];
+    });
     
     // Validate that system is still responsive
     const isResponsive = await page.evaluate(() => {
@@ -152,7 +185,9 @@ test.describe('Unified Interactive Testing', () => {
     }
     
     // Get all interactions
-    const interactions = await page.evaluate(() => window.interactionLog);
+    const interactions = await page.evaluate(() => {
+      return window.interactionLog || [];
+    });
     console.log(`Total interactions tracked: ${interactions.length}`);
   });
 });

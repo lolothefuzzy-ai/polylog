@@ -7,8 +7,8 @@ ONE browser window, background servers, continuous testing
 import subprocess
 import sys
 import time
-import webbrowser
 import urllib.request
+import webbrowser
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()

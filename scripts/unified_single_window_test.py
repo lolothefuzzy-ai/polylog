@@ -7,11 +7,11 @@ Similar to MCP/Bubble/Lovable - all in one unified environment
 
 import subprocess
 import sys
-import time
-import webbrowser
-import urllib.request
-from pathlib import Path
 import threading
+import time
+import urllib.request
+import webbrowser
+from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 FRONTEND_DIR = PROJECT_ROOT / "src" / "frontend"
@@ -40,6 +40,14 @@ def start_api_server_background():
     else:
         env['PYTHONPATH'] = src_path
     
+    # Check if already running
+    try:
+        urllib.request.urlopen("http://localhost:8000/health", timeout=1)
+        print("[OK] API server already running")
+        return True
+    except:
+        pass
+    
     _api_process = subprocess.Popen(
         [sys.executable, "-m", "uvicorn", 
          "polylog6.api.main:app", 
@@ -49,15 +57,24 @@ def start_api_server_background():
         cwd=PROJECT_ROOT,
         env=env,
         stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
         creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
     )
     
     print("[OK] API server starting in background...")
+    return True
 
 def start_frontend_server_background():
     """Start frontend server in background (no window)"""
     global _frontend_process
+    
+    # Check if already running
+    try:
+        urllib.request.urlopen("http://localhost:5173", timeout=1)
+        print("[OK] Frontend server already running")
+        return True
+    except:
+        pass
     
     # Check if node_modules exists
     if not (FRONTEND_DIR / "node_modules").exists():
@@ -69,12 +86,13 @@ def start_frontend_server_background():
         ["npm", "run", "dev"],
         cwd=FRONTEND_DIR,
         stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
         shell=True,
         creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
     )
     
     print("[OK] Frontend server starting in background...")
+    return True
 
 def wait_for_servers(max_wait=60):
     """Wait for servers to be ready"""
