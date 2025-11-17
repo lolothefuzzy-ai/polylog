@@ -136,6 +136,9 @@ data/large_datasets/
 # Cursor/Windsurf specific
 .cursor/
 .windsurf/
+cursor/
+state/
+.last_sync.txt
 
 # Browser coordinator state
 .browser_coordinator_state.json
