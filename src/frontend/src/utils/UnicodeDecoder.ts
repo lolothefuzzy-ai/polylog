@@ -104,7 +104,7 @@ export class UnicodeDecoder {
 
   constructor() {
     this.primitives = PRIMITIVES;
-    this.backendUrl = 'http://localhost:8008';
+    this.backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
   }
 
   /**

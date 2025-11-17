@@ -1,68 +1,139 @@
 # Polylog6 Architecture
 
-## System Overview
+**Single source of truth for system architecture. Links to code, not more docs.**
 
-Polylog6 is a polyform visualization and analysis system combining geometric computation, pattern discovery, and interactive visualization. The system uses an asynchronous CPU/GPU architecture for optimal performance.
+## CPU/GPU Boundary
 
-## Architecture Components
+```
+┌─────────────────────────────────────────────────────────┐
+│ CPU (Backend - Python FastAPI :8000)                    │
+│ - Tier0 encoding/decoding (Series A/B/C/D)              │
+│ - Geometry computation (Netlib)                         │
+│ - Storage (Unicode compression)                         │
+│ - Detection pipeline (Track A)                          │
+│ - Monitoring loop (Track B)                              │
+├─────────────────────────────────────────────────────────┤
+│ GPU (Frontend - React + Babylon.js :5173)                │
+│ - 3D rendering (BabylonScene.jsx)                       │
+│ - Workspace state (workspaceManager.js)                 │
+│ - GPU buffer management (gpuBufferManager.js)           │
+│ - Polygon interaction (polygonInteraction.js)            │
+└─────────────────────────────────────────────────────────┘
+```
 
-### Backend (Python)
-- **FastAPI** - REST API server
-- **Unified Geometry Backend** - Netlib integration for precomputed polyhedra
-- **Tiered Storage** - Unicode compression system (Series A/B/C/D)
-- **Tier Generation** - Tier 1 (Platonic/Archimedean/Johnson) and Tier 2+ decomposition
+**Key Files:**
 
-### Frontend (React + Babylon.js)
-- **React** - UI framework
-- **Babylon.js** - 3D rendering engine
-- **Workspace Manager** - Polygon interaction system
-- **GPU Warming** - Precomputed chain caching
+- Backend API: `src/polylog6/api/main.py`
+- Frontend renderer: `src/frontend/src/components/BabylonScene.jsx`
+- GPU buffers: `src/frontend/src/utils/gpuBufferManager.js`
 
-### Desktop (Tauri)
-- **Rust** - Desktop wrapper
-- **Python Bridge** - Backend integration
+## Tier0 Symbol Flow
 
-## Core Concepts
+```
+User Input → Tier0 Encoder → Backend API → Unicode Decode → Babylon.js Render
+    ↓              ↓              ↓              ↓                ↓
+  Polygon      Series A/B    POST /tier0/   decode()      PolyformMesh
+  placement    encoding      encode        Unicode →      .getMesh()
+                                    geometry
+```
 
-### Primitives
-- 3-20 sided polygons
-- Unit edge length: 1.0
-- Defined by sides, internal angles, circumradius
+**Code Path:**
 
-### Tier 0
-- Polygon-to-polygon attachment sequences
-- Encoded using Series A/B/C/D + subscripts
-- Not primitives (primitives are separate structure)
+1. **Input**: `src/frontend/src/utils/tier0Encoder.js` - User places polygon
+2. **Encode**: `src/polylog6/storage/tier0_generator.py` - Series A/B/C/D encoding
+3. **API**: `src/polylog6/api/tier0.py` - `/tier0/encode` endpoint
+4. **Decode**: `src/frontend/src/utils/UnicodeDecoder.ts` - Unicode → geometry
+5. **Render**: `src/frontend/src/components/BabylonScene.jsx` - Babylon.js mesh
 
-### Tier 1
-- Platonic solids (5)
-- Archimedean solids (13)
-- Johnson solids (92+)
-- Generated using symmetry operations
+**Current Blocker**: `UnicodeDecoder.ts` line 107 uses port `8008` instead of `8000`.
 
-### Tier 2+
-- Recursive polyform structures
-- Dynamic decomposition
-- Stability filtering
+## Track A & Track B
 
-## Data Flow
+```
+┌─────────────────────────────────────────────────────────┐
+│ Track A: Detection Pipeline (CPU)                      │
+│                                                          │
+│ Image → Segment → Pattern → Candidate → Optimize       │
+│   ↓         ↓         ↓          ↓           ↓          │
+│ ImageSeg  Pattern  Candidate  Optimizer  Result         │
+│ menter    Analyzer Generator                            │
+│                                                          │
+│ Code: src/polylog6/detection/service.py                 │
+└─────────────────────────────────────────────────────────┘
 
-1. **User Interaction** → Workspace Manager
-2. **Polygon Placement** → Tier 0 Encoding
-3. **Chain Detection** → Atomic Chain Library
-4. **Visualization** → Babylon.js Rendering
-5. **Backend Indexing** → Unicode Storage
+┌─────────────────────────────────────────────────────────┐
+│ Track B: Monitoring Loop (CPU)                          │
+│                                                          │
+│ ContextBrief → LibraryRefresh → Telemetry → Alerts     │
+│     ↓              ↓             ↓           ↓          │
+│  Tailer      RefreshWorker  Telemetry  AlertSink       │
+│                          Bridge                         │
+│                                                          │
+│ Code: src/polylog6/monitoring/loop.py                  │
+└─────────────────────────────────────────────────────────┘
+```
 
-## Key Files
+**Track A** = Image-to-polygon detection (active development)  
+**Track B** = Background monitoring/telemetry (runs alongside)
 
-- `src/polylog6/api/main.py` - API entry point
-- `src/polylog6/storage/tier0_generator.py` - Tier 0 encoding
-- `src/polylog6/geometry/unified_backend.py` - Unified geometry system
-- `src/frontend/src/utils/workspaceManager.js` - Workspace management
-- `src/frontend/src/components/BabylonScene.jsx` - 3D rendering
+## File Structure
 
-## See Also
+```
+polylog6/
+├── scripts/
+│   ├── dev.py          # Start API + Frontend
+│   ├── test.py         # Run all tests
+│   └── build.py        # Build for production
+├── src/
+│   ├── polylog6/       # Backend (Python)
+│   │   ├── api/        # FastAPI endpoints
+│   │   ├── detection/  # Track A
+│   │   ├── monitoring/ # Track B
+│   │   └── storage/    # Tier0/1/2/3 encoding
+│   ├── frontend/       # Frontend (React + Babylon.js)
+│   │   └── src/
+│   │       ├── components/  # BabylonScene, etc.
+│   │       └── utils/      # UnicodeDecoder, tier0Encoder
+│   └── desktop/        # Tauri wrapper (Rust)
+├── data/
+│   └── catalogs/       # Single source: tier0, tier1, attachments
+└── docs/
+    └── ARCHITECTURE.md # This file (only essential doc)
+```
 
-- `docs/WORKSPACE_INTERACTION_ARCHITECTURE.md` - Interaction model
-- `docs/DEVELOPMENT.md` - Development guide
-- `README.md` - Quick start guide
+## Critical Code References
+
+**Tier0 Encoding:**
+
+- `src/polylog6/storage/tier0_generator.py` - Series A/B/C/D encoding
+- `src/frontend/src/utils/tier0Encoder.js` - Frontend encoder
+
+**Unicode Decoding:**
+
+- `src/frontend/src/utils/UnicodeDecoder.ts` - **FIX: port 8008 → 8000**
+- `src/polylog6/storage/unicode_library.py` - Backend decoder
+
+**3D Rendering:**
+
+- `src/frontend/src/components/BabylonScene.jsx` - Main renderer
+- `src/frontend/src/utils/PolyformMesh.ts` - Mesh creation
+
+**API Endpoints:**
+
+- `src/polylog6/api/main.py` - FastAPI app
+- `src/polylog6/api/tier0.py` - Tier0 endpoints
+
+**Detection (Track A):**
+
+- `src/polylog6/detection/service.py` - Main detection service
+
+**Monitoring (Track B):**
+
+- `src/polylog6/monitoring/loop.py` - Monitoring dispatcher
+
+## Next Steps
+
+1. **Fix UnicodeDecoder port** (line 107: `8008` → `8000`)
+2. **Remove duplicate `src/UnicodeDecoder.ts`** (root level)
+3. **Consolidate `catalogs/` → `data/catalogs/`**
+4. **Archive 50+ scripts → 3 scripts** (dev, test, build)

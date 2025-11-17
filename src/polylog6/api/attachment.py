@@ -19,7 +19,7 @@ _storage_base_path = Path(__file__).parent.parent.parent.parent.parent / "storag
 _storage_manager = PolyformStorageManager(base_path=_storage_base_path)
 
 # Provide catalog directory for PlacementRuntime
-_catalog_dir = Path(__file__).parent.parent.parent.parent.parent / "catalogs"
+_catalog_dir = Path(__file__).parent.parent.parent.parent.parent / "data" / "catalogs"
 _placement_runtime = PlacementRuntime(
     storage_manager=_storage_manager,
     catalog_dir=_catalog_dir
