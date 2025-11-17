@@ -12,14 +12,16 @@ def kill_processes_on_ports(ports):
     """Kill processes using specified ports"""
     killed = []
     for port in ports:
-        for proc in psutil.process_iter(['pid', 'name', 'connections']):
+        for proc in psutil.process_iter(['pid', 'name']):
             try:
-                for conn in proc.info['connections'] or []:
+                connections = proc.connections()
+                for conn in connections:
                     if conn.laddr.port == port:
                         print(f"[KILL] Killing process {proc.info['name']} (PID {proc.info['pid']}) on port {port}")
                         proc.kill()
                         killed.append((proc.info['pid'], proc.info['name'], port))
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                        break
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess, psutil.AccessDenied):
                 pass
     return killed
 
